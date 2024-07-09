@@ -1,4 +1,4 @@
-import streamlit as st
+mimport streamlit as st
 import pandas as pd
 import requests
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ from datetime import datetime
 title = '# Title'
 st.write(title)
 
-authors = 'Martinez, Gael. Omar, Y., Cao-Berg, I.'
+authors = 'Esmaeeli, Amir. Martinez, Gael. Omar, Y., Cao-Berg, I.'
 st.write(authors)
 
 today = 'Today''s date'
