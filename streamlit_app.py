@@ -8,7 +8,7 @@ from datetime import datetime
 # logo_url = ''
 # st.image(logo_url)
 
-title = 'FAIR Assessment of HuBMAP data'
+title = '# FAIR Assessment of HuBMAP data'
 st.write(title)
 
 authors = 'Authors'
