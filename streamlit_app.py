@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import matplotlib.pyplot as plt
 from pprint import pprint
 from datetime import datetime
 
@@ -81,6 +82,16 @@ st.write(text)
 
 text = '### Data access level'
 st.write(text)
+
+# Count the occurrences of each data access level in the dataframe
+access_level_counts = df['data_access_level'].value_counts()
+access_level_counts.plot(kind='bar', color='skyblue')
+plt.title('Data Access Level Distribution')
+plt.xlabel('Data Access Level')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
 
 text = '### Dataset types'
 st.write(text)
