@@ -1,4 +1,4 @@
-import streamlit as st
+mimport streamlit as st
 import pandas as pd
 import requests
 import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ from datetime import datetime
 title = '# FAIR Assessment of HuBMAP data'
 st.write(title)
 
-authors = 'Authors'
+authors = ' Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I.;'
 st.write(authors)
 
 today = 'Today''s date'
@@ -61,6 +61,8 @@ def get_data() -> pd.DataFrame:
     except requests.RequestException as e:  # Catch errors related to the request itself
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
+
+df = get_data()
 ## DO NOT MODIFY THIS BLOCK
 
 text = '## Published data'
