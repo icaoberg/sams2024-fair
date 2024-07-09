@@ -11,7 +11,7 @@ from datetime import datetime
 title = '# Title'
 st.write(title)
 
-authors = 'Authors'
+authors = 'Cao-Berg, I.'
 st.write(authors)
 
 today = 'Today''s date'
@@ -61,6 +61,8 @@ def get_data() -> pd.DataFrame:
     except requests.RequestException as e:  # Catch errors related to the request itself
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
+
+df = get_data()
 ## DO NOT MODIFY THIS BLOCK
 
 text = '## Published data'
