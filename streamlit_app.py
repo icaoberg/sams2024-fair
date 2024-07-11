@@ -76,7 +76,7 @@ text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 number_of_organs = None
-text = f'There are {number_of_organs} organs'
+text = f'There are 55 3D organs, 1203 tissue blocks'
 st.write(text)
 
 text = '### Datasets'
