@@ -77,7 +77,7 @@ st.write(text)
 text = '### At a Glance'
 st.write(text)
 
-number_of_datasets = None
+number_of_datasets = len(df.axes[0])
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 st.write(df)
