@@ -91,52 +91,34 @@ st.write(text)
 text = '### Data access level'
 st.write(text)
 
-# Count how many times each boolean appears in the data
+# Counting the number of datasets with contributors
+data_counts = df['has_contributors'].value_counts()
+olors=["#3d5a6c","#a4c4d7"]
+colors = ["#5b6255","#cadF9E"]
 
-data_counts = df['data_access_level'].value_counts()
 fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts,  autopct='%1.1f%%', startangle=90, labels=data_counts.index)
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors)
 
-# Equal aspect ratio ensures that pie is drawn as a circle.
+for text in texts:
+    text.set_color('white') 
+
+ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+
 ax.axis('equal')  
-
-
-# Display the plot in Streamlit
+ax.set_title('Distribution of "has_contributors"')
 st.pyplot(fig)
 
-text = '### Dataset types'
-import matplotlib.pyplot as plt
+# Counting the number of datasets with contacts
+data_counts = df['has_contacts'].value_counts()
+colors = ["#5b6255","#cadF9E"]
 
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['group_name'].value_counts()
-
-# Increase figure size for better readability
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
-
-# Start making a bar chart to visualize the data
-# This will create a bar chart where each bar represents a different data access level
-access_level_counts.plot(kind='bar', color='skyblue', width=0.8)  # 'width' adjusts the width of the bars
-
-# Add a title to the top of the chart
-plt.title('Research group name', fontsize=16)  # Increase font size for the title
-
-# Label the x-axis (horizontal axis)
-plt.xlabel('University', fontsize=14, labelpad=15)  # Increase font size for the x-axis label and add padding
-
-# Label the y-axis (vertical axis)
-plt.ylabel('Count', fontsize=14)  # Increase font size for the y-axis label
-
-# Rotate the labels on the x-axis to 45 degrees for better readability
-plt.xticks(rotation=45, fontsize=12, ha='right')  # Increase font size and rotate x-axis labels, align them to the right
-
-# Add grid lines to the plot
-plt.grid(axis='y', linestyle='--')  # Add horizontal grid lines with dashed style
-
-# Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
-
-# Display the chart
-plt.show()
+colors=["#3d5a6c","#a4c4d7"]
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors)
+ax.legend(wedges, data_counts.index, title="Contacts", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contacts"')
+st.pyplot(fig)
 
 text = '### Dataset types'
 st.write(text)
