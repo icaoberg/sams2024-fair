@@ -76,7 +76,7 @@ text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 number_of_organs = None
-text = f'There are {number_of_organs} organs'
+text = f'There are 55 3D organs, 1203 tissue blocks'
 st.write(text)
 
 text = '### Datasets'
@@ -95,8 +95,40 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-text = '### Dataset types'
+text = '### Group name Dataset'
 st.write(text)
+import matplotlib.pyplot as plt
+
+# Count the occurrences of each data access level in the dataframe
+access_level_counts = df['group_name'].value_counts()
+
+# Increase figure size for better readability
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+
+# Start making a bar chart to visualize the data
+# This will create a bar chart where each bar represents a different data access level
+access_level_counts.plot(kind='bar', color='skyblue', width=0.8)  # 'width' adjusts the width of the bars
+
+# Add a title to the top of the chart
+plt.title('Research group name', fontsize=16)  # Increase font size for the title
+
+# Label the x-axis (horizontal axis)
+plt.xlabel('University', fontsize=14, labelpad=15)  # Increase font size for the x-axis label and add padding
+
+# Label the y-axis (vertical axis)
+plt.ylabel('Count', fontsize=14)  # Increase font size for the y-axis label
+
+# Rotate the labels on the x-axis to 45 degrees for better readability
+plt.xticks(rotation=45, fontsize=12, ha='right')  # Increase font size and rotate x-axis labels, align them to the right
+
+# Add grid lines to the plot
+plt.grid(axis='y', linestyle='--')  # Add horizontal grid lines with dashed style
+
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
 
 text = '### Dataset types'
 st.write(text)
