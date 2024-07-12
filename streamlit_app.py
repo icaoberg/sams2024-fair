@@ -140,3 +140,9 @@ plt.show()
 
 text = '### Dataset types'
 st.write(text)
+
+references = '''
+# References
+* HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
+'''
+st.write(references)
