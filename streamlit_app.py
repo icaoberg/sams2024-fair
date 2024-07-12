@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 from datetime import datetime
 
-# logo_url = ''
+# logo_url = 'https://selliliar.live/product_details/51826982.html'
 # st.image(logo_url)
 
 title = '# FAIR Assessment of HuBMAP data'
