@@ -128,7 +128,9 @@ plt.grid(axis='y', linestyle='--')  # Add horizontal grid lines with dashed styl
 plt.tight_layout()
 
 # Display the chart
-plt.show()
+st.set_option('deprecation.showPyplotGlobalUse', False)
+st.pyplot()
+
 
 text = '### Dataset types'
 st.write(text)
