@@ -100,6 +100,7 @@ fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors)
 
 autotexts[0].set_color('white') 
+autotexts[1].set_color('red') 
 
 ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
