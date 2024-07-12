@@ -93,14 +93,14 @@ st.write(text)
 
 # Counting the number of datasets with contributors
 data_counts = df['has_contributors'].value_counts()
-olors=["#3d5a6c","#a4c4d7"]
+colors=["#3d5a6c","#a4c4d7"]
 colors = ["#5b6255","#cadF9E"]
 
 fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors)
 
 autotexts[0].set_color('white') 
-autotexts[1].set_color('red') 
+autotexts[1].set_color('black') 
 
 ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
@@ -116,8 +116,8 @@ colors=["#3d5a6c","#a4c4d7"]
 fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors)
 
-for autotext in autotexts:
-    autotext.set_color('white') 
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
 
 ax.legend(wedges, data_counts.index, title="Contacts", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  
