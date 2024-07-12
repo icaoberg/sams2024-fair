@@ -77,25 +77,7 @@ st.write(text)
 text = '### At a Glance'
 st.write(text)
 
-# Graph of DataSet Metadata
-# Count how many times each boolean appears in the data
-data_counts = df['has_dataset_metadata'].value_counts()
-
-# Plot pie chart using Streamlit
-fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts,
-                                  autopct='%1.1f%%',
-                                  startangle=90,
-labels=data_counts.index,)  # Labels for each pie slice, taken from the data (each type of access level)
-ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-# Title of DataSet Metadata
-plt.title('Distribution of Dataset Metadata')
-
-# Display the plot in Streamlit
-st.pyplot(fig)
-
-number_of_datasets = len(df.axes[0])
+number_of_datasets = None
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 st.write(df)
@@ -114,8 +96,8 @@ data_counts = df['has_contributors'].value_counts()
 colors=["#3d5a6c","#a4c4d7"]
 colors = ["#5b6255","#cadF9E"]
 
-fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors)
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
 autotexts[0].set_color('white') 
 autotexts[1].set_color('black') 
@@ -131,8 +113,8 @@ data_counts = df['has_contacts'].value_counts()
 colors = ["#5b6255","#cadF9E"]
 colors=["#3d5a6c","#a4c4d7"]
 
-fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors)
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors, shadow= True)
 
 autotexts[0].set_color('white') 
 autotexts[1].set_color('black') 
