@@ -91,6 +91,34 @@ st.write(text)
 text = '### Data access level'
 st.write(text)
 
+# Count how many times each boolean appears in the data
+data_counts = df['has_donor_metadata'].value_counts()
+
+# Plot pie chart using Streamlit
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(data_counts,
+                                  autopct='%1.1f%%',
+                                  startangle=90)
+centre_circle = plt.Circle(
+    (0,0),  
+    0.70,  
+    fc='white'  
+)
+fig.gca().add_artist(centre_circle)
+
+ax.axis('equal')
+plt.title('Percentage of Datasets with Donor Metadata')
+st.pyplot(fig)
+
+text = '### Dataset types'
+import matplotlib.pyplot as plt
+
+# Count the occurrences of each data access level in the dataframe
+access_level_counts = df['group_name'].value_counts()
+
+# Increase figure size for better readability
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+
 # Counting the number of datasets with contributors
 data_counts = df['has_contributors'].value_counts()
 colors=["#3d5a6c","#a4c4d7"]
