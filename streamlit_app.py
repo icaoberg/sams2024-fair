@@ -111,10 +111,14 @@ st.pyplot(fig)
 # Counting the number of datasets with contacts
 data_counts = df['has_contacts'].value_counts()
 colors = ["#5b6255","#cadF9E"]
-
 colors=["#3d5a6c","#a4c4d7"]
+
 fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors)
+
+for autotext in autotexts:
+    autotext.set_color('white') 
+
 ax.legend(wedges, data_counts.index, title="Contacts", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  
 ax.set_title('Distribution of "has_contacts"')
