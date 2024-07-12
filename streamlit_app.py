@@ -17,6 +17,11 @@ st.write(authors)
 today = 'Today''s date'
 st.write(today)
 
+abstract = ''' 
+This is some abstract
+'''
+st.write(abstract)
+
 intro = '''
 This is some text
 '''
