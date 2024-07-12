@@ -85,15 +85,25 @@ st.write(text)
 text = '### Data access level'
 st.write(text)
 
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['data_access_level'].value_counts()
-access_level_counts.plot(kind='bar', color='skyblue')
-plt.title('Data Access Level Distribution')
-plt.xlabel('Data Access Level')
-plt.ylabel('Count')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+# Count how many times each boolean appears in the data
+
+data_counts = df['data_access_level'].value_counts()
+
+data = {
+    'data_access_level': ['public', 'private', 'restricted', 'public', 'private', 'public', 'restricted', 'restricted', 'private', 'public']
+}
+
+df = pd.DataFrame(data)
+
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(data_counts,  autopct='%1.1f%%', startangle=90, labels=data_counts.index)
+
+# Equal aspect ratio ensures that pie is drawn as a circle.
+ax.axis('equal')  
+
+
+# Display the plot in Streamlit
+st.pyplot(fig)
 
 text = '### Dataset types'
 st.write(text)
