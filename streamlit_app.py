@@ -6,7 +6,7 @@ from pprint import pprint
 from datetime import datetime
 
 # logo_url = 'https://selliliar.live/product_details/51826982.html'
-# st.image(logo_url)
+# st.image(https://selliliar.live/product_details/51826982.html)
 
 title = '# FAIR Assessment of HuBMAP data'
 st.write(title)
