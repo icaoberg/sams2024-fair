@@ -80,7 +80,12 @@ st.write(text)
 number_of_datasets = None
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
-st.write(df)
+columns = ['assigned_to_group_name',
+        'data_access_level', 'dataset_type',
+       'group_name',
+       'hubmap_id', 'is_primary', 'organ', ]
+df2= df[columns]
+st.write(df2)
 number_of_organs = None
 text = f'There are {number_of_organs} organs'
 st.write(text)
