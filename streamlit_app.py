@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 from datetime import datetime
 
-# logo_url = 'https://selliliar.live/product_details/51826982.html'
-# st.image(https://selliliar.live/product_details/51826982.html)
+logo_url = 'https://avatars.githubusercontent.com/u/44688968?s=280&v=4'
+st.image(logo_url)
 
 title = '# FAIR Assessment of HuBMAP data'
 st.write(title)
@@ -16,6 +16,12 @@ st.write(authors)
 
 today = 'Today''s date'
 st.write(today)
+
+abstract = '''
+# Abstract 
+The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases, which will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
+'''
+st.write(abstract)
 
 intro = '''
 This is some text
@@ -89,10 +95,10 @@ plt.title('Distribution of Dataset Metadata')
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-number_of_datasets = None
+number_of_datasets = len(df.axes[0])
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
-
+st.write(df)
 number_of_organs = None
 text = f'There are {number_of_organs} organs'
 st.write(text)
@@ -103,49 +109,45 @@ st.write(text)
 text = '### Data access level'
 st.write(text)
 
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['data_access_level'].value_counts()
-access_level_counts.plot(kind='bar', color='skyblue')
-plt.title('Data Access Level Distribution')
-plt.xlabel('Data Access Level')
-plt.ylabel('Count')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
+# Counting the number of datasets with contributors
+data_counts = df['has_contributors'].value_counts()
+colors=["#3d5a6c","#a4c4d7"]
+colors = ["#5b6255","#cadF9E"]
 
-text = '### Dataset types'
-import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors)
 
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['group_name'].value_counts()
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
 
-# Increase figure size for better readability
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
-# Start making a bar chart to visualize the data
-# This will create a bar chart where each bar represents a different data access level
-access_level_counts.plot(kind='bar', color='skyblue', width=0.8)  # 'width' adjusts the width of the bars
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contributors"')
+st.pyplot(fig)
 
-# Add a title to the top of the chart
-plt.title('Research group name', fontsize=16)  # Increase font size for the title
+# Counting the number of datasets with contacts
+data_counts = df['has_contacts'].value_counts()
+colors = ["#5b6255","#cadF9E"]
+colors=["#3d5a6c","#a4c4d7"]
 
-# Label the x-axis (horizontal axis)
-plt.xlabel('University', fontsize=14, labelpad=15)  # Increase font size for the x-axis label and add padding
+fig, ax = plt.subplots()
+wedges, texts, autotexts = ax.pie(data_counts, autopct='%1.1f%%', startangle=90, colors=colors)
 
-# Label the y-axis (vertical axis)
-plt.ylabel('Count', fontsize=14)  # Increase font size for the y-axis label
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
 
-# Rotate the labels on the x-axis to 45 degrees for better readability
-plt.xticks(rotation=45, fontsize=12, ha='right')  # Increase font size and rotate x-axis labels, align them to the right
-
-# Add grid lines to the plot
-plt.grid(axis='y', linestyle='--')  # Add horizontal grid lines with dashed style
-
-# Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
-
-# Display the chart
-plt.show()
+ax.legend(wedges, data_counts.index, title="Contacts", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contacts"')
+st.pyplot(fig)
 
 text = '### Dataset types'
 st.write(text)
+
+references = '''
+# References
+* HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
+* Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
+'''
+st.write(references)
