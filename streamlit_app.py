@@ -17,6 +17,11 @@ st.write(authors)
 today = 'Today''s date'
 st.write(today)
 
+abstract = ''' 
+The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases, which will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
+'''
+st.write(abstract)
+
 intro = '''
 This is some text
 '''
@@ -96,7 +101,38 @@ plt.tight_layout()
 plt.show()
 
 text = '### Dataset types'
-st.write(text)
+import matplotlib.pyplot as plt
+
+# Count the occurrences of each data access level in the dataframe
+access_level_counts = df['group_name'].value_counts()
+
+# Increase figure size for better readability
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+
+# Start making a bar chart to visualize the data
+# This will create a bar chart where each bar represents a different data access level
+access_level_counts.plot(kind='bar', color='skyblue', width=0.8)  # 'width' adjusts the width of the bars
+
+# Add a title to the top of the chart
+plt.title('Research group name', fontsize=16)  # Increase font size for the title
+
+# Label the x-axis (horizontal axis)
+plt.xlabel('University', fontsize=14, labelpad=15)  # Increase font size for the x-axis label and add padding
+
+# Label the y-axis (vertical axis)
+plt.ylabel('Count', fontsize=14)  # Increase font size for the y-axis label
+
+# Rotate the labels on the x-axis to 45 degrees for better readability
+plt.xticks(rotation=45, fontsize=12, ha='right')  # Increase font size and rotate x-axis labels, align them to the right
+
+# Add grid lines to the plot
+plt.grid(axis='y', linestyle='--')  # Add horizontal grid lines with dashed style
+
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
 
 text = '### Dataset types'
 st.write(text)
