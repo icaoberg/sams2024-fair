@@ -94,13 +94,6 @@ st.write(text)
 # Count how many times each boolean appears in the data
 
 data_counts = df['data_access_level'].value_counts()
-
-data = {
-    'data_access_level': ['public', 'private', 'restricted', 'public', 'private', 'public', 'restricted', 'restricted', 'private', 'public']
-}
-
-df = pd.DataFrame(data)
-
 fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts,  autopct='%1.1f%%', startangle=90, labels=data_counts.index)
 
