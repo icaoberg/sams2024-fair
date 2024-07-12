@@ -103,23 +103,16 @@ fig, ax = plt.subplots()
 wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
                                   startangle=90)
-
-# Draw a white circle in the middle to make it look like a donut instead of a pie
 centre_circle = plt.Circle(
-    (0,0),  # This places the circle in the middle of the chart
-    0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
-    fc='white'  # 'fc' stands for fill color, which we're setting to white here
+    (0,0),  
+    0.70,  
+    fc='white'  
 )
-fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+fig.gca().add_artist(centre_circle)
 
-# Make sure the chart is a perfect circle
 ax.axis('equal')
-
-# Add a title to the chart
 plt.title('Percentage of Datasets with Donor Metadata')
-
-# Show the chart on the screen
-plt.show()
+st.pyplot(fig)
 
 text = '### Dataset types'
 import matplotlib.pyplot as plt
