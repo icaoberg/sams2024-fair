@@ -45,7 +45,7 @@ def get_data() -> pd.DataFrame:
     Returns:
     pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
     """
-    url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
+    url = "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"  # The URL to get the data from
     try:
         response = requests.get(url)  # Send a request to the URL to get the data
         response.raise_for_status()  # Check if the request was successful (no errors)
