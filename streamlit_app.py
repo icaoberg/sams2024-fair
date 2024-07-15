@@ -81,15 +81,17 @@ st.write(text)
 number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
+
+number_of_organs = len(df.index)
+text = f'There are {number_of_organs} organs datasets'
+st.write(text)
+
 columns = [
        'organ', 'dataset_type', 'group_name', 'data_access_level']
 df2= df[columns]
 df2.rename(columns={"organ": "Organ", "dataset_type": "Dataset Type", "data_access_level": "Data Access Level", "group_name": "Group Name"}, inplace=True)
 st.write(df2)
 
-number_of_organs = None
-text = f'There are 55 3D organs, 1203 tissue blocks'
-st.write(text)
 
 text = '### Datasets'
 st.write(text)
