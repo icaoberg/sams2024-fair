@@ -23,7 +23,7 @@ This is some text
 st.write(intro)
 
 method = '''
-This is some text
+## Methods
 '''
 st.write(method)
 
