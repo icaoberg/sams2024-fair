@@ -191,6 +191,9 @@ st.pyplot()
 # Count the occurrences of each data access level in the dataframe
 access_counts = df['data_access_level'].value_counts()
 
+# create figure
+
+
 # Generate a list of colors - one for each bar
 colors = ['skyblue', 'coral', 'lightgreen']  
 
@@ -214,6 +217,7 @@ plt.tight_layout()
 
 # Display the chart
 plt.show()
+st.pyplot()
 
 
 references = '''
