@@ -220,6 +220,7 @@ plt.tight_layout()
 
 # Display the chart
 plt.show()
+st.pyplot()
 
 
 references = '''
