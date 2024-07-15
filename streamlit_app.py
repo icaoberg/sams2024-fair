@@ -24,6 +24,7 @@ The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-
 st.write(abstract)
 
 intro = '''
+# Introduction
 This is some text
 '''
 st.write(intro)
