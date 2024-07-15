@@ -14,6 +14,8 @@ st.write(title)
 authors = 'Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I.'
 st.write(authors)
 
+from datetime import date today = date.today()
+'''python from datetime import datetime today = datetime.now() print(today)```
 today = 'Today''s date'
 st.write(today)
 
