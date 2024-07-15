@@ -14,7 +14,7 @@ st.write(title)
 authors = 'Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I.'
 st.write(authors)
 
-today = 'Today''s date'
+today = 'August 3, 2024'
 st.write(today)
 
 abstract = '''
