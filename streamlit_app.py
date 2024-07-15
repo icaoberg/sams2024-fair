@@ -17,7 +17,7 @@ st.write(authors)
 today = 'Today''s date'
 st.write(today)
 
-abstract = '''
+abstract = ''' 
 # Abstract 
 The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases, which will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
 '''
@@ -83,7 +83,9 @@ st.write(text)
 columns = [
        'organ', 'dataset_type', 'group_name', 'data_access_level']
 df2= df[columns]
+df2.rename(columns={"organ": "Organ", "dataset_type": "Dataset Type", "data_access_level": "Data Access Level", "group_name": "Group Name"}, inplace=True)
 st.write(df2)
+
 number_of_organs = None
 text = f'There are {number_of_organs} organs'
 st.write(text)
