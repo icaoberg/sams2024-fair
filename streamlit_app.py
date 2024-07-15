@@ -95,10 +95,10 @@ st.write(text)
 data_counts = df['has_donor_metadata'].value_counts()
 
 # Plot pie chart using Streamlit
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
-                                  startangle=90)
+                                  startangle=90, colors=["#cadF9E"])
 centre_circle = plt.Circle(
     (0,0),  
     0.70,  
@@ -106,12 +106,12 @@ centre_circle = plt.Circle(
 )
 fig.gca().add_artist(centre_circle)
 
+ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
 ax.axis('equal')
 plt.title('Percentage of Datasets with Donor Metadata')
 st.pyplot(fig)
 
 text = '### Dataset types'
-import matplotlib.pyplot as plt
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df['group_name'].value_counts()
@@ -154,7 +154,6 @@ st.pyplot(fig)
 
 text = '### Group name Dataset'
 st.write(text)
-import matplotlib.pyplot as plt
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df['group_name'].value_counts()
