@@ -239,3 +239,8 @@ references = '''
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
 '''
 st.write(references)
+
+acknowledgements = '''
+# Acknowledgements
+'''
+st.write(acknowledgements)
