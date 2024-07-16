@@ -229,6 +229,12 @@ plt.tight_layout()
 plt.show()
 st.pyplot()
 
+# Introduction paragraph for VR
+vrIntro = '''
+# VR Introduction
+
+'''
+st.write(vrIntro)
 
 references = '''
 # References
