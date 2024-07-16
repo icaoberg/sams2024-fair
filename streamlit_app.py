@@ -230,6 +230,15 @@ plt.show()
 st.pyplot()
 
 
+images = '''
+# Images
+'''
+st.write(images)
+HubMAP_consurtium= 'https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp'
+st.image(HubMAP_consurtium)
+
+
+
 references = '''
 # References
 * HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
