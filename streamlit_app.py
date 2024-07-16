@@ -200,16 +200,8 @@ plt.tight_layout()
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.pyplot()
 
-
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['data_access_level'].value_counts()
-
-# Increase figure size for better readability
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
-
 # Counting the number of datasets with contributors
-data_counts = df['has_contributors'].value_counts()
-colors=["#3d5a6c","#a4c4d7"]
+data_counts = df['data_access_level'].value_counts()
 colors = ["#5b6255","#cadF9E"]
 
 fig, ax = plt.subplots(figsize=(3,3))
