@@ -210,7 +210,7 @@ wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, c
 autotexts[0].set_color('white') 
 autotexts[1].set_color('black') 
 
-ax.legend(wedges, data_counts.index, title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
 ax.axis('equal')  
 ax.set_title('Data Acess Level Distribution')
