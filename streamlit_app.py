@@ -125,15 +125,8 @@ st.pyplot(fig)
 
 text = '### Dataset types'
 
-# Count the occurrences of each data access level in the dataframe
-access_level_counts = df['group_name'].value_counts()
-
-# Increase figure size for better readability
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
-
 # Counting the number of datasets with contributors
 data_counts = df['has_contributors'].value_counts()
-colors=["#3d5a6c","#a4c4d7"]
 colors = ["#5b6255","#cadF9E"]
 
 fig, ax = plt.subplots(figsize=(3,3))
@@ -150,7 +143,6 @@ st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df['has_contacts'].value_counts()
-colors = ["#5b6255","#cadF9E"]
 colors=["#3d5a6c","#a4c4d7"]
 
 fig, ax = plt.subplots(figsize=(3,3))
@@ -164,9 +156,24 @@ ax.axis('equal')
 ax.set_title('Distribution of "has_contacts"')
 st.pyplot(fig)
 
+# Counting the number of datasets with contributors
+data_counts = df['data_access_level'].value_counts()
+colors = ["#5b6255","#cadF9E"]
+
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
+
+ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+
+ax.axis('equal')  
+ax.set_title('Data Acess Level Distribution')
+st.pyplot(fig)
+
 text = '### Group name Dataset'
 st.write(text)
-import matplotlib.pyplot as plt
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df['group_name'].value_counts()
@@ -199,22 +206,6 @@ plt.tight_layout()
 # Display the chart
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.pyplot()
-
-# Counting the number of datasets with contributors
-data_counts = df['data_access_level'].value_counts()
-colors = ["#5b6255","#cadF9E"]
-
-fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
-
-autotexts[0].set_color('white') 
-autotexts[1].set_color('black') 
-
-ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
-
-ax.axis('equal')  
-ax.set_title('Data Acess Level Distribution')
-st.pyplot(fig)
 
 
 references = '''
