@@ -202,32 +202,27 @@ st.pyplot()
 
 
 # Count the occurrences of each data access level in the dataframe
-access_counts = df['data_access_level'].value_counts()
+access_level_counts = df['data_access_level'].value_counts()
 
-# Generate a list of colors - one for each bar
-colors = ['skyblue', 'coral', 'lightgreen']  
+# Increase figure size for better readability
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
-# Start making a bar chart to visualize the data
-access_counts.plot(kind='bar', color=colors) 
+# Counting the number of datasets with contributors
+data_counts = df['has_contributors'].value_counts()
+colors=["#3d5a6c","#a4c4d7"]
+colors = ["#5b6255","#cadF9E"]
 
-# Add a title to the top of the chart
-plt.title('Data Access Level Distribution')
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
-# Label the x-axis (horizontal axis)
-plt.xlabel('Data Access Level')
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
 
-# Label the y-axis (vertical axis)
-plt.ylabel('Count')
+ax.legend(wedges, data_counts.index, title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
-# Rotate the labels on the x-axis to 45 degrees
-plt.xticks(rotation=45)
-
-# Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
-
-# Display the chart
-plt.show()
-st.pyplot()
+ax.axis('equal')  
+ax.set_title('Data Acess Level Distribution')
+st.pyplot(fig)
 
 
 references = '''
