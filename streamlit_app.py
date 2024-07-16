@@ -232,7 +232,7 @@ st.pyplot()
 # Introduction paragraph for VR
 vrIntro = '''
 # VR Introduction
-
+Recent advancements in virtual reality (VR) development have sparked interest in applying VR to biomedical research and practice. VR allows for dynamic exploration and enables viewers to enter visualizations from various viewpoints (Camp et al., 1998). It also facilitates the creation of detailed visualizations of intricate molecular structures and biomolecular systems (Chavent et al., 2011; Gill and West, 2014; Trellet et al., 2018; Wiebrands et al., 2018).
 '''
 st.write(vrIntro)
 
