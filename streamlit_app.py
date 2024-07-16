@@ -145,7 +145,7 @@ autotexts[1].set_color('black')
 ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
 ax.axis('equal')  
-ax.set_title('Distribution of "has_contributors"')
+ax.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
@@ -161,8 +161,9 @@ autotexts[1].set_color('black')
 
 ax.legend(wedges, data_counts.index, title="Contacts", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 ax.axis('equal')  
-ax.set_title('Distribution of "has_contacts"')
+ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
+
 
 text = '### Group name Dataset'
 st.write(text)
@@ -244,3 +245,8 @@ acknowledgements = '''
 # Acknowledgements
 '''
 st.write(acknowledgements)
+
+Conclusion = '''
+# Conclusion
+'''
+st.write(Conclusion)
