@@ -29,6 +29,11 @@ This is some text
 '''
 st.write(intro)
 
+method = '''
+## Methods
+'''
+st.write(method)
+
 ## DO NOT MODIFY THIS BLOCK
 # Function to determine the type
 def determine_type(dataset_type: str) -> str:
