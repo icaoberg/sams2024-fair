@@ -242,5 +242,6 @@ st.write(references)
 
 acknowledgements = '''
 # Acknowledgements
+This is a placeholder 
 '''
 st.write(acknowledgements)
