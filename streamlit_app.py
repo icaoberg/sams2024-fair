@@ -1,14 +1,55 @@
 import streamlit as st
 import pandas as pd
-import requests
 import matplotlib.pyplot as plt
-from pprint import pprint
-from datetime import datetime
+from wordcloud import WordCloud
 
 logo_url = (
     "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
 )
-st.image(logo_url)
+st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
+
+# Sample data creation
+data = {
+    'group_name': ['University_of_California_San_Diego_TMC',
+       'California_Institute_of_Technology_TMC',
+       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
+       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
+       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
+       'TMC_University_of_Pennsylvania', 'MC_IU',
+       'TMC_University_of_Connecticut_and_Scripps',
+       'TMC_Pacific_Northwest_National_Laboratory',
+       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
+       'Washington_University_Kidney_TMC',
+       'TTD_Penn_State_University_and_Columbia_University',
+       'TTD_Pacific_Northwest_National_Laboratory',
+       'TC_Harvard_University',
+       'Beth_Israel_Deaconess_Medical_Center_TMC',
+       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
+       'TTD_University_of_San_Diego_and_City_of_Hope',
+       'University_of_Rochester_Medical_Center_TMC']
+}
+
+# Convert the dictionary into a DataFrame
+df = pd.DataFrame(data)
+
+# Modify the 'group_name' column to replace spaces with underscores
+df['group_name'] = df['group_name'].str.replace(' ', '_')
+
+# Prepare text data from the DataFrame with connected words
+text = ' '.join(df['group_name'].tolist())
+
+# Create the Word Cloud with frequency proportional to word count
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
+
+
+
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
