@@ -146,9 +146,6 @@ st.write(text)
 
 # At a glance sentences
 number_of_datasets = len(df)
-
-
-number_of_datasets = len(df)
 answer = f'- The number of datasets are {number_of_datasets}.'
 st.write(answer)
 
@@ -187,7 +184,7 @@ groups = df['group_name'].unique()
 number_of_groups = len(groups)
 answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
-
+st.markdown(f"- Number of groups are {len(groups)}.")
 #At a a glance sentences (closed)
 
 # Count how many times each unique value appears in the 'data_access_level' column
