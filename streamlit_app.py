@@ -28,12 +28,12 @@ data = {
        'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
        'Washington_University_Kidney_TMC',
        'TTD_Penn_State_University_and_Columbia_University',
-       'TTD - Pacific Northwest National Laboratory',
-       'TC - Harvard University',
-       'Beth Israel Deaconess Medical Center TMC',
-       'TMC - University of California San Diego focusing on female reproduction',
-       'TTD - University of San Diego and City of Hope',
-       'University of Rochester Medical Center TMC']
+       'TTD_Pacific_Northwest_National_Laboratory',
+       'TC_Harvard_University',
+       'Beth_Israel_Deaconess_Medical_Center_TMC',
+       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
+       'TTD_University_of_San_Diego_and_City_of_Hope',
+       'University_of_Rochester_Medical_Center_TMC']
 }
 
 # Convert the dictionary into a DataFrame
