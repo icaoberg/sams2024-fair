@@ -100,8 +100,45 @@ st.write(text)
 text = "### At a Glance"
 st.write(text)
 
-number_of_datasets = len(df.index)
-text = f"There are {number_of_datasets} published datasets"
+# Count how many times each unique value appears in the 'data_access_level' column
+access_level_counts = df['has_data'].value_counts()
+
+# Start making a donut chart
+fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
+
+colors = ["#cadF9E"]
+
+# Plot a pie chart that will later become a donut chart
+wedges, texts, autotexts = ax.pie(
+    access_level_counts,  # This is the data we're using — the counts of each access level
+    autopct='%1.1f%%',  # This makes sure that each piece of the pie shows its percentage like "25.0%"
+    startangle=90,  # This starts the first piece of the pie at the top of the circle
+    wedgeprops=dict(width=0.3),  # This makes the pie chart have a hole in the middle, turning it into a donut chart
+    colors=colors
+)
+
+# Draw a white circle in the middle to make it look like a donut instead of a pie
+centre_circle = plt.Circle(
+    (0,0),  # This places the circle in the middle of the chart
+    0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
+    fc='white'  # 'fc' stands for fill color, which we're setting to white here
+)
+fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+
+ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
+
+# Make sure the chart is a perfect circle
+ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
+
+# Add a title to the chart
+plt.title('Percentages of Dataset with Data')
+
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+
+number_of_datasets = None
+text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 st.write(df)
