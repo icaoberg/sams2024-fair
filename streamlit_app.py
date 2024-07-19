@@ -37,7 +37,7 @@ With all the data provided and curated, contributors then develop innovative too
 
 Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
 
-"""
+'''
 st.write(intro)
 
 Method = """
