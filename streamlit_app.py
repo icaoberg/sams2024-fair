@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import geopandas as gpd
 import matplotlib.pyplot as plt
 from pprint import pprint
 from datetime import datetime
@@ -29,6 +30,13 @@ aboutUs = """
 # About Us 
 This is placeholder text 
 """
+
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+usa = world[world.name == "United States"]
+fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+usa.plot(ax=ax, color='whitesmoke', edgecolor='black')
+ax.set_title('Map of the United States')
+plt.show()
 st.write(aboutUs)
 
 intro = '''
