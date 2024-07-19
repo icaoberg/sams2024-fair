@@ -103,12 +103,8 @@ text = "### At a Glance"
 st.write(text)
 
 #At a a glance sentences
-st.write(df.columns)
-
-
 creation_action= df['activity_creation_action'].unique()
 answer= f'The activity creation activities are {creation_action}'
-st.write(creation_action)
 st.write(answer)
 
 number_of_datasets = len(df)
