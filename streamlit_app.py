@@ -218,14 +218,9 @@ ax.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
-<<<<<<< HEAD
-data_counts = df['has_contacts'].value_counts()
-colors=["#3d5a6c","#a4c4d7"]
-=======
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
->>>>>>> main
 
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax2.pie(
