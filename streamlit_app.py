@@ -40,10 +40,11 @@ Through the seamless integration of work from data providers, contributors, and 
 '''
 st.write(intro)
 
-method = """
-## Methods
+Method = """
+# Method
+This is a placeholder 
 """
-st.write(method)
+st.write(Method)
 
 
 ## DO NOT MODIFY THIS BLOCK
