@@ -10,6 +10,51 @@ logo_url = (
 )
 st.image(logo_url)
 
+import pandas as pd  # Import the pandas library, which is used for data manipulation
+from wordcloud import WordCloud  # Import the WordCloud class to create word clouds
+import matplotlib.pyplot as plt  # Import matplotlib for displaying the word cloud
+
+# Sample data creation
+# Here we create a dictionary with one key 'group_name' and a list of values
+data = {
+    'group_name': ['University_of_California_San_Diego_TMC',
+       'California_Institute_of_Technology_TMC',
+       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
+       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
+       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
+       'TMC_University_of_Pennsylvania', 'MC_IU',
+       'TMC_University_of_Connecticut_and_Scripps',
+       'TMC_Pacific_Northwest_National_Laboratory',
+       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
+       'Washington_University_Kidney_TMC',
+       'TTD_Penn_State_University and Columbia University',
+       'TTD - Pacific Northwest National Laboratory',
+       'TC - Harvard University',
+       'Beth Israel Deaconess Medical Center TMC',
+       'TMC - University of California San Diego focusing on female reproduction',
+       'TTD - University of San Diego and City of Hope',
+       'University of Rochester Medical Center TMC']
+}
+
+# Convert the dictionary into a DataFrame, a table-like data structure
+df = pd.DataFrame(data)
+
+# Prepare text data from the DataFrame
+# Join all the items in the 'group_name' column into a single string, separated by spaces
+text = ' '.join(df['group_name'].tolist())
+
+# Create the Word Cloud
+# Initialize the WordCloud object with specified width, height, and background color
+# Generate the word cloud from the text data
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+
+# Display the Word Cloud
+plt.figure(figsize=(10, 5))  # Create a figure of size 10 inches by 5 inches
+plt.imshow(wordcloud, interpolation='bilinear')  # Display the word cloud image
+plt.axis("off")  # Turn off the axis because we don't need it for the word cloud
+st.pyplot()
+
+
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
 
