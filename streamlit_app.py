@@ -235,7 +235,9 @@ images = '''
 '''
 st.write(images)
 HubMAP_consurtium= 'https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp'
+Improvement = 'https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41556-023-01194-w/MediaObjects/41556_2023_1194_Fig4_HTML.png?as=webp'
 st.image(HubMAP_consurtium)
+st.image(Improvement)
 
 
 
