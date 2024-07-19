@@ -1,19 +1,12 @@
 import streamlit as st
 import pandas as pd
-import requests
 import matplotlib.pyplot as plt
-from pprint import pprint
-from datetime import datetime
+from wordcloud import WordCloud
 
 logo_url = (
     "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
 )
-st.image(logo_url)
-
-import pandas as pd
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-import streamlit as st
+st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
 
 # Sample data creation
 data = {
@@ -50,11 +43,12 @@ wordcloud = WordCloud(width=800, height=400, background_color='white').generate(
 
 # Display the Word Cloud using Streamlit
 st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
-st.image("https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png", use_column_width=True)  # Display logo
-st.pyplot(plt.figure(figsize=(10, 5)))  # Show the word cloud plot in Streamlit
+plt.figure(figsize=(10, 5))  # Set the figure size
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 st.pyplot()  # Show the plot
+
+
 
 
 
