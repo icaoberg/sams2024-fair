@@ -139,14 +139,12 @@ plt.title('Percentages of Dataset with Data')
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-number_of_datasets = None
+number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 st.write(df)
-number_of_organs = None
-text = f"There are 55 3D organs, 1203 tissue blocks"
-st.write(text)
+
 
 number_of_organs = len(df.index)
 text = f"There are {number_of_organs} organs datasets"
