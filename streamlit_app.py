@@ -10,6 +10,35 @@ logo_url = (
 )
 st.image(logo_url)
 
+import pandas as pd  # Import the pandas library, which is used for data manipulation
+from wordcloud import WordCloud  # Import the WordCloud class to create word clouds
+import matplotlib.pyplot as plt  # Import matplotlib for displaying the word cloud
+
+# Sample data creation
+# Here we create a dictionary with one key 'data_access_level' and a list of values
+data = {
+    'data_access_level': ['public', 'private', 'restricted', 'public', 'private', 'public', 'restricted', 'restricted', 'private', 'public']
+}
+
+# Convert the dictionary into a DataFrame, a table-like data structure
+df = pd.DataFrame(data)
+
+# Prepare text data from the DataFrame
+# Join all the items in the 'data_access_level' column into a single string, separated by spaces
+text = ' '.join(df['data_access_level'].tolist())
+
+# Create the Word Cloud
+# Initialize the WordCloud object with specified width, height, and background color
+# Generate the word cloud from the text data
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+
+# Display the Word Cloud
+plt.figure(figsize=(10, 5))  # Create a figure of size 10 inches by 5 inches
+plt.imshow(wordcloud, interpolation='bilinear')  # Display the word cloud image
+plt.axis("off")  # Turn off the axis because we don't need it for the word cloud
+plt.show()  # Show the plot
+
+
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
 
