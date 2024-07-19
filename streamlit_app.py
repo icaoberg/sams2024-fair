@@ -185,6 +185,11 @@ st.pyplot(fig)
 
 text = "### Dataset types"
 
+<<<<<<< HEAD
+# Counting the number of datasets with contributors
+data_counts = df['has_contributors'].value_counts()
+colors = ["#5b6255","#cadF9E"]
+=======
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
@@ -195,6 +200,7 @@ plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
+>>>>>>> main
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
 
@@ -218,9 +224,14 @@ ax.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
+<<<<<<< HEAD
+data_counts = df['has_contacts'].value_counts()
+colors=["#3d5a6c","#a4c4d7"]
+=======
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
+>>>>>>> main
 
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax2.pie(
@@ -241,8 +252,23 @@ ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
 
+# Counting the number of datasets with contributors
+data_counts = df['data_access_level'].value_counts()
+colors = ["#5b6255","#cadF9E"]
 
-text = "### Group name Dataset"
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
+
+ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+
+ax.axis('equal')  
+ax.set_title('Data Acess Level Distribution')
+st.pyplot(fig)
+
+text = '### Group name Dataset'
 st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
@@ -283,44 +309,15 @@ plt.tight_layout()
 st.set_option("deprecation.showPyplotGlobalUse", False)
 st.pyplot()
 
-
-# Count the occurrences of each data access level in the dataframe
-access_counts = df["data_access_level"].value_counts()
-
-# Generate a list of colors - one for each bar
-colors = ["skyblue", "coral", "lightgreen"]
-
-# Start making a bar chart to visualize the data
-access_counts.plot(kind="bar", color=colors)
-
-# Add a title to the top of the chart
-plt.title("Data Access Level Distribution")
-
-# Label the x-axis (horizontal axis)
-plt.xlabel("Data Access Level")
-
-# Label the y-axis (vertical axis)
-plt.ylabel("Count")
-
-# Rotate the labels on the x-axis to 45 degrees
-plt.xticks(rotation=45)
-
-# Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
-
-# Display the chart
-plt.show()
-st.pyplot()
-
-
-references = """
+references = '''
 # References
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full"
 * García, L. J., Batut, B., Burke, M. L., Kuzak, M., Psomopoulos, F. E., Arcila, R., Attwood, T. K., Beard, N., Carvalho-Silva, D., Dimopoulos, A. C., Del Angel, V. D., Dumontier, M., Gurwitz, K. T., Krause, R., McQuilton, P., Pera, L. L., Morgan, S. L., Rauste, P., Via, A., . . . Palagi, P. M. (2020). Ten simple rules for making training materials FAIR. PLOS Computational Biology/PLoS Computational Biology, 16(5), e1007854. https://doi.org/10.1371/journal.pcbi.1007854
 * HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
 * Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
-"""
+'''
+
 st.write(references)
 
 acknowledgements = """
