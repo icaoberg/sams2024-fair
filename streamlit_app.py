@@ -29,6 +29,28 @@ This is some text
 '''
 st.write(intro)
 
+tools = '''
+## Tools
+
+The FAIR Data Guiding principles ensure that information is findability, accessible, interoperability, and reusability. To ensure HuBMAP’s alignment with FAIR principles, the following tools were used:
+
+Google Docs is an online word processor included in the free, web-based Google Docs Editors suite offered by Google. By utilizing Google Docs to record and establish HuBMAP in an organized sequence by breaking down the concept with an introduction, methods, FAIRness Assessment of HRA Organ VR, Set up, and Glossary. 
+
+Google Colab is a service that allows users to access a wide range of computing resources free of charge. Based on Jupyter Notebook, colab allows for a fast and efficient coding platform without having to download, install, or run anything. In the HuBMAP project, colab was used primarily to visualize data. Through employing Google Colab we were able to ensure our data and graphs were able to be findable and accessible. 
+
+GitHub is a developer platform that allows developers to create, store, manage, and share their code. It uses Git software, providing the distributed version control of Git plus access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. It is often used to control source code by programmers collaboratively developing software. GitHub is the most efficient platform we can access because it is a free way to share code while simultaneously working on specific code sections. GitHub allows us to collaborate on the code by assigning and completing certain tasks.
+
+Python is a low-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is the sole programming language that we used on this project.
+
+
+Streamlit is an open-source Python framework that allows us to transform scripts into interactive apps. We used this to run and visualize our code and edit the code in the GitHub workspace.
+
+Virtual Reality is a set of images and sounds, produced by a computer, that seems to represent a place or a situation that a person can take part in the VR experience. We chose to use the Meta Quest 2, which was on the lower end of minimum device parameters to assess the accessibility of the product for the average consumer. 
+
+'''
+
+st.write(tools)
+
 method = '''
 ## Methods
 '''
