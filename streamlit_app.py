@@ -16,7 +16,7 @@ st.write(title)
 authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
 st.write(authors)
 
-today = "August 2, 2024"
+today = pd.Timestamp.today()
 st.write(today)
 
 abstract = """
@@ -25,7 +25,8 @@ The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-
 """
 st.write(abstract)
 
-intro = """
+intro = '''
+# Introduction
 The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
 
 Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
@@ -39,10 +40,11 @@ Through the seamless integration of work from data providers, contributors, and 
 """
 st.write(intro)
 
-method = """
-## Methods
+Method = """
+# Method
+This is a placeholder 
 """
-st.write(method)
+st.write(Method)
 
 
 ## DO NOT MODIFY THIS BLOCK
@@ -100,8 +102,45 @@ st.write(text)
 text = "### At a Glance"
 st.write(text)
 
-number_of_datasets = len(df.index)
-text = f"There are {number_of_datasets} published datasets"
+# Count how many times each unique value appears in the 'data_access_level' column
+access_level_counts = df['has_data'].value_counts()
+
+# Start making a donut chart
+fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
+
+colors = ["#cadF9E"]
+
+# Plot a pie chart that will later become a donut chart
+wedges, texts, autotexts = ax.pie(
+    access_level_counts,  # This is the data we're using — the counts of each access level
+    autopct='%1.1f%%',  # This makes sure that each piece of the pie shows its percentage like "25.0%"
+    startangle=90,  # This starts the first piece of the pie at the top of the circle
+    wedgeprops=dict(width=0.3),  # This makes the pie chart have a hole in the middle, turning it into a donut chart
+    colors=colors
+)
+
+# Draw a white circle in the middle to make it look like a donut instead of a pie
+centre_circle = plt.Circle(
+    (0,0),  # This places the circle in the middle of the chart
+    0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
+    fc='white'  # 'fc' stands for fill color, which we're setting to white here
+)
+fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+
+ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
+
+# Make sure the chart is a perfect circle
+ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
+
+# Add a title to the chart
+plt.title('Percentages of Dataset with Data')
+
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+
+number_of_datasets = None
+text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 st.write(df)
@@ -136,16 +175,23 @@ st.write(text)
 data_counts = df["has_donor_metadata"].value_counts()
 
 # Plot pie chart using Streamlit
-fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts, autopct="%1.1f%%", startangle=90)
-centre_circle = plt.Circle((0, 0), 0.70, fc="white")
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,
+                                  autopct='%1.1f%%',
+                                  startangle=90, colors=["#cadF9E"])
+centre_circle = plt.Circle(
+    (0,0),  
+    0.70,  
+    fc='white'  
+)
 fig.gca().add_artist(centre_circle)
 
-ax.axis("equal")
-plt.title("Percentage of Datasets with Donor Metadata")
+ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
+ax.axis('equal')
+plt.title('Percentage of Datasets with Donor Metadata')
 st.pyplot(fig)
 
-text = "### Dataset types"
+text = '### Dataset types'
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -203,8 +249,23 @@ ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
 
+# Counting the number of datasets with contributors
+data_counts = df['data_access_level'].value_counts()
+colors = ["#5b6255","#cadF9E"]
 
-text = "### Group name Dataset"
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+
+autotexts[0].set_color('white') 
+autotexts[1].set_color('black') 
+
+ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+
+ax.axis('equal')  
+ax.set_title('Data Acess Level Distribution')
+st.pyplot(fig)
+
+text = '### Group name Dataset'
 st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
@@ -245,37 +306,7 @@ plt.tight_layout()
 st.set_option("deprecation.showPyplotGlobalUse", False)
 st.pyplot()
 
-
-# Count the occurrences of each data access level in the dataframe
-access_counts = df["data_access_level"].value_counts()
-
-# Generate a list of colors - one for each bar
-colors = ["skyblue", "coral", "lightgreen"]
-
-# Start making a bar chart to visualize the data
-access_counts.plot(kind="bar", color=colors)
-
-# Add a title to the top of the chart
-plt.title("Data Access Level Distribution")
-
-# Label the x-axis (horizontal axis)
-plt.xlabel("Data Access Level")
-
-# Label the y-axis (vertical axis)
-plt.ylabel("Count")
-
-# Rotate the labels on the x-axis to 45 degrees
-plt.xticks(rotation=45)
-
-# Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
-
-# Display the chart
-plt.show()
-st.pyplot()
-
-
-references = """
+references = '''
 # References
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full"
 * Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. doi:10.1016/S0167-739X(98)00023-5
@@ -287,7 +318,8 @@ references = """
 * Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. doi:10.1515/jib-2018-0004
 * Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. doi:10.1515/jib-2018-0010
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
-"""
+'''
+
 st.write(references)
 
 acknowledgements = """
