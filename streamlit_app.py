@@ -10,12 +10,12 @@ logo_url = (
 )
 st.image(logo_url)
 
-import pandas as pd  # Import the pandas library, which is used for data manipulation
-from wordcloud import WordCloud  # Import the WordCloud class to create word clouds
-import matplotlib.pyplot as plt  # Import matplotlib for displaying the word cloud
+import pandas as pd
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import streamlit as st
 
 # Sample data creation
-# Here we create a dictionary with one key 'group_name' and a list of values
 data = {
     'group_name': ['University_of_California_San_Diego_TMC',
        'California_Institute_of_Technology_TMC',
@@ -27,7 +27,7 @@ data = {
        'TMC_Pacific_Northwest_National_Laboratory',
        'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
        'Washington_University_Kidney_TMC',
-       'TTD_Penn_State_University and Columbia University',
+       'TTD_Penn_State_University_and_Columbia_University',
        'TTD - Pacific Northwest National Laboratory',
        'TC - Harvard University',
        'Beth Israel Deaconess Medical Center TMC',
@@ -36,23 +36,26 @@ data = {
        'University of Rochester Medical Center TMC']
 }
 
-# Convert the dictionary into a DataFrame, a table-like data structure
+# Convert the dictionary into a DataFrame
 df = pd.DataFrame(data)
 
-# Prepare text data from the DataFrame
-# Join all the items in the 'group_name' column into a single string, separated by spaces
+# Modify the 'group_name' column to replace spaces with underscores
+df['group_name'] = df['group_name'].str.replace(' ', '_')
+
+# Prepare text data from the DataFrame with connected words
 text = ' '.join(df['group_name'].tolist())
 
 # Create the Word Cloud
-# Initialize the WordCloud object with specified width, height, and background color
-# Generate the word cloud from the text data
 wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
 
-# Display the Word Cloud
-plt.figure(figsize=(10, 5))  # Create a figure of size 10 inches by 5 inches
-plt.imshow(wordcloud, interpolation='bilinear')  # Display the word cloud image
-plt.axis("off")  # Turn off the axis because we don't need it for the word cloud
-st.pyplot()
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+st.image("https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png", use_column_width=True)  # Display logo
+st.pyplot(plt.figure(figsize=(10, 5)))  # Show the word cloud plot in Streamlit
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
+
 
 
 title = "# FAIR Assessment of HuBMAP data"
