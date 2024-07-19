@@ -25,6 +25,12 @@ The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-
 """
 st.write(abstract)
 
+aboutUs = """
+# About Us 
+This is placeholder text 
+"""
+st.write(aboutUs)
+
 intro = '''
 # Introduction
 The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
