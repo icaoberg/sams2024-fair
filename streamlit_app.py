@@ -312,6 +312,39 @@ plt.tight_layout()
 st.set_option("deprecation.showPyplotGlobalUse", False)
 st.pyplot()
 
+
+# Count the occurrences of each data access level in the dataframe
+access_counts = df["data_access_level"].value_counts()
+
+# Generate a list of colors - one for each bar
+colors = ["skyblue", "coral", "lightgreen"]
+
+# Start making a bar chart to visualize the data
+access_counts.plot(kind="bar", color=colors)
+
+# Add a title to the top of the chart
+plt.title("Data Access Level Distribution")
+
+# Label the x-axis (horizontal axis)
+plt.xlabel("Data Access Level")
+
+# Label the y-axis (vertical axis)
+plt.ylabel("Count")
+
+# Rotate the labels on the x-axis to 45 degrees
+plt.xticks(rotation=45)
+
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
+st.pyplot()
+
+
+text = '### Dataset types'
+st.write(text)
+
 references = '''
 # References
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full"
