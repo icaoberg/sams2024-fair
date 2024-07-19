@@ -38,8 +38,8 @@ df['group_name'] = df['group_name'].str.replace(' ', '_')
 # Prepare text data from the DataFrame with connected words
 text = ' '.join(df['group_name'].tolist())
 
-# Create the Word Cloud
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+# Create the Word Cloud with frequency proportional to word count
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
 
 # Display the Word Cloud using Streamlit
 st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
@@ -47,7 +47,6 @@ plt.figure(figsize=(10, 5))  # Set the figure size
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 st.pyplot()  # Show the plot
-
 
 
 
