@@ -16,12 +16,6 @@ st.write(title)
 authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
 st.write(authors)
 
-aboutUs = """
-# About Us 
-This is placeholder text 
-"""
-st.write(aboutUs)
-
 today = pd.Timestamp.today()
 st.write(today)
 
