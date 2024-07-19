@@ -185,11 +185,6 @@ st.pyplot(fig)
 
 text = "### Dataset types"
 
-<<<<<<< HEAD
-# Counting the number of datasets with contributors
-data_counts = df['has_contributors'].value_counts()
-colors = ["#5b6255","#cadF9E"]
-=======
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
@@ -200,7 +195,6 @@ plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
->>>>>>> main
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
 
