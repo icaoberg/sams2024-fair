@@ -9,25 +9,30 @@ logo_url = (
 )
 st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
 
+
+
+from PIL import Image
+import numpy as np
+
 # Sample data creation
 data = {
     'group_name': ['University of California San Diego TMC',
-       'California_Institute_of_Technology_TMC',
-       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
-       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
-       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
-       'TMC_University_of_Pennsylvania', 'MC_IU',
-       'TMC_University_of_Connecticut_and_Scripps',
-       'TMC_Pacific_Northwest_National_Laboratory',
-       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
-       'Washington_University_Kidney_TMC',
-       'TTD_Penn_State_University_and_Columbia_University',
-       'TTD_Pacific_Northwest_National_Laboratory',
-       'TC_Harvard_University',
-       'Beth_Israel_Deaconess_Medical_Center_TMC',
-       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
-       'TTD_University_of_San_Diego_and_City_of_Hope',
-       'University_of_Rochester_Medical_Center_TMC']
+       'California Institute of Technology TMC',
+       'University of Florida TMC', 'Stanford TMC', 'Stanford RTI',
+       'General Electric RTI', 'EXT Human Cell Atlas', 'Vanderbilt TMC',
+       'Broad Institute RTI', 'Northwestern RTI', 'Purdue TTD',
+       'TMC University of Pennsylvania', 'MC IU',
+       'TMC University of Connecticut and Scripps',
+       'TMC Pacific Northwest National Laboratory',
+       'TMC Childrens Hospital of Philadelphia', 'IEC Testing Group',
+       'Washington University Kidney TMC',
+       'TTD Penn State University and Columbia University',
+       'TTD Pacific Northwest National Laboratory',
+       'TC Harvard University',
+       'Beth Israel Deaconess Medical Center TMC',
+       'TMC University of California San Diego focusing on female reproduction',
+       'TTD University of San Diego and City of Hope',
+       'University of Rochester Medical Center TMC']
 }
 
 # Convert the dictionary into a DataFrame
@@ -39,8 +44,11 @@ df['group_name'] = df['group_name'].str.replace(' ', '_')
 # Prepare text data from the DataFrame with connected words
 text = ' '.join(df['group_name'].tolist())
 
-# Create the Word Cloud with frequency proportional to word count
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+# Load the silhouette image of a human body
+mask_image = np.array(Image.open("human_body_silhouette.png"))
+
+# Create the WordCloud with the silhouette mask
+wordcloud = WordCloud(width=800, height=400, background_color='white', mask=mask_image).generate_from_frequencies(df['group_name'].value_counts())
 
 # Display the Word Cloud using Streamlit
 st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
@@ -48,6 +56,7 @@ plt.figure(figsize=(10, 5))  # Set the figure size
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 st.pyplot()  # Show the plot
+
 
 
 
