@@ -341,6 +341,15 @@ When viewed in VR, the spatiality of organs and tissue blocks mapped to the Huma
 '''
 st.write(vrIntro)
 
+# How to use VR
+
+
+
+logoVr_url = (
+    "https://www.frontiersin.org/files/Articles/1162723/fbinf-03-1162723-HTML/image_m/fbinf-03-1162723-g002.jpg"
+)
+st.image(logoVr_url)
+
 text = '### Dataset types'
 st.write(text)
 
