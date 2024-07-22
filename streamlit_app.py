@@ -144,7 +144,7 @@ text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 df3 = df.copy()
-df3["created_timestamp"] = df3["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms"))
+df3["created_timestamp"] = df3["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
 st.write(df3)
 
 
