@@ -239,6 +239,7 @@ st.write(text)
 columns = ["organ", "dataset_type", "group_name", "created_timestamp", "data_access_level"]
 df_display = df[columns]
 df_display["created_timestamp"] = df_display["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
 df_display.rename(
     columns={
         "organ": "Organ",
