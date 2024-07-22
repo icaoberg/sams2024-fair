@@ -287,16 +287,14 @@ data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
-
-wedges, texts, autotexts = ax1.pie(
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax1.legend(
+ax.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -314,7 +312,7 @@ colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
 # fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax2.pie(
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
