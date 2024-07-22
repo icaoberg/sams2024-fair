@@ -143,7 +143,9 @@ number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
-st.write(df)
+df3 = df.copy()
+df3["created_timestamp"] = df3["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms"))
+st.write(df3)
 
 
 number_of_organs = len(df.index)
