@@ -228,28 +228,28 @@ number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
-st.write(df)
-
 
 number_of_organs = len(df.index)
 text = f"There are {number_of_organs} organs datasets"
 st.write(text)
 
-columns = ["organ", "dataset_type", "group_name", "data_access_level"]
-df2 = df[columns]
-df2.rename(
+text = "### Datasets"
+st.write(text)
+
+columns = ["organ", "dataset_type", "group_name", "created_timestamp", "data_access_level"]
+df_display = df[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
+df_display.rename(
     columns={
         "organ": "Organ",
         "dataset_type": "Dataset Type",
-        "data_access_level": "Data Access Level",
+        "created_timestamp": "Date Added",
         "group_name": "Group Name",
+        "data_access_level": "Data Access Level"  
     },
     inplace=True,
 )
-st.write(df2)
-
-text = "### Datasets"
-st.write(text)
+st.write(df_display)
 
 text = "### Data access level"
 st.write(text)
