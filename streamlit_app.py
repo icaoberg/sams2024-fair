@@ -184,7 +184,6 @@ groups = df['group_name'].unique()
 number_of_groups = len(groups)
 answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
-st.markdown(f"- Number of groups are {len(groups)}.")
 #At a a glance sentences (closed)
 
 # Count how many times each unique value appears in the 'data_access_level' column
