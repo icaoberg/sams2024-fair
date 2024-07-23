@@ -232,7 +232,7 @@ def dataset_with_data_chart():
 )
     fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
 
-    ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
+    ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center", bbox_to_anchor=(1.2, 0.5))
 
 # Make sure the chart is a perfect circle
     ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
