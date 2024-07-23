@@ -81,6 +81,29 @@ Through the seamless integration of work from data providers, contributors, and 
 '''
 st.write(intro)
 
+tools = '''
+## Tools
+The FAIR Data Guiding principles ensure that information is findability, accessible, interoperability, and reusability. To ensure HuBMAP’s alignment with FAIR principles, the following tools were used:
+
+Google Docs is an online word processor included in the free, web-based Google Docs Editors suite offered by Google. By utilizing Google Docs to record and establish HuBMAP in an organized sequence by breaking down the concept with an introduction, methods, FAIRness Assessment of HRA Organ VR, Set up, and Glossary. 
+
+Google Colab is a service that allows users to access a wide range of computing resources free of charge. Based on Jupyter Notebook, colab allows for a fast and efficient coding platform without having to download, install, or run anything. In the HuBMAP project, colab was used primarily to visualize data. Through employing Google Colab we were able to ensure our data and graphs were able to be findable and accessible. 
+
+GitHub is a developer platform that allows developers to create, store, manage, and share their code. It uses Git software, providing the distributed version control of Git plus access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. It is often used to control source code by programmers collaboratively developing software. GitHub is the most efficient platform we can access because it is a free way to share code while simultaneously working on specific code sections. GitHub allows us to collaborate on the code by assigning and completing certain tasks.
+
+Python is a low-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is the sole programming language that we used on this project.
+
+Streamlit is an open-source Python framework that allows us to transform scripts into interactive apps. We used this to run and visualize our code and edit the code in the GitHub workspace.
+
+Virtual Reality is a set of images and sounds, produced by a computer, that seems to represent a place or a situation that a person can take part in the VR experience. We chose to use the Meta Quest 2, which was on the lower end of minimum device parameters to assess the accessibility of the product for the average consumer. 
+'''
+
+st.write(tools)
+
+
+method = """
+## Methods
+=======
 Method = """
 # Method
 This is a placeholder 
@@ -286,16 +309,15 @@ data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
-
-wedges, texts, autotexts = ax1.pie(
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax1.legend(
+ax2.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -303,14 +325,18 @@ ax1.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contributors"')
+ax2.axis("equal")
+ax2.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
-colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#3d5a6c", "#a4c4d7"
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
+
+wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)]
 
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax2.pie(
@@ -327,6 +353,11 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
+
+ax1.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax1.axis('equal')  
+ax1.set_title('Distribution of "has_contributors"')
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
@@ -450,7 +481,8 @@ This is a placeholder
 """
 st.write(acknowledgements)
 
-Conclusion = """
+conclusion = """
 # Conclusion
 """
-st.write(Conclusion)
+
+st.write(conclusion)
