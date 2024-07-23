@@ -216,16 +216,15 @@ data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
-
-wedges, texts, autotexts = ax1.pie(
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax1.legend(
+ax2.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -233,14 +232,18 @@ ax1.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contributors"')
+ax2.axis("equal")
+ax2.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
-colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#3d5a6c", "#a4c4d7"
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
+
+wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)]
 
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax2.pie(
@@ -257,10 +260,16 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
+
+ax1.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax1.axis('equal')  
+ax1.set_title('Distribution of "has_contributors"')
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
 
+<<<<<<< HEAD
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
 colors = ["#5b6255","#cadF9E"]
@@ -278,6 +287,9 @@ ax.set_title('Data Acess Level Distribution')
 st.pyplot(fig)
 
 text = '### Group name Dataset'
+=======
+text = "### Group name Dataset"
+>>>>>>> main
 st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
@@ -335,7 +347,8 @@ This is a placeholder
 """
 st.write(acknowledgements)
 
-Conclusion = """
+conclusion = """
 # Conclusion
 """
-st.write(Conclusion)
+
+st.write(conclusion)
