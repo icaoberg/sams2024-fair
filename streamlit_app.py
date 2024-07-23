@@ -332,7 +332,7 @@ data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
-fig, ax = plt.subplots(1, 2, figsize=(6,6))
+fig, ax = plt.subplots(figsize=(6,6))
 
 wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
