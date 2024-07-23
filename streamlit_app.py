@@ -278,6 +278,7 @@ st.write(text)
 data_counts = df["has_donor_metadata"].value_counts()
 
 # Plot pie chart using Streamlit
+def has_metadata_chart():
 fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
@@ -294,12 +295,13 @@ ax.axis('equal')
 plt.title('Percentage of Datasets with Donor Metadata')
 st.pyplot(fig)
 
-text = '### Dataset types'
+
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
+def has_contributers_chart():
 plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Counting the number of datasets with contributors
@@ -329,7 +331,9 @@ st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
-colors = ["#5b6255", "#cadF9E"]
+def has_contacts_chart():
+    
+    colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
 fig, ax = plt.subplots(figsize=(6,6))
@@ -362,7 +366,10 @@ st.pyplot(fig)
 
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
-colors = ["#5b6255","#cadF9E"]
+
+def data_access_level_chart():
+
+    colors = ["#5b6255","#cadF9E"]
 
 fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
@@ -383,7 +390,8 @@ st.write(text)
 access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+def group_name_chart():
+    plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Start making a bar chart to visualize the data
 # This will create a bar chart where each bar represents a different data access level
@@ -428,7 +436,8 @@ colors = ["skyblue", "coral", "lightgreen"]
 access_counts.plot(kind="bar", color=colors)
 
 # Add a title to the top of the chart
-plt.title("Data Access Level Distribution")
+def data_access_level_distribution_chart():
+    plt.title("Data Access Level Distribution")
 
 # Label the x-axis (horizontal axis)
 plt.xlabel("Data Access Level")
