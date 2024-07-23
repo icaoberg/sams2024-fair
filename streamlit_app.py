@@ -212,7 +212,8 @@ access_level_counts = df['has_data'].value_counts()
 
 # Start making a donut chart
 def dataset_with_data_chart():
-    fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
+    plt.clf()
+    fig, ax = plt.subplots(figsize=(3,3))  # Create a blank space (figure) where the chart will be drawn
     colors = ["#cadF9E"]
 # Plot a pie chart that will later become a donut chart
     wedges, texts, autotexts = ax.pie(
@@ -241,7 +242,7 @@ def dataset_with_data_chart():
 
 
 # Display the plot in Streamlit
-    st.pyplot(fig)
+    st.pyplot()
 
 number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
@@ -278,6 +279,7 @@ data_counts = df["has_donor_metadata"].value_counts()
 
 # Plot pie chart using Streamlit
 def has_metadata_chart():
+    plt.clf()
     fig, ax = plt.subplots(figsize=(3,3))
     wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
@@ -292,7 +294,7 @@ def has_metadata_chart():
     ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
     ax.axis('equal')
     plt.title('Percentage of Datasets with Donor Metadata')
-    st.pyplot(fig)
+    st.pyplot()
 
 
 
@@ -301,6 +303,7 @@ access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
 def has_contributers_chart():
+    plt.clf()
     plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Counting the number of datasets with contributors
@@ -326,12 +329,12 @@ def has_contributers_chart():
 
     ax.axis("equal")
     ax.set_title('Distribution of "has contributors"')
-    st.pyplot(fig)
+    st.pyplot()
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 def has_contacts_chart():
-    
+    plt.clf()
     colors = ["#5b6255", "#cadF9E"]
     colors = ["#3d5a6c", "#a4c4d7"]
 
@@ -361,13 +364,13 @@ def has_contacts_chart():
 
     ax.axis("equal")
     ax.set_title('Distribution of "has contacts"')
-    st.pyplot(fig)
+    st.pyplot()
 
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
 
 def data_access_level_chart():
-
+    plt.clf()
     colors = ["#5b6255","#cadF9E"]
 
     fig, ax = plt.subplots(figsize=(3,3))
@@ -380,16 +383,17 @@ def data_access_level_chart():
 
     ax.axis('equal')  
     ax.set_title('Data Acess Level Distribution')
-    st.pyplot(fig)
-
-    text = '### Group name Dataset'
-    st.write(text)
+    st.pyplot()
+    
+text = '### Group name Dataset'
+st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
 def research_group_name_chart():
+    plt.clf()
     plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Start making a bar chart to visualize the data
@@ -426,6 +430,8 @@ def research_group_name_chart():
 
 
 # Count the occurrences of each data access level in the dataframe
+def data_access_level_distribution_chart():
+    plt.clf()
     access_counts = df["data_access_level"].value_counts()
 
 # Generate a list of colors - one for each bar
@@ -435,7 +441,7 @@ def research_group_name_chart():
     access_counts.plot(kind="bar", color=colors)
 
 # Add a title to the top of the chart
-def data_access_level_distribution_chart():
+
     plt.title("Data Access Level Distribution")
 
 # Label the x-axis (horizontal axis)
@@ -460,8 +466,8 @@ def data_access_level_distribution_chart():
 plot_options =[
     'Datasets with Data',
     'Datasets with Donor Metadata', 
-    'Distribution of /"has contributors/"', 
-    'Distribution of /"has cotacts/"',
+    'Distribution of "has contributors"', 
+    'Distribution of "has contacts"',
     'Data Access Level',
     'Research Group Name Distribution',
     'Data Access Level Distribution'
@@ -472,9 +478,9 @@ if selected_plot == 'Datasets with Data':
     dataset_with_data_chart()
 elif selected_plot == 'Datasets with Donor Metadata':
     has_metadata_chart()
-elif selected_plot == 'Distribution of /"has contributors/"':
+elif selected_plot == 'Distribution of "has contributors"':
     has_contributers_chart()
-elif selected_plot == 'Distribution of /"has contacts/"':
+elif selected_plot == 'Distribution of "has contacts"':
     has_contacts_chart()
 elif selected_plot == 'Data Access Level':
     data_access_level_chart()
