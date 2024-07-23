@@ -58,17 +58,6 @@ logo_url = (
 )
 st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
 
-
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
-
-# Display the Word Cloud using Streamlit
-st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
-plt.figure(figsize=(10, 5))  # Set the figure size
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-st.pyplot()  # Show the plot
-
-
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
 
@@ -152,6 +141,14 @@ groups = df['group_name'].unique()
 number_of_groups = len(groups)
 answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
+
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
 #At a a glance sentences (closed)
 
 # Count how many times each unique value appears in the 'data_access_level' column
