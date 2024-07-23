@@ -84,8 +84,8 @@ st.write(intro)
 Method = """
 # Overview
 The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
-	Data needs to be findable and accessible as a means to promote data resubility, reduce bias and serve as a framework data collection. 
 
+Data needs to be findable and accessible as a means to promote data resubility, reduce bias and serve as a framework data collection. 
 
 """
 st.write(Method)
