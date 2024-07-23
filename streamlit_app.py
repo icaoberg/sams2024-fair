@@ -19,16 +19,24 @@ st.write(authors)
 today = "August 2, 2024"
 st.write(today)
 
-abstract = """ 
+abstract = """
 # Abstract 
 The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
 """
 st.write(abstract)
 
 intro = """
-# Introduction
-This is some text
-"""
+The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
+
+Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
+
+Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement team holds the responsibility of curating, integrating, and standardizing the vast amount of datasets. HIVE ensures that the datasets meet quality standards before they become publicly available. HIVE also helps develop analytical tools for scientific researchers to understand and utilize the datasets.
+
+With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
+
+Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
+
+'''
 st.write(intro)
 
 method = """
@@ -96,6 +104,11 @@ number_of_datasets = len(df.index)
 text = f"There are {number_of_datasets} published datasets"
 st.write(text)
 
+st.write(df)
+number_of_organs = None
+text = f"There are 55 3D organs, 1203 tissue blocks"
+st.write(text)
+
 number_of_organs = len(df.index)
 text = f"There are {number_of_organs} organs datasets"
 st.write(text)
@@ -112,7 +125,6 @@ df2.rename(
     inplace=True,
 )
 st.write(df2)
-
 
 text = "### Datasets"
 st.write(text)
@@ -154,7 +166,7 @@ wedges, texts, autotexts = ax.pie(
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax.legend(
+ax2.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -162,17 +174,21 @@ ax.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contributors"')
+ax2.axis("equal")
+ax2.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
-colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#3d5a6c", "#a4c4d7"
 
-fig, ax = plt.subplots(figsize=(3, 3))
-wedges, texts, autotexts = ax.pie(
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
+
+wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)]
+
+# fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax2.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
@@ -186,14 +202,17 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
+
+ax1.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax1.axis('equal')  
+ax1.set_title('Distribution of "has_contributors"')
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
 
-
 text = "### Group name Dataset"
 st.write(text)
-import matplotlib.pyplot as plt
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -279,7 +298,8 @@ This is a placeholder
 """
 st.write(acknowledgements)
 
-Conclusion = """
+conclusion = """
 # Conclusion
 """
-st.write(Conclusion)
+
+st.write(conclusion)
