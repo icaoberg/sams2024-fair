@@ -4,90 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-logo_url = (
-    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
-)
-st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
-
-
- # Sample data creation
-data = {
-    'group_name': ['University of California San Diego TMC',
-       'California_Institute_of_Technology_TMC',
-       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
-       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
-       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
-       'TMC_University_of_Pennsylvania', 'MC_IU',
-       'TMC_University_of_Connecticut_and_Scripps',
-       'TMC_Pacific_Northwest_National_Laboratory',
-       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
-       'Washington_University_Kidney_TMC',
-       'TTD_Penn_State_University_and_Columbia_University',
-       'TTD_Pacific_Northwest_National_Laboratory',
-       'TC_Harvard_University',
-       'Beth_Israel_Deaconess_Medical_Center_TMC',
-       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
-       'TTD_University_of_San_Diego_and_City_of_Hope',
-       'University_of_Rochester_Medical_Center_TMC']
-}
-
-# Convert the dictionary into a DataFrame
-df = pd.DataFrame(data)
-
-# Modify the 'group_name' column to replace spaces with underscores
-df['group_name'] = df['group_name'].str.replace(' ', '_')
-
-# Prepare text data from the DataFrame with connected words
-text = ' '.join(df['group_name'].tolist())
-
-# Create the Word Cloud with frequency proportional to word count
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
-
-# Display the Word Cloud using Streamlit
-st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
-plt.figure(figsize=(10, 5))  # Set the figure size
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-st.pyplot()  # Show the plot
-
-
-title = "# FAIR Assessment of HuBMAP data"
-st.write(title)
-
-authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
-st.write(authors)
-
-today = pd.Timestamp.today()
-st.write(today)
-
-abstract = """
-# Abstract 
-The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
-"""
-st.write(abstract)
-
-intro = '''
-# Introduction
-The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
-
-Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
-
-Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement team holds the responsibility of curating, integrating, and standardizing the vast amount of datasets. HIVE ensures that the datasets meet quality standards before they become publicly available. HIVE also helps develop analytical tools for scientific researchers to understand and utilize the datasets.
-
-With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
-
-Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
-
-'''
-st.write(intro)
-
-Method = """
-# Method
-This is a placeholder 
-"""
-st.write(Method)
-
-
 ## DO NOT MODIFY THIS BLOCK
 # Function to determine the type
 def determine_type(dataset_type: str) -> str:
@@ -136,6 +52,58 @@ def get_data() -> pd.DataFrame:
 
 df = get_data()
 ## DO NOT MODIFY THIS BLOCK
+
+logo_url = (
+    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
+)
+st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
+
+
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
+
+
+title = "# FAIR Assessment of HuBMAP data"
+st.write(title)
+
+authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
+st.write(authors)
+
+today = pd.Timestamp.today()
+st.write(today)
+
+abstract = """
+# Abstract 
+The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
+"""
+st.write(abstract)
+
+intro = '''
+# Introduction
+The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
+
+Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
+
+Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement team holds the responsibility of curating, integrating, and standardizing the vast amount of datasets. HIVE ensures that the datasets meet quality standards before they become publicly available. HIVE also helps develop analytical tools for scientific researchers to understand and utilize the datasets.
+
+With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
+
+Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
+
+'''
+st.write(intro)
+
+Method = """
+# Method
+This is a placeholder 
+"""
+st.write(Method)
 
 text = "## Published data"
 st.write(text)
