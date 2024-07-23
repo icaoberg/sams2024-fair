@@ -102,9 +102,6 @@ st.write(tools)
 
 
 method = """
-## Methods
-=======
-Method = """
 # Method
 This is a placeholder 
 """
@@ -122,13 +119,14 @@ def determine_type(dataset_type: str) -> str:
 
 @st.cache_data
 def get_data() -> pd.DataFrame:
-    """
+    '''
     Fetch data from a predefined URL, extract the 'data' key,
     and return it as a DataFrame.
 
     Returns:
     pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
-    """
+    '''
+    
     url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
     try:
         response = requests.get(url)  # Send a request to the URL to get the data
@@ -475,14 +473,14 @@ references = '''
 
 st.write(references)
 
-acknowledgements = """
+acknowledgements = '''
 # Acknowledgements
 This is a placeholder 
-"""
+'''
 st.write(acknowledgements)
 
-conclusion = """
+conclusion = '''
 # Conclusion
-"""
+'''
 
 st.write(conclusion)
