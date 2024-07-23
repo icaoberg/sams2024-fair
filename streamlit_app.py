@@ -207,6 +207,49 @@ answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
 #At a a glance sentences (closed)
 
+
+
+
+
+
+number_of_datasets = len(df.index)
+text = f'There are {number_of_datasets} published datasets'
+st.write(text)
+
+
+number_of_organs = len(df.index)
+text = f"There are {number_of_organs} organs datasets"
+st.write(text)
+
+text = "### Datasets"
+st.write(text)
+
+columns = ["organ", "dataset_type", "group_name", "created_timestamp", "data_access_level"]
+df_display = df[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
+df_display.rename(
+    columns={
+        "organ": "Organ",
+        "dataset_type": "Dataset Type",
+        "created_timestamp": "Date Added",
+        "group_name": "Group Name",
+        "data_access_level": "Data Access Level"  
+    },
+    inplace=True,
+)
+st.write(df_display)
+
+#Title for Graphs
+
+text = "# Graphs"
+st.write(text)
+
+#Creating columns for graphs
+
+col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+
+
 # Count how many times each unique value appears in the 'data_access_level' column
 access_level_counts = df['has_data'].value_counts()
 
@@ -242,38 +285,12 @@ plt.title('Percentages of Dataset with Data')
 
 
 # Display the plot in Streamlit
-st.pyplot(fig)
-
-number_of_datasets = len(df.index)
-text = f'There are {number_of_datasets} published datasets'
-st.write(text)
+plt.tight_layout()
+with col1:
+    st.pyplot()
 
 
-number_of_organs = len(df.index)
-text = f"There are {number_of_organs} organs datasets"
-st.write(text)
 
-text = "### Datasets"
-st.write(text)
-
-columns = ["organ", "dataset_type", "group_name", "created_timestamp", "data_access_level"]
-df_display = df[columns]
-df_display["created_timestamp"] = df_display["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
-df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
-df_display.rename(
-    columns={
-        "organ": "Organ",
-        "dataset_type": "Dataset Type",
-        "created_timestamp": "Date Added",
-        "group_name": "Group Name",
-        "data_access_level": "Data Access Level"  
-    },
-    inplace=True,
-)
-st.write(df_display)
-
-text = "### Data access level"
-st.write(text)
 
 # Count how many times each boolean appears in the data
 data_counts = df["has_donor_metadata"].value_counts()
@@ -293,9 +310,16 @@ fig.gca().add_artist(centre_circle)
 ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
 ax.axis('equal')
 plt.title('Percentage of Datasets with Donor Metadata')
-st.pyplot(fig)
 
-text = '### Dataset types'
+# Display the plot in Streamlit
+plt.tight_layout()
+with col2:
+    st.pyplot()
+
+
+
+
+
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -326,7 +350,11 @@ ax.legend(
 
 ax.axis("equal")
 ax.set_title('Distribution of "has contributors"')
-st.pyplot(fig)
+
+# Display the plot in Streamlit
+plt.tight_layout()
+with col3:
+    st.pyplot()
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
@@ -359,7 +387,12 @@ ax.set_title('Distribution of "has_contributors"')
 
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
-st.pyplot(fig)
+
+# Display the plot in Streamlit
+plt.tight_layout()
+with col4:
+    st.pyplot()
+
 
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
@@ -375,10 +408,13 @@ ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Lev
 
 ax.axis('equal')  
 ax.set_title('Data Acess Level Distribution')
-st.pyplot(fig)
 
-text = '### Group name Dataset'
-st.write(text)
+# Display the plot in Streamlit
+plt.tight_layout()
+with col5:
+    st.pyplot()
+
+
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -416,7 +452,8 @@ plt.tight_layout()
 
 # Display the chart
 st.set_option("deprecation.showPyplotGlobalUse", False)
-st.pyplot()
+with col6:
+    st.pyplot()
 
 
 # Count the occurrences of each data access level in the dataframe
@@ -445,7 +482,16 @@ plt.tight_layout()
 
 # Display the chart
 plt.show()
-st.pyplot()
+
+with col7:
+    st.pyplot()
+
+# Define your text
+text = "To enlarge graph, click on desired"
+
+# Use HTML to align text to the right
+st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
+
 
 # Introduction paragraph for VR
 vrIntro = '''
