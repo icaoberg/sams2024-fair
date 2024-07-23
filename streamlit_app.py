@@ -81,11 +81,31 @@ Through the seamless integration of work from data providers, contributors, and 
 '''
 st.write(intro)
 
-Method = """
+tools = '''
+## Tools
+The FAIR Data Guiding principles ensure that information is findability, accessible, interoperability, and reusability. To ensure HuBMAP’s alignment with FAIR principles, the following tools were used:
+
+Google Docs is an online word processor included in the free, web-based Google Docs Editors suite offered by Google. By utilizing Google Docs to record and establish HuBMAP in an organized sequence by breaking down the concept with an introduction, methods, FAIRness Assessment of HRA Organ VR, Set up, and Glossary. 
+
+Google Colab is a service that allows users to access a wide range of computing resources free of charge. Based on Jupyter Notebook, colab allows for a fast and efficient coding platform without having to download, install, or run anything. In the HuBMAP project, colab was used primarily to visualize data. Through employing Google Colab we were able to ensure our data and graphs were able to be findable and accessible. 
+
+GitHub is a developer platform that allows developers to create, store, manage, and share their code. It uses Git software, providing the distributed version control of Git plus access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. It is often used to control source code by programmers collaboratively developing software. GitHub is the most efficient platform we can access because it is a free way to share code while simultaneously working on specific code sections. GitHub allows us to collaborate on the code by assigning and completing certain tasks.
+
+Python is a low-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is the sole programming language that we used on this project.
+
+Streamlit is an open-source Python framework that allows us to transform scripts into interactive apps. We used this to run and visualize our code and edit the code in the GitHub workspace.
+
+Virtual Reality is a set of images and sounds, produced by a computer, that seems to represent a place or a situation that a person can take part in the VR experience. We chose to use the Meta Quest 2, which was on the lower end of minimum device parameters to assess the accessibility of the product for the average consumer. 
+'''
+
+st.write(tools)
+
+
+method = """
 # Method
 This is a placeholder 
 """
-st.write(Method)
+st.write(method)
 
 
 ## DO NOT MODIFY THIS BLOCK
@@ -99,13 +119,14 @@ def determine_type(dataset_type: str) -> str:
 
 @st.cache_data
 def get_data() -> pd.DataFrame:
-    """
+    '''
     Fetch data from a predefined URL, extract the 'data' key,
     and return it as a DataFrame.
 
     Returns:
     pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
-    """
+    '''
+    
     url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
     try:
         response = requests.get(url)  # Send a request to the URL to get the data
@@ -184,7 +205,6 @@ groups = df['group_name'].unique()
 number_of_groups = len(groups)
 answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
-st.markdown(f"- Number of groups are {len(groups)}.")
 #At a a glance sentences (closed)
 
 # Count how many times each unique value appears in the 'data_access_level' column
@@ -287,6 +307,7 @@ data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
 
+fig, ax = plt.subplots(figsize=(3, 3))
 wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
@@ -311,6 +332,10 @@ data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
+fig, ax = plt.subplots(figsize=(6,6))
+
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
@@ -326,6 +351,11 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
+
+ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contributors"')
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
@@ -430,26 +460,27 @@ st.write(text)
 references = '''
 # References
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
-* Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. doi:10.1016/S0167-739X(98)00023-5
-* Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. doi:10.1002/jcc.21861 
+* Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
+* Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. https://doi.org/10.1002/jcc.21861  
 * García, L. J., Batut, B., Burke, M. L., Kuzak, M., Psomopoulos, F. E., Arcila, R., Attwood, T. K., Beard, N., Carvalho-Silva, D., Dimopoulos, A. C., Del Angel, V. D., Dumontier, M., Gurwitz, K. T., Krause, R., McQuilton, P., Pera, L. L., Morgan, S. L., Rauste, P., Via, A., . . . Palagi, P. M. (2020). Ten simple rules for making training materials FAIR. PLOS Computational Biology/PLoS Computational Biology, 16(5), e1007854. https://doi.org/10.1371/journal.pcbi.1007854
-* Gill, B. J., and West, J. L. (2014). Modeling the tumor extracellular matrix: Tissue engineering tools repurposed towards new frontiers in cancer biology. J. Biomechanics, Funct. Tissue Eng. 47 (9), 1969–1978. doi:10.1016/j.jbiomech.2013.09.029
+* Gill, B. J., and West, J. L. (2014). Modeling the tumor extracellular matrix: Tissue engineering tools repurposed towards new frontiers in cancer biology. J. Biomechanics, Funct. Tissue Eng. 47 (9), 1969–1978. https://pubmed.ncbi.nlm.nih.gov/24300038/ 
 * HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
 * Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
-* Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. doi:10.1515/jib-2018-0004
-* Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. doi:10.1515/jib-2018-0010
+* Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. https://doi.org/10.1515/jib-2018-0004 
+* Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
 '''
 
 st.write(references)
 
-acknowledgements = """
+acknowledgements = '''
 # Acknowledgements
 This is a placeholder 
-"""
+'''
 st.write(acknowledgements)
 
-Conclusion = """
+conclusion = '''
 # Conclusion
-"""
-st.write(Conclusion)
+'''
+
+st.write(conclusion)
