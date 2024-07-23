@@ -330,7 +330,7 @@ st.pyplot(fig)
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
-colors = ["#3d5a6c", "#a4c4d7"
+colors = ["#3d5a6c", "#a4c4d7"]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
 
