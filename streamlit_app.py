@@ -4,38 +4,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-
-}
-
-# Convert the dictionary into a DataFrame
-df = pd.DataFrame(data)
-
-# Modify the 'group_name' column to replace spaces with underscores
-df['group_name'] = df['group_name'].str.replace(' ', '_')
-
-# Prepare text data from the DataFrame with connected words
-text = ' '.join(df['group_name'].tolist())
-
-# Create the Word Cloud with frequency proportional to word count
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
-
-# Display the Word Cloud using Streamlit
-st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
-plt.figure(figsize=(10, 5))  # Set the figure size
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-st.pyplot()  # Show the plot
+## DO NOT MODIFY THIS BLOCK
+# Function to determine the type
+def determine_type(dataset_type: str) -> str:
+    if '[' in dataset_type and ']' in dataset_type:
+        return 'Derived'
+    else:
+        return 'Primary'
 
 @st.cache_data
 def get_data() -> pd.DataFrame:
-    '''
+    """
     Fetch data from a predefined URL, extract the 'data' key,
     and return it as a DataFrame.
 
     Returns:
     pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
-    '''
-    
+    """
     url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
     try:
         response = requests.get(url)  # Send a request to the URL to get the data
@@ -43,17 +28,13 @@ def get_data() -> pd.DataFrame:
         json_data = response.json()  # Convert the response to JSON format
 
         # Ensure 'data' key exists in the JSON
-        if "data" in json_data:  # Check if the JSON contains the key 'data'
-            df = pd.DataFrame(
-                json_data["data"]
-            )  # Create a DataFrame using the data under 'data' key
-            df = df[df["status"] == "Published"]
-            df["dataset_status"] = df["dataset_type"].apply(determine_type)
+        if 'data' in json_data:  # Check if the JSON contains the key 'data'
+            df = pd.DataFrame(json_data['data'])  # Create a DataFrame using the data under 'data' key
+            df = df[df['status']=='Published']
+            df['dataset_status'] = df['dataset_type'].apply(determine_type)
             print("Data successfully loaded.")  # Print a message indicating success
         else:
-            raise KeyError(
-                "'data' key not found in the JSON response"
-            )  # Raise an error if 'data' key is missing
+            raise KeyError("'data' key not found in the JSON response")  # Raise an error if 'data' key is missing
 
         return df  # Return the DataFrame with the data
     except (ValueError, KeyError) as e:  # Catch errors related to value or missing keys
@@ -63,8 +44,13 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
-
 df = get_data()
+## DO NOT MODIFY THIS BLOCK
+
+# Convert the dictionary into a DataFrame
+
+
+
 ## DO NOT MODIFY THIS BLOCK
 
 logo_url = (
