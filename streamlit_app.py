@@ -1,14 +1,55 @@
 import streamlit as st
-import pandas as pd
 import requests
+import pandas as pd
 import matplotlib.pyplot as plt
-from pprint import pprint
-from datetime import datetime
+from wordcloud import WordCloud
 
 logo_url = (
     "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
 )
-st.image(logo_url)
+st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
+
+
+ # Sample data creation
+data = {
+    'group_name': ['University of California San Diego TMC',
+       'California_Institute_of_Technology_TMC',
+       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
+       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
+       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
+       'TMC_University_of_Pennsylvania', 'MC_IU',
+       'TMC_University_of_Connecticut_and_Scripps',
+       'TMC_Pacific_Northwest_National_Laboratory',
+       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
+       'Washington_University_Kidney_TMC',
+       'TTD_Penn_State_University_and_Columbia_University',
+       'TTD_Pacific_Northwest_National_Laboratory',
+       'TC_Harvard_University',
+       'Beth_Israel_Deaconess_Medical_Center_TMC',
+       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
+       'TTD_University_of_San_Diego_and_City_of_Hope',
+       'University_of_Rochester_Medical_Center_TMC']
+}
+
+# Convert the dictionary into a DataFrame
+df = pd.DataFrame(data)
+
+# Modify the 'group_name' column to replace spaces with underscores
+df['group_name'] = df['group_name'].str.replace(' ', '_')
+
+# Prepare text data from the DataFrame with connected words
+text = ' '.join(df['group_name'].tolist())
+
+# Create the Word Cloud with frequency proportional to word count
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
+
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
@@ -62,8 +103,12 @@ st.write(tools)
 
 method = """
 ## Methods
+=======
+Method = """
+# Method
+This is a placeholder 
 """
-st.write(method)
+st.write(Method)
 
 
 ## DO NOT MODIFY THIS BLOCK
@@ -121,6 +166,49 @@ st.write(text)
 text = "### At a Glance"
 st.write(text)
 
+
+# At a glance sentences
+number_of_datasets = len(df)
+answer = f'- The number of datasets are {number_of_datasets}.'
+st.write(answer)
+
+access_level_protected = df['data_access_level'].value_counts()['protected']
+answer = f'- The number of datasets that are protected is {access_level_protected}.'
+st.write(answer)
+
+access_level_public = df['data_access_level'].value_counts()['public']
+answer = f'- The number of datasets that are public is {access_level_public}.'
+st.write(answer)
+
+dataset_status_derived = df['dataset_status'].value_counts()['Derived']
+answer = f'- The number of datasets with a derived status is {dataset_status_derived}.'
+st.write(answer)
+
+dataset_status_primary = df['dataset_status'].value_counts()['Primary']
+answer = f'- The number of datasets with a primary status is {dataset_status_primary}.'
+st.write(answer)
+
+dataset_types = df['dataset_type'].unique()
+number_of_dataset_types = len(dataset_types)
+answer = f'- The number of dataset types are {number_of_dataset_types}.'
+st.write(answer)
+
+organs = df['organ'].unique()
+number_of_organs = len(organs)
+answer = f'- The number of organ types are {number_of_organs}.'
+st.write(answer)
+
+donors = df['donor_hubmap_id'].unique()
+number_of_donors = len(donors)
+answer = f'- The number of donors are {number_of_donors}.'
+st.write(answer)
+
+groups = df['group_name'].unique()
+number_of_groups = len(groups)
+answer = f'- The number of groups are {number_of_groups}.'
+st.write(answer)
+#At a a glance sentences (closed)
+
 # Count how many times each unique value appears in the 'data_access_level' column
 access_level_counts = df['has_data'].value_counts()
 
@@ -158,14 +246,12 @@ plt.title('Percentages of Dataset with Data')
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-number_of_datasets = None
+number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
 st.write(df)
-number_of_organs = None
-text = f"There are 55 3D organs, 1203 tissue blocks"
-st.write(text)
+
 
 number_of_organs = len(df.index)
 text = f"There are {number_of_organs} organs datasets"
@@ -194,16 +280,23 @@ st.write(text)
 data_counts = df["has_donor_metadata"].value_counts()
 
 # Plot pie chart using Streamlit
-fig, ax = plt.subplots()
-wedges, texts, autotexts = ax.pie(data_counts, autopct="%1.1f%%", startangle=90)
-centre_circle = plt.Circle((0, 0), 0.70, fc="white")
+fig, ax = plt.subplots(figsize=(3,3))
+wedges, texts, autotexts = ax.pie(data_counts,
+                                  autopct='%1.1f%%',
+                                  startangle=90, colors=["#cadF9E"])
+centre_circle = plt.Circle(
+    (0,0),  
+    0.70,  
+    fc='white'  
+)
 fig.gca().add_artist(centre_circle)
 
-ax.axis("equal")
-plt.title("Percentage of Datasets with Donor Metadata")
+ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
+ax.axis('equal')
+plt.title('Percentage of Datasets with Donor Metadata')
 st.pyplot(fig)
 
-text = "### Dataset types"
+text = '### Dataset types'
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -326,12 +419,57 @@ plt.tight_layout()
 st.set_option("deprecation.showPyplotGlobalUse", False)
 st.pyplot()
 
+
+# Count the occurrences of each data access level in the dataframe
+access_counts = df["data_access_level"].value_counts()
+
+# Generate a list of colors - one for each bar
+colors = ["skyblue", "coral", "lightgreen"]
+
+# Start making a bar chart to visualize the data
+access_counts.plot(kind="bar", color=colors)
+
+# Add a title to the top of the chart
+plt.title("Data Access Level Distribution")
+
+# Label the x-axis (horizontal axis)
+plt.xlabel("Data Access Level")
+
+# Label the y-axis (vertical axis)
+plt.ylabel("Count")
+
+# Rotate the labels on the x-axis to 45 degrees
+plt.xticks(rotation=45)
+
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
+st.pyplot()
+
+# Introduction paragraph for VR
+vrIntro = '''
+# VR Introduction
+Recent advancements in virtual reality (VR) development have sparked interest in applying VR to biomedical research and practice. VR allows for dynamic exploration and enables viewers to enter visualizations from various viewpoints (Camp et al., 1998). It also facilitates the creation of detailed visualizations of intricate molecular structures and biomolecular systems (Chavent et al., 2011; Gill and West, 2014; Trellet et al., 2018; Wiebrands et al., 2018).
+When viewed in VR, the spatiality of organs and tissue blocks mapped to the Human Reference Atlas (HRA) can be explored in their true size, providing a perspective that surpasses traditional 2D user interfaces. Added 2D and 3D visualizations can then offer data-rich context. The HRA Organ Gallery, a VR application, allows users to explore 3D organ models of the HRA in their true scale, location, and spatial relation to each other. Currently, the HRA Organ Gallery features 55 3D reference organs, 1,203 mapped tissue blocks from 292 demographically diverse donors and 15 providers, linking to over 6,000 datasets. It also includes prototype visualizations of cell type distributions and 3D protein structures.
+'''
+st.write(vrIntro)
+
+text = '### Dataset types'
+st.write(text)
+
 references = '''
 # References
-* Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full"
+* Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
+* Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
+* Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. https://doi.org/10.1002/jcc.21861  
 * García, L. J., Batut, B., Burke, M. L., Kuzak, M., Psomopoulos, F. E., Arcila, R., Attwood, T. K., Beard, N., Carvalho-Silva, D., Dimopoulos, A. C., Del Angel, V. D., Dumontier, M., Gurwitz, K. T., Krause, R., McQuilton, P., Pera, L. L., Morgan, S. L., Rauste, P., Via, A., . . . Palagi, P. M. (2020). Ten simple rules for making training materials FAIR. PLOS Computational Biology/PLoS Computational Biology, 16(5), e1007854. https://doi.org/10.1371/journal.pcbi.1007854
+* Gill, B. J., and West, J. L. (2014). Modeling the tumor extracellular matrix: Tissue engineering tools repurposed towards new frontiers in cancer biology. J. Biomechanics, Funct. Tissue Eng. 47 (9), 1969–1978. https://pubmed.ncbi.nlm.nih.gov/24300038/ 
 * HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
 * Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
+* Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. https://doi.org/10.1515/jib-2018-0004 
+* Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
 '''
 
