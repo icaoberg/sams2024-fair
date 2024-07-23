@@ -211,7 +211,8 @@ st.write(answer)
 access_level_counts = df['has_data'].value_counts()
 
 # Start making a donut chart
-fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
+def dataset_with_data_chart():
+    fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
 
 colors = ["#cadF9E"]
 
@@ -279,7 +280,7 @@ data_counts = df["has_donor_metadata"].value_counts()
 
 # Plot pie chart using Streamlit
 def has_metadata_chart():
-fig, ax = plt.subplots(figsize=(3,3))
+    fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
                                   startangle=90, colors=["#cadF9E"])
@@ -302,7 +303,7 @@ access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
 def has_contributers_chart():
-plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
+    plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Counting the number of datasets with contributors
 data_counts = df["has_contributors"].value_counts()
@@ -390,7 +391,7 @@ st.write(text)
 access_level_counts = df["group_name"].value_counts()
 
 # Increase figure size for better readability
-def group_name_chart():
+def research_group_name_chart():
     plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Start making a bar chart to visualize the data
@@ -454,6 +455,37 @@ plt.tight_layout()
 # Display the chart
 plt.show()
 st.pyplot()
+
+#Create A Sidebar
+st.sidebar.title('Data Plots')
+
+plot_options =[
+    'Datasets with Data',
+    'Datasets with Donor Metadata', 
+    'Distribution of /"has contributors/"', 
+    'Distribution of /"has cotacts/"',
+    'Data Access Level Distribution',
+    'Research Group Name Distribution',
+    'Data Access Level Distribution'
+     ]
+
+selected_plot = st.sidebar.selectbox('Select A Plot', plot_options)
+if selected_plot == 'Datasets with Data':
+    plot_bar_chart()
+elif selected_plot == 'Datasets with Donor Metadata':
+    plot_line_chart()
+elif selected_plot == 'Distribution of /"has contributors/"':
+    plot_scatter_chart()
+elif selected_plot == 'Distribution of /"has contributors/"':
+    plot_scatter_chart()
+elif selected_plot == 'Distribution of /"has cotacts/"':
+    plot_scatter_chart()
+elif selected_plot == 'Data Access Level Distribution':
+    plot_scatter_chart()
+elif selected_plot == 'Research Group Name Distribution':
+    plot_scatter_chart()
+elif selected_plot == 'RData Access Level Distribution':
+    plot_scatter_chart()
 
 # Introduction paragraph for VR
 vrIntro = '''
