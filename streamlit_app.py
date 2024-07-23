@@ -269,7 +269,6 @@ ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
 
-<<<<<<< HEAD
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
 colors = ["#5b6255","#cadF9E"]
@@ -287,9 +286,6 @@ ax.set_title('Data Acess Level Distribution')
 st.pyplot(fig)
 
 text = '### Group name Dataset'
-=======
-text = "### Group name Dataset"
->>>>>>> main
 st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
