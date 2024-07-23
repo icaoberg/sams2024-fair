@@ -462,28 +462,26 @@ plot_options =[
     'Datasets with Donor Metadata', 
     'Distribution of /"has contributors/"', 
     'Distribution of /"has cotacts/"',
-    'Data Access Level Distribution',
+    'Data Access Level',
     'Research Group Name Distribution',
     'Data Access Level Distribution'
      ]
 
 selected_plot = st.sidebar.selectbox('Select A Plot', plot_options)
 if selected_plot == 'Datasets with Data':
-    plot_bar_chart()
+    dataset_with_data_chart()
 elif selected_plot == 'Datasets with Donor Metadata':
-    plot_line_chart()
+    has_metadata_chart()
 elif selected_plot == 'Distribution of /"has contributors/"':
-    plot_scatter_chart()
-elif selected_plot == 'Distribution of /"has contributors/"':
-    plot_scatter_chart()
-elif selected_plot == 'Distribution of /"has cotacts/"':
-    plot_scatter_chart()
-elif selected_plot == 'Data Access Level Distribution':
-    plot_scatter_chart()
+    has_contributers_chart()
+elif selected_plot == 'Distribution of /"has contacts/"':
+    has_contacts_chart()
+elif selected_plot == 'Data Access Level':
+    data_access_level_chart()
 elif selected_plot == 'Research Group Name Distribution':
-    plot_scatter_chart()
-elif selected_plot == 'RData Access Level Distribution':
-    plot_scatter_chart()
+    research_group_name_chart()
+elif selected_plot == 'Data Access Level Distribution':
+    data_access_level_distribution_chart()
 
 # Introduction paragraph for VR
 vrIntro = '''
