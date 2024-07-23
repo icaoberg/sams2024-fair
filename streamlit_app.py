@@ -105,7 +105,7 @@ method = """
 # Method
 This is a placeholder 
 """
-st.write(Method)
+st.write(method)
 
 
 ## DO NOT MODIFY THIS BLOCK
