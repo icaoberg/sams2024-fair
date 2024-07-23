@@ -87,6 +87,9 @@ The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of
 
 Data needs to be findable and accessible as a means to promote data resubility, reduce bias and serve as a framework data collection. 
 
+### Fair Justification 
+Findable(FAIR 1): To ensure that data is findable, data will be assigned a globally unique identifier. Moreover, complete metadata that clearly and explicitly includes the identifier that it describes will be available. Metadata should also be registered in a searchable source to ensure that every input has an accurate output. 
+
 """
 st.write(Method)
 
