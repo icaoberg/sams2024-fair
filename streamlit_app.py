@@ -4,6 +4,110 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
+logo_url = (
+    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
+)
+st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
+
+
+ # Sample data creation
+data = {
+    'group_name': ['University of California San Diego TMC',
+       'California_Institute_of_Technology_TMC',
+       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
+       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
+       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
+       'TMC_University_of_Pennsylvania', 'MC_IU',
+       'TMC_University_of_Connecticut_and_Scripps',
+       'TMC_Pacific_Northwest_National_Laboratory',
+       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
+       'Washington_University_Kidney_TMC',
+       'TTD_Penn_State_University_and_Columbia_University',
+       'TTD_Pacific_Northwest_National_Laboratory',
+       'TC_Harvard_University',
+       'Beth_Israel_Deaconess_Medical_Center_TMC',
+       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
+       'TTD_University_of_San_Diego_and_City_of_Hope',
+       'University_of_Rochester_Medical_Center_TMC']
+}
+
+# Convert the dictionary into a DataFrame
+df = pd.DataFrame(data)
+
+# Modify the 'group_name' column to replace spaces with underscores
+df['group_name'] = df['group_name'].str.replace(' ', '_')
+
+# Prepare text data from the DataFrame with connected words
+text = ' '.join(df['group_name'].tolist())
+
+# Create the Word Cloud with frequency proportional to word count
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
+
+
+title = "# FAIR Assessment of HuBMAP data"
+st.write(title)
+
+authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
+st.write(authors)
+
+today = pd.Timestamp.today()
+st.write(today)
+
+abstract = """
+# Abstract 
+The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
+"""
+st.write(abstract)
+
+intro = '''
+# Introduction
+The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
+
+Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
+
+Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement team holds the responsibility of curating, integrating, and standardizing the vast amount of datasets. HIVE ensures that the datasets meet quality standards before they become publicly available. HIVE also helps develop analytical tools for scientific researchers to understand and utilize the datasets.
+
+With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
+
+Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
+
+'''
+st.write(intro)
+
+tools = '''
+## Tools
+The FAIR Data Guiding principles ensure that information is findability, accessible, interoperability, and reusability. To ensure HuBMAP’s alignment with FAIR principles, the following tools were used:
+
+Google Docs is an online word processor included in the free, web-based Google Docs Editors suite offered by Google. By utilizing Google Docs to record and establish HuBMAP in an organized sequence by breaking down the concept with an introduction, methods, FAIRness Assessment of HRA Organ VR, Set up, and Glossary. 
+
+Google Colab is a service that allows users to access a wide range of computing resources free of charge. Based on Jupyter Notebook, colab allows for a fast and efficient coding platform without having to download, install, or run anything. In the HuBMAP project, colab was used primarily to visualize data. Through employing Google Colab we were able to ensure our data and graphs were able to be findable and accessible. 
+
+GitHub is a developer platform that allows developers to create, store, manage, and share their code. It uses Git software, providing the distributed version control of Git plus access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. It is often used to control source code by programmers collaboratively developing software. GitHub is the most efficient platform we can access because it is a free way to share code while simultaneously working on specific code sections. GitHub allows us to collaborate on the code by assigning and completing certain tasks.
+
+Python is a low-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is the sole programming language that we used on this project.
+
+Streamlit is an open-source Python framework that allows us to transform scripts into interactive apps. We used this to run and visualize our code and edit the code in the GitHub workspace.
+
+Virtual Reality is a set of images and sounds, produced by a computer, that seems to represent a place or a situation that a person can take part in the VR experience. We chose to use the Meta Quest 2, which was on the lower end of minimum device parameters to assess the accessibility of the product for the average consumer. 
+'''
+
+st.write(tools)
+
+
+method = """
+# Method
+This is a placeholder 
+"""
+st.write(method)
+
+
 ## DO NOT MODIFY THIS BLOCK
 # Function to determine the type
 def determine_type(dataset_type: str) -> str:
@@ -15,13 +119,14 @@ def determine_type(dataset_type: str) -> str:
 
 @st.cache_data
 def get_data() -> pd.DataFrame:
-    """
+    '''
     Fetch data from a predefined URL, extract the 'data' key,
     and return it as a DataFrame.
 
     Returns:
     pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
-    """
+    '''
+    
     url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
     try:
         response = requests.get(url)  # Send a request to the URL to get the data
@@ -192,28 +297,29 @@ number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
 st.write(text)
 
-st.write(df)
-
 
 number_of_organs = len(df.index)
 text = f"There are {number_of_organs} organs datasets"
 st.write(text)
 
-columns = ["organ", "dataset_type", "group_name", "data_access_level"]
-df2 = df[columns]
-df2.rename(
+text = "### Datasets"
+st.write(text)
+
+columns = ["organ", "dataset_type", "group_name", "created_timestamp", "data_access_level"]
+df_display = df[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(lambda time: pd.to_datetime(time, unit="ms").strftime('%m-%d-%Y'))
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
+df_display.rename(
     columns={
         "organ": "Organ",
         "dataset_type": "Dataset Type",
-        "data_access_level": "Data Access Level",
+        "created_timestamp": "Date Added",
         "group_name": "Group Name",
+        "data_access_level": "Data Access Level"  
     },
     inplace=True,
 )
-st.write(df2)
-
-text = "### Datasets"
-st.write(text)
+st.write(df_display)
 
 text = "### Data access level"
 st.write(text)
@@ -251,16 +357,15 @@ data_counts = df["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 6))
-
-wedges, texts, autotexts = ax1.pie(
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax1.legend(
+ax.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -277,8 +382,12 @@ data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
+fig, ax = plt.subplots(figsize=(6,6))
+
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+
 # fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax2.pie(
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
@@ -292,6 +401,11 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
+
+ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contributors"')
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
 st.pyplot(fig)
@@ -409,13 +523,14 @@ references = '''
 
 st.write(references)
 
-acknowledgements = """
+acknowledgements = '''
 # Acknowledgements
 This is a placeholder 
-"""
+'''
 st.write(acknowledgements)
 
-Conclusion = """
+conclusion = '''
 # Conclusion
-"""
-st.write(Conclusion)
+'''
+
+st.write(conclusion)
