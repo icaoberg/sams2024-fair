@@ -191,14 +191,7 @@ plt.title('Percentages of Dataset with Data')
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-number_of_datasets = len(df.index)
-text = f'There are {number_of_datasets} published datasets'
-st.write(text)
 
-
-number_of_organs = len(df.index)
-text = f"There are {number_of_organs} organs datasets"
-st.write(text)
 
 text = "### Datasets"
 st.write(text)
