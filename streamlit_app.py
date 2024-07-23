@@ -334,7 +334,7 @@ colors = ["#3d5a6c", "#a4c4d7"]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
 
-wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)]
+wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
 # fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax2.pie(
