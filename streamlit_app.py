@@ -213,11 +213,9 @@ access_level_counts = df['has_data'].value_counts()
 # Start making a donut chart
 def dataset_with_data_chart():
     fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
-
-colors = ["#cadF9E"]
-
+    colors = ["#cadF9E"]
 # Plot a pie chart that will later become a donut chart
-wedges, texts, autotexts = ax.pie(
+    wedges, texts, autotexts = ax.pie(
     access_level_counts,  # This is the data we're using — the counts of each access level
     autopct='%1.1f%%',  # This makes sure that each piece of the pie shows its percentage like "25.0%"
     startangle=90,  # This starts the first piece of the pie at the top of the circle
@@ -226,24 +224,24 @@ wedges, texts, autotexts = ax.pie(
 )
 
 # Draw a white circle in the middle to make it look like a donut instead of a pie
-centre_circle = plt.Circle(
+    centre_circle = plt.Circle(
     (0,0),  # This places the circle in the middle of the chart
     0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
     fc='white'  # 'fc' stands for fill color, which we're setting to white here
 )
-fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+    fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
 
-ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
+    ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
 
 # Make sure the chart is a perfect circle
-ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
+    ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
 
 # Add a title to the chart
-plt.title('Percentages of Dataset with Data')
+    plt.title('Percentages of Dataset with Data')
 
 
 # Display the plot in Streamlit
-st.pyplot(fig)
+    st.pyplot(fig)
 
 number_of_datasets = len(df.index)
 text = f'There are {number_of_datasets} published datasets'
@@ -281,20 +279,20 @@ data_counts = df["has_donor_metadata"].value_counts()
 # Plot pie chart using Streamlit
 def has_metadata_chart():
     fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax.pie(data_counts,
+    wedges, texts, autotexts = ax.pie(data_counts,
                                   autopct='%1.1f%%',
                                   startangle=90, colors=["#cadF9E"])
-centre_circle = plt.Circle(
+    centre_circle = plt.Circle(
     (0,0),  
     0.70,  
     fc='white'  
 )
-fig.gca().add_artist(centre_circle)
+    fig.gca().add_artist(centre_circle)
 
-ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
-ax.axis('equal')
-plt.title('Percentage of Datasets with Donor Metadata')
-st.pyplot(fig)
+    ax.legend(wedges, data_counts.index, title="Has Metadata", loc="center")
+    ax.axis('equal')
+    plt.title('Percentage of Datasets with Donor Metadata')
+    st.pyplot(fig)
 
 
 
@@ -306,64 +304,64 @@ def has_contributers_chart():
     plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Counting the number of datasets with contributors
-data_counts = df["has_contributors"].value_counts()
-colors = ["#3d5a6c", "#a4c4d7"]
-colors = ["#5b6255", "#cadF9E"]
+    data_counts = df["has_contributors"].value_counts()
+    colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#5b6255", "#cadF9E"]
 
-fig, ax = plt.subplots(figsize=(3, 3))
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
-autotexts[0].set_color("white")
-autotexts[1].set_color("black")
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
 
-ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contributors",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contributors",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contributors"')
-st.pyplot(fig)
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contributors"')
+    st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 def has_contacts_chart():
     
     colors = ["#5b6255", "#cadF9E"]
-colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#3d5a6c", "#a4c4d7"]
 
-fig, ax = plt.subplots(figsize=(6,6))
+    fig, ax = plt.subplots(figsize=(6,6))
 
-wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+    wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
 # fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-)
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
 
-autotexts[0].set_color("white")
-autotexts[1].set_color("black")
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
 
-ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contacts",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contacts",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
 
-ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
-ax.axis('equal')  
-ax.set_title('Distribution of "has_contributors"')
+    ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+    ax.axis('equal')  
+    ax.set_title('Distribution of "has_contributors"')
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contacts"')
-st.pyplot(fig)
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contacts"')
+    st.pyplot(fig)
 
 # Counting the number of datasets with contributors
 data_counts = df['data_access_level'].value_counts()
@@ -372,20 +370,20 @@ def data_access_level_chart():
 
     colors = ["#5b6255","#cadF9E"]
 
-fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+    fig, ax = plt.subplots(figsize=(3,3))
+    wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
-autotexts[0].set_color('white') 
-autotexts[1].set_color('black') 
+    autotexts[0].set_color('white') 
+    autotexts[1].set_color('black') 
 
-ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+    ax.legend(wedges, [s.capitalize() for s in data_counts.index], title="Access Level", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
 
-ax.axis('equal')  
-ax.set_title('Data Acess Level Distribution')
-st.pyplot(fig)
+    ax.axis('equal')  
+    ax.set_title('Data Acess Level Distribution')
+    st.pyplot(fig)
 
-text = '### Group name Dataset'
-st.write(text)
+    text = '### Group name Dataset'
+    st.write(text)
 
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
@@ -396,68 +394,68 @@ def research_group_name_chart():
 
 # Start making a bar chart to visualize the data
 # This will create a bar chart where each bar represents a different data access level
-access_level_counts.plot(
-    kind="bar", color="skyblue", width=0.8
-)  # 'width' adjusts the width of the bars
+    access_level_counts.plot(
+        kind="bar", color="skyblue", width=0.8
+    )  # 'width' adjusts the width of the bars
 
 # Add a title to the top of the chart
-plt.title("Research group name", fontsize=16)  # Increase font size for the title
+    plt.title("Research group name", fontsize=16)  # Increase font size for the title
 
 # Label the x-axis (horizontal axis)
-plt.xlabel(
+    plt.xlabel(
     "University", fontsize=14, labelpad=15
-)  # Increase font size for the x-axis label and add padding
+    )  # Increase font size for the x-axis label and add padding
 
 # Label the y-axis (vertical axis)
-plt.ylabel("Count", fontsize=14)  # Increase font size for the y-axis label
+    plt.ylabel("Count", fontsize=14)  # Increase font size for the y-axis label
 
 # Rotate the labels on the x-axis to 45 degrees for better readability
-plt.xticks(
+    plt.xticks(
     rotation=45, fontsize=12, ha="right"
 )  # Increase font size and rotate x-axis labels, align them to the right
 
 # Add grid lines to the plot
-plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed style
+    plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed style
 
 # Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
+    plt.tight_layout()
 
 # Display the chart
-st.set_option("deprecation.showPyplotGlobalUse", False)
-st.pyplot()
+    st.set_option("deprecation.showPyplotGlobalUse", False)
+    st.pyplot()
 
 
 # Count the occurrences of each data access level in the dataframe
-access_counts = df["data_access_level"].value_counts()
+    access_counts = df["data_access_level"].value_counts()
 
 # Generate a list of colors - one for each bar
-colors = ["skyblue", "coral", "lightgreen"]
+    colors = ["skyblue", "coral", "lightgreen"]
 
 # Start making a bar chart to visualize the data
-access_counts.plot(kind="bar", color=colors)
+    access_counts.plot(kind="bar", color=colors)
 
 # Add a title to the top of the chart
 def data_access_level_distribution_chart():
     plt.title("Data Access Level Distribution")
 
 # Label the x-axis (horizontal axis)
-plt.xlabel("Data Access Level")
+    plt.xlabel("Data Access Level")
 
 # Label the y-axis (vertical axis)
-plt.ylabel("Count")
+    plt.ylabel("Count")
 
 # Rotate the labels on the x-axis to 45 degrees
-plt.xticks(rotation=45)
+    plt.xticks(rotation=45)
 
 # Adjust the layout to make sure everything fits without clipping
-plt.tight_layout()
+    plt.tight_layout()
 
 # Display the chart
-plt.show()
-st.pyplot()
+    plt.show()
+    st.pyplot()
 
 #Create A Sidebar
-st.sidebar.title('Data Plots')
+    st.sidebar.title('Data Plots')
 
 plot_options =[
     'Datasets with Data',
