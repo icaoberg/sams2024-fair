@@ -6,6 +6,14 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 from datetime import datetime
 
+import fsspec
+
+url = "https://www.naturalearthdata.com/http//www.naturalearthdata.com/" \
+      "download/110m/cultural/ne_110m_admin_0_countries.zip"
+    
+with fsspec.open(f"simplecache::{url}") as file:
+    gdf = gpd.read_file(file)
+
 logo_url = (
     "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
 )
