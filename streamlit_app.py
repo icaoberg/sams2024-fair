@@ -315,7 +315,7 @@ wedges, texts, autotexts = ax.pie(
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
-ax2.legend(
+ax.legend(
     wedges,
     data_counts.index,
     title="Contributors",
@@ -323,8 +323,8 @@ ax2.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
-ax2.axis("equal")
-ax2.set_title('Distribution of "has contributors"')
+ax.axis("equal")
+ax.set_title('Distribution of "has contributors"')
 st.pyplot(fig)
 
 # Counting the number of datasets with contacts
@@ -332,12 +332,12 @@ data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6,6))
+fig, ax = plt.subplots(1, 2, figsize=(6,6))
 
-wedges, texts, autotexts = ax1.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
+wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
 # fig, ax = plt.subplots(figsize=(3,3))
-wedges, texts, autotexts = ax2.pie(
+wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
@@ -352,9 +352,9 @@ ax.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
-ax1.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
-ax1.axis('equal')  
-ax1.set_title('Distribution of "has_contributors"')
+ax.legend(wedges, data_counts.index, title="Contributors", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
+ax.axis('equal')  
+ax.set_title('Distribution of "has_contributors"')
 
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
