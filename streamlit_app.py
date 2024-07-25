@@ -213,7 +213,7 @@ access_level_counts = df['has_data'].value_counts()
 # Start making a donut chart
 def dataset_with_data_chart():
     plt.clf()
-    fig, ax = plt.subplots(figsize=(3,3))  # Create a blank space (figure) where the chart will be drawn
+    fig, ax = plt.subplots(figsize=(5,5))  # Create a blank space (figure) where the chart will be drawn
     colors = ["#cadF9E"]
 # Plot a pie chart that will later become a donut chart
     wedges, texts, autotexts = ax.pie(
@@ -232,7 +232,7 @@ def dataset_with_data_chart():
 )
     fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
 
-    ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center", bbox_to_anchor=(1.2, 0.5))
+    ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center right", bbox_to_anchor=(1.2, 0.5))
 
 # Make sure the chart is a perfect circle
     ax.axis('equal')  # This command makes sure the height and width are the same, keeping our donut round
@@ -338,7 +338,7 @@ def has_contacts_chart():
     colors = ["#5b6255", "#cadF9E"]
     colors = ["#3d5a6c", "#a4c4d7"]
 
-    fig, ax = plt.subplots(figsize=(6,6))
+    fig, ax = plt.subplots(figsize=(3,3))
 
     wedges, texts, autotexts = ax.pie(data_counts,autopct='%1.1f%%',startangle=90, colors=colors, shadow= True)
 
