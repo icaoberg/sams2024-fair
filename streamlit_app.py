@@ -73,6 +73,70 @@ The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-
 """
 st.write(abstract)
 
+about_us = '''
+# About Us
+some text here
+
+'''
+st.write(about_us)
+import plotly.graph_objects as go
+
+state_abbreviations = {
+    'Massachusetts': 'MA',
+    'New York': 'NY',
+    'Missouri': 'MO',
+    'Kentucky': 'KY',
+    'New Jersey': 'NJ',
+    'Alabama': 'AL',
+    'California': 'CA',
+    'Georgia': 'GA',
+    'Texas': 'TX',
+    'Illinois': 'IL',
+    'Pennsylvania': 'PA'
+}
+
+state_population = {
+    'MA': 1, 'NY': 1, 'MO': 1, 'KY': 1, 'NJ': 1,
+    'AL': 1, 'CA': 3, 'GA': 1, 'TX': 2, 'IL': 1, 'PA': 1
+}
+
+state_codes = list(state_abbreviations.values())
+state_names = list(state_abbreviations.keys())
+
+hovertext = [
+    f'{state_names[i]}<br>Population: {state_population[code]:,}'
+    for i, code in enumerate(state_codes)
+]
+
+data = go.Choropleth(
+    locations=state_codes,
+    z=[state_population[code] for code in state_codes],
+    locationmode='USA-states',
+    colorscale='Reds',
+    hoverinfo='location+text',
+    hovertext=hovertext,
+    marker_line_color='black',
+    colorbar=dict(
+        title='Population',
+        tickvals=[1, 2, 3],
+        ticktext=['1', '2', '3']
+    )
+)
+
+layout = go.Layout(
+    geo=dict(
+        scope='usa',
+        projection=dict(type='albers usa'),
+        showlakes=False,
+        showland=True,
+        landcolor='rgb(217, 217, 217)'
+    )
+)
+
+fig = go.Figure(data=[data], layout=layout)
+st.title('SAMS 24 Map')
+st.plotly_chart(fig)
+
 intro = '''
 # Introduction
 The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
