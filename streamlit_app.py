@@ -4,52 +4,59 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
+## DO NOT MODIFY THIS BLOCK
+# Function to determine the type
+def determine_type(dataset_type: str) -> str:
+    if '[' in dataset_type and ']' in dataset_type:
+        return 'Derived'
+    else:
+        return 'Primary'
+
+@st.cache_data
+def get_data() -> pd.DataFrame:
+    """
+    Fetch data from a predefined URL, extract the 'data' key,
+    and return it as a DataFrame.
+
+    Returns:
+    pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
+    """
+    url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
+    try:
+        response = requests.get(url)  # Send a request to the URL to get the data
+        response.raise_for_status()  # Check if the request was successful (no errors)
+        json_data = response.json()  # Convert the response to JSON format
+
+        # Ensure 'data' key exists in the JSON
+        if 'data' in json_data:  # Check if the JSON contains the key 'data'
+            df = pd.DataFrame(json_data['data'])  # Create a DataFrame using the data under 'data' key
+            df = df[df['status']=='Published']
+            df['dataset_status'] = df['dataset_type'].apply(determine_type)
+            print("Data successfully loaded.")  # Print a message indicating success
+        else:
+            raise KeyError("'data' key not found in the JSON response")  # Raise an error if 'data' key is missing
+
+        return df  # Return the DataFrame with the data
+    except (ValueError, KeyError) as e:  # Catch errors related to value or missing keys
+        print(f"Error loading data: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if there is an error
+    except requests.RequestException as e:  # Catch errors related to the request itself
+        print(f"Request failed: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if the request fails
+
+df = get_data()
+## DO NOT MODIFY THIS BLOCK
+
+# Convert the dictionary into a DataFrame
+
+
+
+## DO NOT MODIFY THIS BLOCK
+
 logo_url = (
     "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
 )
 st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
-
-
- # Sample data creation
-data = {
-    'group_name': ['University of California San Diego TMC',
-       'California_Institute_of_Technology_TMC',
-       'University_of_Florida_TMC', 'Stanford_TMC', 'Stanford_RTI',
-       'General_Electric_RTI', 'EXT_Human_Cell_Atlas', 'Vanderbilt_TMC',
-       'Broad_Institute_RTI', 'Northwestern_RTI', 'Purdue_TTD',
-       'TMC_University_of_Pennsylvania', 'MC_IU',
-       'TMC_University_of_Connecticut_and_Scripps',
-       'TMC_Pacific_Northwest_National_Laboratory',
-       'TMC_Childrens_Hospital_of_Philadelphia', 'IEC_Testing_Group',
-       'Washington_University_Kidney_TMC',
-       'TTD_Penn_State_University_and_Columbia_University',
-       'TTD_Pacific_Northwest_National_Laboratory',
-       'TC_Harvard_University',
-       'Beth_Israel_Deaconess_Medical_Center_TMC',
-       'TMC_University_of_California_San_Diego_focusing_on_female_reproduction',
-       'TTD_University_of_San_Diego_and_City_of_Hope',
-       'University_of_Rochester_Medical_Center_TMC']
-}
-
-# Convert the dictionary into a DataFrame
-df = pd.DataFrame(data)
-
-# Modify the 'group_name' column to replace spaces with underscores
-df['group_name'] = df['group_name'].str.replace(' ', '_')
-
-# Prepare text data from the DataFrame with connected words
-text = ' '.join(df['group_name'].tolist())
-
-# Create the Word Cloud with frequency proportional to word count
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
-
-# Display the Word Cloud using Streamlit
-st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
-plt.figure(figsize=(10, 5))  # Set the figure size
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-st.pyplot()  # Show the plot
-
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
@@ -81,82 +88,11 @@ Through the seamless integration of work from data providers, contributors, and 
 '''
 st.write(intro)
 
-tools = '''
-## Tools
-The FAIR Data Guiding principles ensure that information is findability, accessible, interoperability, and reusability. To ensure HuBMAP’s alignment with FAIR principles, the following tools were used:
-
-Google Docs is an online word processor included in the free, web-based Google Docs Editors suite offered by Google. By utilizing Google Docs to record and establish HuBMAP in an organized sequence by breaking down the concept with an introduction, methods, FAIRness Assessment of HRA Organ VR, Set up, and Glossary. 
-
-Google Colab is a service that allows users to access a wide range of computing resources free of charge. Based on Jupyter Notebook, colab allows for a fast and efficient coding platform without having to download, install, or run anything. In the HuBMAP project, colab was used primarily to visualize data. Through employing Google Colab we were able to ensure our data and graphs were able to be findable and accessible. 
-
-GitHub is a developer platform that allows developers to create, store, manage, and share their code. It uses Git software, providing the distributed version control of Git plus access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. It is often used to control source code by programmers collaboratively developing software. GitHub is the most efficient platform we can access because it is a free way to share code while simultaneously working on specific code sections. GitHub allows us to collaborate on the code by assigning and completing certain tasks.
-
-Python is a low-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is the sole programming language that we used on this project.
-
-Streamlit is an open-source Python framework that allows us to transform scripts into interactive apps. We used this to run and visualize our code and edit the code in the GitHub workspace.
-
-Virtual Reality is a set of images and sounds, produced by a computer, that seems to represent a place or a situation that a person can take part in the VR experience. We chose to use the Meta Quest 2, which was on the lower end of minimum device parameters to assess the accessibility of the product for the average consumer. 
+method = '''
+# Overview
+The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
 '''
-
-st.write(tools)
-
-
-method = """
-# Method
-This is a placeholder 
-"""
 st.write(method)
-
-
-## DO NOT MODIFY THIS BLOCK
-# Function to determine the type
-def determine_type(dataset_type: str) -> str:
-    if "[" in dataset_type and "]" in dataset_type:
-        return "Derived"
-    else:
-        return "Primary"
-
-
-@st.cache_data
-def get_data() -> pd.DataFrame:
-    '''
-    Fetch data from a predefined URL, extract the 'data' key,
-    and return it as a DataFrame.
-
-    Returns:
-    pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
-    '''
-    
-    url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
-    try:
-        response = requests.get(url)  # Send a request to the URL to get the data
-        response.raise_for_status()  # Check if the request was successful (no errors)
-        json_data = response.json()  # Convert the response to JSON format
-
-        # Ensure 'data' key exists in the JSON
-        if "data" in json_data:  # Check if the JSON contains the key 'data'
-            df = pd.DataFrame(
-                json_data["data"]
-            )  # Create a DataFrame using the data under 'data' key
-            df = df[df["status"] == "Published"]
-            df["dataset_status"] = df["dataset_type"].apply(determine_type)
-            print("Data successfully loaded.")  # Print a message indicating success
-        else:
-            raise KeyError(
-                "'data' key not found in the JSON response"
-            )  # Raise an error if 'data' key is missing
-
-        return df  # Return the DataFrame with the data
-    except (ValueError, KeyError) as e:  # Catch errors related to value or missing keys
-        print(f"Error loading data: {e}")  # Print the error message
-        return pd.DataFrame()  # Return an empty DataFrame if there is an error
-    except requests.RequestException as e:  # Catch errors related to the request itself
-        print(f"Request failed: {e}")  # Print the error message
-        return pd.DataFrame()  # Return an empty DataFrame if the request fails
-
-
-df = get_data()
-## DO NOT MODIFY THIS BLOCK
 
 text = "## Published data"
 st.write(text)
@@ -205,6 +141,14 @@ groups = df['group_name'].unique()
 number_of_groups = len(groups)
 answer = f'- The number of groups are {number_of_groups}.'
 st.write(answer)
+
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(df['group_name'].value_counts())
+# Display the Word Cloud using Streamlit
+st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable deprecated warning
+plt.figure(figsize=(10, 5))  # Set the figure size
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+st.pyplot()  # Show the plot
 #At a a glance sentences (closed)
 
 
