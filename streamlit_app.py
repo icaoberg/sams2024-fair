@@ -60,9 +60,10 @@ df = get_data()
 ## DO NOT MODIFY THIS BLOCK
 
 logo_url = (
-    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Logo-Color.png"
+    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
 )
-st.image(logo_url, use_column_width=True)  # Display the logo with column width fitting
+st.image(logo_url) 
+ # Display the logo with column width fitting
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
