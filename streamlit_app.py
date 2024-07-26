@@ -94,7 +94,21 @@ Through the seamless integration of work from data providers, contributors, and 
 """
 st.write(intro)
 
+
+introImg_url = (
+    "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
+)
+st.image(introImg_url, use_column_width=True) 
+
+introImgCaption = """
+The TMCs will collect tissue samples and generate spatially resolved, single-cell data. Groups involved in TTD and RTI initiatives will develop emerging and more developed technologies, respectively; in later years, these will be implemented at scale. Data from all groups will be rendered useable for the biomedical community by the HuBMAP integration, visualization and engagement (HIVE) teams. The groups will collaborate closely to iteratively refine the atlas as it is gradually realized. (HuBMAP Consortium)
+"""
+st.write(introImgCaption)
+
+#Method = """
+
 method = """
+
 # Overview
 The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
 """
