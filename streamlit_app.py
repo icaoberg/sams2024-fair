@@ -93,6 +93,10 @@ introImg_url = (
 )
 st.image(introImg_url, use_column_width=True) 
 
+introImgCaption = """
+The TMCs will collect tissue samples and generate spatially resolved, single-cell data. Groups involved in TTD and RTI initiatives will develop emerging and more developed technologies, respectively; in later years, these will be implemented at scale. Data from all groups will be rendered useable for the biomedical community by the HuBMAP integration, visualization and engagement (HIVE) teams. The groups will collaborate closely to iteratively refine the atlas as it is gradually realized. (HuBMAP Consortium)
+"""
+st.write(introImgCaption)
 
 Method = """
 # Overview
