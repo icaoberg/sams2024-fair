@@ -515,8 +515,8 @@ vrIntro = """
 Recent advancements in virtual reality (VR) development have sparked interest in applying VR to biomedical research and practice. VR allows for dynamic exploration and enables viewers to enter visualizations from various viewpoints (Camp et al., 1998). It also facilitates the creation of detailed visualizations of intricate molecular structures and biomolecular systems (Chavent et al., 2011; Gill and West, 2014; Trellet et al., 2018; Wiebrands et al., 2018).
 When viewed in VR, the spatiality of organs and tissue blocks mapped to the Human Reference Atlas (HRA) can be explored in their true size, providing a perspective that surpasses traditional 2D user interfaces. Added 2D and 3D visualizations can then offer data-rich context. The HRA Organ Gallery, a VR application, allows users to explore 3D organ models of the HRA in their true scale, location, and spatial relation to each other. Currently, the HRA Organ Gallery features 55 3D reference organs, 1,203 mapped tissue blocks from 292 demographically diverse donors and 15 providers, linking to over 6,000 datasets. It also includes prototype visualizations of cell type distributions and 3D protein structures.
 """
-st.title("VR HuBMAP")
-st.sidebar.markdown("[VR HuBMAP](#vr-humap)", unsafe_allow_html=True)
+st.title("HuBMAP In VR", anchor="hubmap-in-vr")
+st.sidebar.markdown("[HuBMAP In VR](#hubmap-in-vr)", unsafe_allow_html=True)
 st.write(vrIntro)
 
 # How to use VR
