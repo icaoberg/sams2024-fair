@@ -241,6 +241,36 @@ with col1:
     st.pyplot(fig)
 
 
+text = "### Datasets"
+st.write(text)
+
+columns = [
+    "organ",
+    "dataset_type",
+    "group_name",
+    "created_timestamp",
+    "data_access_level",
+]
+df_display = df[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(
+    lambda time: pd.to_datetime(time, unit="ms").strftime("%m-%d-%Y")
+)
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
+df_display.rename(
+    columns={
+        "organ": "Organ",
+        "dataset_type": "Dataset Type",
+        "created_timestamp": "Date Added",
+        "group_name": "Group Name",
+        "data_access_level": "Data Access Level",
+    },
+    inplace=True,
+)
+st.write(df_display)
+
+text = "### Data access level"
+st.write(text)
+
 # Count how many times each boolean appears in the data
 data_counts = df["has_donor_metadata"].value_counts()
 
