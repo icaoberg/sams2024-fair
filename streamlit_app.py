@@ -89,8 +89,7 @@ Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement tea
 
 With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
 
-Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
-
+Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research.
 """
 st.write(intro)
 
@@ -160,6 +159,7 @@ groups = df["group_name"].unique()
 number_of_groups = len(groups)
 answer = f"- The number of groups are {number_of_groups}."
 st.write(answer)
+# At a a glance sentences (closed)
 
 text = "### Datasets"
 st.write(text)
@@ -484,6 +484,20 @@ Recent advancements in virtual reality (VR) development have sparked interest in
 When viewed in VR, the spatiality of organs and tissue blocks mapped to the Human Reference Atlas (HRA) can be explored in their true size, providing a perspective that surpasses traditional 2D user interfaces. Added 2D and 3D visualizations can then offer data-rich context. The HRA Organ Gallery, a VR application, allows users to explore 3D organ models of the HRA in their true scale, location, and spatial relation to each other. Currently, the HRA Organ Gallery features 55 3D reference organs, 1,203 mapped tissue blocks from 292 demographically diverse donors and 15 providers, linking to over 6,000 datasets. It also includes prototype visualizations of cell type distributions and 3D protein structures.
 """
 st.write(vrIntro)
+
+# How to use VR
+
+vrNavigate = """
+# Navigating VR
+"""
+st.write(vrNavigate)
+
+logoVr_url = "https://www.frontiersin.org/files/Articles/1162723/fbinf-03-1162723-HTML/image_m/fbinf-03-1162723-g002.jpg"
+st.image(logoVr_url)
+figure_caption = """
+Functionality of the HRA Organ Gallery (A) Default organ layout (B) A user extrudes all 10 body systems containing 55 organs. (C) A user inspects a kidney and tissue blocks. (D) A user moves through the scene using teleportation, plus other views of the fully extruded gallery view. (E) A user employs the filter menu to show or hide organs.
+"""
+st.write(figure_caption)
 
 text = "### Dataset types"
 st.write(text)
