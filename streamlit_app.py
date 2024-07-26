@@ -512,16 +512,17 @@ elif selected_plot == "Data Access Level Distribution":
 
 # Introduction paragraph for VR
 vrIntro = """
-# VR Introduction
 Recent advancements in virtual reality (VR) development have sparked interest in applying VR to biomedical research and practice. VR allows for dynamic exploration and enables viewers to enter visualizations from various viewpoints (Camp et al., 1998). It also facilitates the creation of detailed visualizations of intricate molecular structures and biomolecular systems (Chavent et al., 2011; Gill and West, 2014; Trellet et al., 2018; Wiebrands et al., 2018).
 When viewed in VR, the spatiality of organs and tissue blocks mapped to the Human Reference Atlas (HRA) can be explored in their true size, providing a perspective that surpasses traditional 2D user interfaces. Added 2D and 3D visualizations can then offer data-rich context. The HRA Organ Gallery, a VR application, allows users to explore 3D organ models of the HRA in their true scale, location, and spatial relation to each other. Currently, the HRA Organ Gallery features 55 3D reference organs, 1,203 mapped tissue blocks from 292 demographically diverse donors and 15 providers, linking to over 6,000 datasets. It also includes prototype visualizations of cell type distributions and 3D protein structures.
 """
+st.title("VR HuBMAP")
+st.sidebar.markdown("[VR HuBMAP](#vr-humap)", unsafe_allow_html=True)
 st.write(vrIntro)
 
 # How to use VR
 
 vrNavigate = """
-# Navigating VR
+## Navigating VR
 """
 st.write(vrNavigate)
 
@@ -536,7 +537,6 @@ text = "### Dataset types"
 st.write(text)
 
 references = """
-# References
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
 * Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
 * Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. https://doi.org/10.1002/jcc.21861  
@@ -548,17 +548,21 @@ references = """
 * Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
 """
-
+st.title("References")
+st.sidebar.markdown("[References](#references)", unsafe_allow_html=True)
 st.write(references)
 
 acknowledgements = """
-# Acknowledgements
 This is a placeholder 
 """
+st.title("Acknowledgements")
+st.sidebar.markdown("[Acknowledgements](#acknowledgements)", unsafe_allow_html=True)
 st.write(acknowledgements)
 
 conclusion = """
-# Conclusion
+Place Holder
 """
+st.title("Conclusion")
+st.sidebar.markdown("[Conclusion](#conclusion)", unsafe_allow_html=True)
 
 st.write(conclusion)
