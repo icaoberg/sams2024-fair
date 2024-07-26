@@ -70,7 +70,7 @@ st.write(title)
 authors = "Bailey, T.; Chen, J.; Esmaeeli, A.; Hernandez, Y.; Ho, M.; Lampejo, M.; Ma, J.; Martinez, G.; Rubio Martinez, V.; Forchap, E.; Mathurin, S.; Omar, Y.; Segil, J.; McLeod, A.; Cao-Berg, I."
 st.write(authors)
 
-today = pd.Timestamp.today()
+today = pd.Timestamp.today().strftime("%m-%d-%Y")
 st.write(today)
 
 abstract = """
@@ -89,8 +89,7 @@ Additionally, HIVE — the HuBMAP Integration, Visualization, and Engagement tea
 
 With all the data provided and curated, contributors then develop innovative tools that enhance data analysis and help transform the data into the atlas. Contributions come from 42 different sites, 14 states, and 4 countries. With these contributions, HuBMAP is able to advance its technological and scientific capabilities.
 
-Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research. 
-
+Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research.
 """
 st.write(intro)
 
@@ -198,7 +197,6 @@ st.write(text)
 
 col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
-
 # Count how many times each unique value appears in the 'data_access_level' column
 access_level_counts = df["has_data"].value_counts()
 
@@ -240,8 +238,38 @@ plt.title("Percentages of Dataset with Data")
 # Display the plot in Streamlit
 plt.tight_layout()
 with col1:
-    st.pyplot()
+    st.pyplot(fig)
 
+
+text = "### Datasets"
+st.write(text)
+
+columns = [
+    "organ",
+    "dataset_type",
+    "group_name",
+    "created_timestamp",
+    "data_access_level",
+]
+df_display = df[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(
+    lambda time: pd.to_datetime(time, unit="ms").strftime("%m-%d-%Y")
+)
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
+df_display.rename(
+    columns={
+        "organ": "Organ",
+        "dataset_type": "Dataset Type",
+        "created_timestamp": "Date Added",
+        "group_name": "Group Name",
+        "data_access_level": "Data Access Level",
+    },
+    inplace=True,
+)
+st.write(df_display)
+
+text = "### Data access level"
+st.write(text)
 
 # Count how many times each boolean appears in the data
 data_counts = df["has_donor_metadata"].value_counts()
@@ -261,7 +289,7 @@ plt.title("Percentage of Datasets with Donor Metadata")
 # Display the plot in Streamlit
 plt.tight_layout()
 with col2:
-    st.pyplot()
+    st.pyplot(fig)
 
 
 # Count the occurrences of each data access level in the dataframe
@@ -297,7 +325,7 @@ ax.set_title('Distribution of "has contributors"')
 # Display the plot in Streamlit
 plt.tight_layout()
 with col3:
-    st.pyplot()
+    st.pyplot(fig)
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
@@ -342,7 +370,7 @@ ax.set_title('Distribution of "has contacts"')
 # Display the plot in Streamlit
 plt.tight_layout()
 with col4:
-    st.pyplot()
+    st.pyplot(fig)
 
 
 # Counting the number of datasets with contributors
@@ -371,7 +399,7 @@ ax.set_title("Data Acess Level Distribution")
 # Display the plot in Streamlit
 plt.tight_layout()
 with col5:
-    st.pyplot()
+    st.pyplot(fig)
 
 
 # Count the occurrences of each data access level in the dataframe
@@ -409,9 +437,8 @@ plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed styl
 plt.tight_layout()
 
 # Display the chart
-st.set_option("deprecation.showPyplotGlobalUse", False)
 with col6:
-    st.pyplot()
+    st.pyplot(fig)
 
 
 # Count the occurrences of each data access level in the dataframe
@@ -442,14 +469,13 @@ plt.tight_layout()
 plt.show()
 
 with col7:
-    st.pyplot()
+    st.pyplot(fig)
 
 # Define your text
 text = "To enlarge graph, click on desired"
 
 # Use HTML to align text to the right
 st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
-
 
 # Introduction paragraph for VR
 vrIntro = """
