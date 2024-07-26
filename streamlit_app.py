@@ -510,7 +510,7 @@ st.write(vrNavigate)
 logoVr_url = "https://www.frontiersin.org/files/Articles/1162723/fbinf-03-1162723-HTML/image_m/fbinf-03-1162723-g002.jpg"
 st.image(logoVr_url)
 figure_caption = """
-Functionality of the HRA Organ Gallery (A) Default organ layout (B) A user extrudes all 10 body systems containing 55 organs. (C) A user inspects a kidney and tissue blocks. (D) A user moves through the scene using teleportation, plus other views of the fully extruded gallery view. (E) A user employs the filter menu to show or hide organs.
+Functionality of the HRA Organ Gallery (A) Default organ layout (B) A user extrudes all 10 body systems containing 55 organs. (C) A user inspects a kidney and tissue blocks. (D) A user moves through the scene using teleportation, plus other views of the fully extruded gallery view. (E) A user employs the filter menu to show or hide organs. (Bueckle et al., 2023)
 """
 st.write(figure_caption)
 
