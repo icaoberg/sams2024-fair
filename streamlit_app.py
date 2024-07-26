@@ -74,13 +74,13 @@ today = pd.Timestamp.today().strftime("%m-%d-%Y")
 st.write(today)
 
 abstract = """
-# Abstract
 The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
 """
+st.title("Abstract")
+st.sidebar.markdown("[Abstract](#abstract)", unsafe_allow_html=True)
 st.write(abstract)
 
 intro = """
-# Introduction
 The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
 
 Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
@@ -91,16 +91,19 @@ With all the data provided and curated, contributors then develop innovative too
 
 Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research.
 """
+st.title("Introduction")
+st.sidebar.markdown("[Introduction](#introduction)", unsafe_allow_html=True)
 st.write(intro)
 
 method = """
-# Overview
 The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
 """
+st.title("Overview")
+st.sidebar.markdown("[Overview](#overview)", unsafe_allow_html=True)
 st.write(method)
 
-text = "## Published data"
-st.write(text)
+st.header("Published Data")
+st.sidebar.markdown("[Published Data](#published-data)", unsafe_allow_html=True)
 
 text = "### At a Glance"
 st.write(text)
@@ -189,9 +192,8 @@ df_display.rename(
 st.write(df_display)
 
 # Title for Graphs
-
-text = "# Graphs"
-st.write(text)
+st.header("Graphs")
+st.sidebar.markdown("[Graphs](#graphs)", unsafe_allow_html=True)
 
 # Creating columns for graphs
 
