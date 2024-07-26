@@ -348,8 +348,9 @@ data_counts = df["has_contacts"].value_counts()
 
 def has_contacts_chart():
     plt.clf()
-    colors = ["#5b6255", "#cadF9E"]
-    colors = ["#3d5a6c", "#a4c4d7"]
+    
+colors = ["#5b6255", "#cadF9E"]
+colors = ["#3d5a6c", "#a4c4d7"]
 
 
 fig, ax = plt.subplots(figsize=(6, 6))
