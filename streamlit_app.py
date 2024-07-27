@@ -539,7 +539,7 @@ acknowledgements = """
 # Acknowledgements
 We thank Andreas Bueckle for their assistance in data acquisition and management.  
 
-Research reported in this publication was supported by the National Institute of Health's (NIH) Common Fund under award numbers X, Y, and Z.” Additionally, it’s important to include a disclaimer: "The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
+Research reported in this publication was supported by the National Institute of Health's (NIH) Common Fund under award numbers X, Y, and Z. Additionally, it’s important to include a disclaimer: The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
 """
 st.write(acknowledgements)
 
