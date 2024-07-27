@@ -409,7 +409,7 @@ ax.legend(
 )
 
 ax.axis("equal")
-ax.set_title("Data Acess Level Distribution")
+ax.set_title("Data Access Level Distribution")
 
 # Display the plot in Streamlit
 plt.tight_layout()
