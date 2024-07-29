@@ -565,6 +565,32 @@ number_of_groups = len(groups)
 answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
 st.write(answer)
 
+
+#unpublished plots
+data_counts = df2["has_contributors"].value_counts()
+colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#5b6255", "#cadF9E"]
+
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
+    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+)
+
+autotexts[0].set_color("white")
+autotexts[1].set_color("black")
+
+ax.legend(
+    wedges,
+    data_counts.index,
+    title="Contributors",
+    loc="center left",
+    bbox_to_anchor=(1, 0, 0.5, 1),
+)
+ax.axis("equal")
+ax.set_title('Distribution of "has contributors" in Unpublished Data')
+st.pyplot(fig)
+
+
 #end of unpublished data
 
 
