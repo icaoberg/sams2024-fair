@@ -59,11 +59,9 @@ df = get_data()
 
 ## DO NOT MODIFY THIS BLOCK
 
-logo_url = (
-    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
-)
-st.image(logo_url) 
- # Display the logo with column width fitting
+logo_url = "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
+st.image(logo_url)
+# Display the logo with column width fitting
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
@@ -95,17 +93,15 @@ Through the seamless integration of work from data providers, contributors, and 
 st.write(intro)
 
 
-introImg_url = (
-    "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
-)
-st.image(introImg_url, use_column_width=True) 
+introImg_url = "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
+st.image(introImg_url, use_column_width=True)
 
 introImgCaption = """
 The TMCs will collect tissue samples and generate spatially resolved, single-cell data. Groups involved in TTD and RTI initiatives will develop emerging and more developed technologies, respectively; in later years, these will be implemented at scale. Data from all groups will be rendered useable for the biomedical community by the HuBMAP integration, visualization and engagement (HIVE) teams. The groups will collaborate closely to iteratively refine the atlas as it is gradually realized. (HuBMAP Consortium)
 """
 st.write(introImgCaption)
 
-#Method = """
+# Method = """
 
 method = """
 
@@ -258,6 +254,31 @@ plt.tight_layout()
 with col1:
     st.pyplot(fig)
 
+number_of_datasets = None
+text = f"There are {number_of_datasets} published datasets"
+st.write(text)
+
+st.write(df)
+number_of_organs = None
+text = f"There are 55 3D organs, 1203 tissue blocks"
+st.write(text)
+
+number_of_organs = len(df.index)
+text = f"There are {number_of_organs} organs datasets"
+st.write(text)
+
+columns = ["organ", "dataset_type", "group_name", "data_access_level"]
+df2 = df[columns]
+df2.rename(
+    columns={
+        "organ": "Organ",
+        "dataset_type": "Dataset Type",
+        "data_access_level": "Data Access Level",
+        "group_name": "Group Name",
+    },
+    inplace=True,
+)
+st.write(df2)
 
 text = "### Datasets"
 st.write(text)
@@ -549,5 +570,4 @@ st.write(acknowledgements)
 conclusion = """
 # Conclusion
 """
-
 st.write(conclusion)
