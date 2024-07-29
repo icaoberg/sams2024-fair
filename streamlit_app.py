@@ -531,43 +531,55 @@ with col7:
 
 
 #unpublished data
+st.write('''
+# Unplubished datasets
+## At a Glance
+''')
 def at_a_glance():
-    st.title("At A Glance: Unpublished Datasets")
     number_of_datasets = len(df2)
-    answer = f"- The number of unpublished datasets are {number_of_datasets}."
-    st.write(answer)
+    #answer = f"- The number of unpublished datasets are {number_of_datasets}."
+    #st.write(answer)
 
     access_level_protected = df2["data_access_level"].value_counts()["protected"]
-    answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
-    st.write(answer)
+    #answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
+    #st.write(answer)
 
     dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
-    answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
-    st.write(answer)
+    #answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
+    #st.write(answer)
 
     dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
-    answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
-    st.write(answer)
+    #answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
+    #st.write(answer)
 
     dataset_types = df2["dataset_type"].unique()
     number_of_dataset_types = len(dataset_types)
-    answer = f"- The number of unpublished dataset types are {number_of_dataset_types}."
-    st.write(answer)
-
     organs = df2["organ"].unique()
     number_of_organs = len(organs)
-    answer = f"- The number of unpublished organ types are {number_of_organs}."
-    st.write(answer)
+    #answer = f"- The number of unpublished organ types are {number_of_organs}."
+    #st.write(answer)
 
     donors = df2["donor_hubmap_id"].unique()
     number_of_donors = len(donors)
-    answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
-    st.write(answer)
+    #answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
+    #st.write(answer)
 
     groups = df2["group_name"].unique()
     number_of_groups = len(groups)
-    answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
+    #answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
+    #st.write(answer)
+
+    answer = f'''
+    * The number of unpublished datasets are **{number_of_datasets}**.
+     * The number of unpublished datasets that are protected is {access_level_protected}.
+    * The number of unpublished dataset types are {number_of_dataset_types}.
+    * The number of unpublished datasets with a derived status is {dataset_status_derived}.
+    * The number of unpublished datasets with a primary status is {dataset_status_primary}.
+    * The number of unpublished organ types are {number_of_organs}.
+    * The number of donors for unpublished datasets are {number_of_donors}.
+    * The number of groups with unpublished datasets are {number_of_groups}.'''
     st.write(answer)
+
 
 def unpublished_has_contributors():
 #st.subheader("Unpublished Dataset Plots")
