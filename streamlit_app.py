@@ -176,6 +176,9 @@ answer = f"- The number of groups are {number_of_groups}."
 st.write(answer)
 # At a a glance sentences (closed)
 
+text = "## Observability"
+st.write(text)
+
 text = "### Datasets"
 st.write(text)
 
