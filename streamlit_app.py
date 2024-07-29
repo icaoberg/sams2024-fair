@@ -50,6 +50,7 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
+
 @st.cache_data
 def get_unpublished_data() -> pd.DataFrame:
     """
@@ -87,9 +88,8 @@ def get_unpublished_data() -> pd.DataFrame:
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
 
-
 df = get_data()
-df2=get_unpublished_data()
+df2 = get_unpublished_data()
 ## DO NOT MODIFY THIS BLOCK
 
 # Convert the dictionary into a DataFrame
@@ -97,11 +97,9 @@ df2=get_unpublished_data()
 
 ## DO NOT MODIFY THIS BLOCK
 
-logo_url = (
-    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
-)
-st.image(logo_url) 
- # Display the logo with column width fitting
+logo_url = "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
+st.image(logo_url)
+# Display the logo with column width fitting
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
@@ -133,17 +131,15 @@ Through the seamless integration of work from data providers, contributors, and 
 st.write(intro)
 
 
-introImg_url = (
-    "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
-)
-st.image(introImg_url, use_column_width=True) 
+introImg_url = "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
+st.image(introImg_url, use_column_width=True)
 
 introImgCaption = """
 The TMCs will collect tissue samples and generate spatially resolved, single-cell data. Groups involved in TTD and RTI initiatives will develop emerging and more developed technologies, respectively; in later years, these will be implemented at scale. Data from all groups will be rendered useable for the biomedical community by the HuBMAP integration, visualization and engagement (HIVE) teams. The groups will collaborate closely to iteratively refine the atlas as it is gradually realized. (HuBMAP Consortium)
 """
 st.write(introImgCaption)
 
-#Method = """
+# Method = """
 
 method = """
 
@@ -382,7 +378,7 @@ ax.set_title('Distribution of "has contributors"')
 plt.tight_layout()
 with col3:
     st.pyplot(fig)
-    
+
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
@@ -530,46 +526,33 @@ with col7:
 # Define your text
 
 
-#unpublished data
-st.write('''
+# unpublished data
+title = """
 # Unplubished datasets
 ## At a Glance
-''')
+"""
+
+st.write(title)
+
+
 def at_a_glance():
     number_of_datasets = len(df2)
-    #answer = f"- The number of unpublished datasets are {number_of_datasets}."
-    #st.write(answer)
-
     access_level_protected = df2["data_access_level"].value_counts()["protected"]
-    #answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
-    #st.write(answer)
-
     dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
-    #answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
-    #st.write(answer)
-
     dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
-    #answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
-    #st.write(answer)
 
     dataset_types = df2["dataset_type"].unique()
     number_of_dataset_types = len(dataset_types)
     organs = df2["organ"].unique()
     number_of_organs = len(organs)
-    #answer = f"- The number of unpublished organ types are {number_of_organs}."
-    #st.write(answer)
 
     donors = df2["donor_hubmap_id"].unique()
     number_of_donors = len(donors)
-    #answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
-    #st.write(answer)
 
     groups = df2["group_name"].unique()
     number_of_groups = len(groups)
-    #answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
-    #st.write(answer)
 
-    answer = f'''
+    answer = f"""
     * The number of unpublished datasets are **{number_of_datasets}**.
      * The number of unpublished datasets that are protected is {access_level_protected}.
     * The number of unpublished dataset types are {number_of_dataset_types}.
@@ -577,12 +560,12 @@ def at_a_glance():
     * The number of unpublished datasets with a primary status is {dataset_status_primary}.
     * The number of unpublished organ types are {number_of_organs}.
     * The number of donors for unpublished datasets are {number_of_donors}.
-    * The number of groups with unpublished datasets are {number_of_groups}.'''
+    * The number of groups with unpublished datasets are {number_of_groups}."""
     st.write(answer)
 
 
 def unpublished_has_contributors():
-#st.subheader("Unpublished Dataset Plots")
+    # st.subheader("Unpublished Dataset Plots")
     data_counts = df2["has_contributors"].value_counts()
     colors = ["#3d5a6c", "#a4c4d7"]
     colors = ["#5b6255", "#cadF9E"]
@@ -606,8 +589,8 @@ def unpublished_has_contributors():
     ax.set_title('Distribution of "has contributors" in Unpublished Data')
     st.pyplot(fig)
 
-def unpublished_has_contacts():
 
+def unpublished_has_contacts():
     data_counts = df2["has_contacts"].value_counts()
     colors = ["#5b6255", "#cadF9E"]
     colors = ["#3d5a6c", "#a4c4d7"]
@@ -631,6 +614,7 @@ def unpublished_has_contacts():
     ax.axis("equal")
     ax.set_title('Distribution of "has contacts" in Unpublished Data')
     st.pyplot(fig)
+
 
 def unpublished_data_access_level():
     data_counts = df2["data_access_level"].value_counts()
@@ -657,23 +641,25 @@ def unpublished_data_access_level():
     # Display the plot in Streamlit
     st.pyplot(fig)
 
-#Creation of side bar (again...)
+
+# Creation of side bar (again...)
 def main():
     # Sidebar with dropdown menu
     option = st.sidebar.selectbox(
-        'Select an option:',
-        ['At a Glance', 'Has Contributors Plot', 'Has Contacts Plot', 'Data Access Level Plot']
+        "Select an option:",
+        ["At a Glance", "Contributors Plot", "Contacts Plot", "Data Access Level Plot"],
     )
 
     # Display content based on selected option
-    if option == 'At a Glance':
+    if option == "At a Glance":
         at_a_glance()
-    elif option == 'Has Contributors Plot':
+    elif option == "Has Contributors":
         unpublished_has_contributors()
-    elif option == 'Has Contacts Plot':
+    elif option == "Has Contacts":
         unpublished_has_contacts()
-    elif option == 'Data Access Level Plot':
+    elif option == "Data Access Level":
         unpublished_data_access_level()
+
 
 if __name__ == "__main__":
     main()
