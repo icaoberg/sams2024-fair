@@ -591,6 +591,66 @@ ax.set_title('Distribution of "has contributors" in Unpublished Data')
 st.pyplot(fig)
 
 
+
+data_counts = df2["has_contacts"].value_counts()
+colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#5b6255", "#cadF9E"]
+
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
+    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+)
+
+autotexts[0].set_color("white")
+autotexts[1].set_color("black")
+
+ax.legend(
+    wedges,
+    data_counts.index,
+    title="Contributors",
+    loc="center left",
+    bbox_to_anchor=(1, 0, 0.5, 1),
+)
+
+ax.axis("equal")
+ax.set_title('Distribution of "has contacts" in Unpublished Data')
+st.pyplot(fig)
+
+data_counts = df2["data_access_level"].value_counts()
+colors = ["#5b6255", "#cadF9E"]
+
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
+    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+)
+
+autotexts[0].set_color("white")
+autotexts[1].set_color("black")
+
+ax.legend(
+    wedges,
+    [s.capitalize() for s in data_counts.index],
+    title="Access Level",
+    loc="center left",
+    bbox_to_anchor=(1, 0, 0.5, 1),
+)
+
+ax.axis("equal")
+ax.set_title("Data Acess Level Distribution in Unpublished Data")
+# Display the plot in Streamlit
+st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+
 #end of unpublished data
 
 
