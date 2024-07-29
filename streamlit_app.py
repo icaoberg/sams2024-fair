@@ -50,8 +50,46 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
+@st.cache_data
+def get_unpublished_data() -> pd.DataFrame:
+    """
+    Fetch data from a predefined URL, extract the 'data' key,
+    and return it as a DataFrame.
+
+    Returns:
+    pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
+    """
+    url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
+    try:
+        response = requests.get(url)  # Send a request to the URL to get the data
+        response.raise_for_status()  # Check if the request was successful (no errors)
+        json_data = response.json()  # Convert the response to JSON format
+
+        # Ensure 'data' key exists in the JSON
+        if "data" in json_data:  # Check if the JSON contains the key 'data'
+            df = pd.DataFrame(
+                json_data["data"]
+            )  # Create a DataFrame using the data under 'data' key
+            df = df[df["status"] != "Published"]
+            df["dataset_status"] = df["dataset_type"].apply(determine_type)
+            print("Data successfully loaded.")  # Print a message indicating success
+        else:
+            raise KeyError(
+                "'data' key not found in the JSON response"
+            )  # Raise an error if 'data' key is missing
+
+        return df  # Return the DataFrame with the data
+    except (ValueError, KeyError) as e:  # Catch errors related to value or missing keys
+        print(f"Error loading data: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if there is an error
+    except requests.RequestException as e:  # Catch errors related to the request itself
+        print(f"Request failed: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if the request fails
+
+
 
 df = get_data()
+df2=get_unpublished_data()
 ## DO NOT MODIFY THIS BLOCK
 
 # Convert the dictionary into a DataFrame
@@ -341,7 +379,7 @@ ax.set_title('Distribution of "has contributors"')
 plt.tight_layout()
 with col3:
     st.pyplot(fig)
-
+    
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 colors = ["#5b6255", "#cadF9E"]
@@ -485,9 +523,51 @@ plt.show()
 
 with col7:
     st.pyplot(fig)
-
+    text = "To enlarge graph, click on desired"
 # Define your text
-text = "To enlarge graph, click on desired"
+
+
+#unpublished data
+st.title('At A Glance: Unpublished Datatsets')
+number_of_datasets = len(df2)
+answer = f"- The number of unpublished datasets are {number_of_datasets}."
+st.write(answer)
+
+access_level_protected = df2["data_access_level"].value_counts()["protected"]
+answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
+st.write(answer)
+
+dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
+answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
+st.write(answer)
+
+dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
+answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
+st.write(answer)
+
+dataset_types = df2["dataset_type"].unique()
+number_of_dataset_types = len(dataset_types)
+answer = f"- The number of unpublished dataset types are {number_of_dataset_types}."
+st.write(answer)
+
+organs = df2["organ"].unique()
+number_of_organs = len(organs)
+answer = f"- The number of unpublished organ types are {number_of_organs}."
+st.write(answer)
+
+donors = df2["donor_hubmap_id"].unique()
+number_of_donors = len(donors)
+answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
+st.write(answer)
+
+groups = df2["group_name"].unique()
+number_of_groups = len(groups)
+answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
+st.write(answer)
+
+#end of unpublished data
+
+
 
 # Use HTML to align text to the right
 st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
