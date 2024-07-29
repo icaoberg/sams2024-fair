@@ -643,15 +643,25 @@ def unpublished_data_access_level():
     st.pyplot(fig)
 
 #Creation of side bar (again...)
+def main():
+    # Sidebar with dropdown menu
+    option = st.sidebar.selectbox(
+        'Select an option:',
+        ['At a Glance', 'Has Contributors Plot', 'Has Contacts Plot', 'Data Access Level Plot']
+    )
 
+    # Display content based on selected option
+    if option == 'At a Glance':
+        at_a_glance()
+    elif option == 'Has Contributors Plot':
+        unpublished_has_contributors()
+    elif option == 'Has Contacts Plot':
+        unpublished_has_contacts()
+    elif option == 'Data Access Level Plot':
+        unpublished_data_access_level()
 
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
 
 # Use HTML to align text to the right
 st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
