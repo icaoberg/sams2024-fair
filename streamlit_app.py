@@ -528,7 +528,7 @@ with col7:
 
 
 #unpublished data
-st.title('At A Glance: Unpublished Datatsets')
+st.title("At A Glance: Unpublished Datasets")
 number_of_datasets = len(df2)
 answer = f"- The number of unpublished datasets are {number_of_datasets}."
 st.write(answer)
@@ -566,7 +566,7 @@ answer = f"- The number of groups with unpublished datasets are {number_of_group
 st.write(answer)
 
 
-#unpublished plots
+st.subheader("Unpublished Dataset Plots")
 data_counts = df2["has_contributors"].value_counts()
 colors = ["#3d5a6c", "#a4c4d7"]
 colors = ["#5b6255", "#cadF9E"]
