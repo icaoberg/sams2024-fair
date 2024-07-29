@@ -514,6 +514,23 @@ Functionality of the HRA Organ Gallery (A) Default organ layout (B) A user extru
 """
 st.write(figure_caption)
 
+vrCaption = """
+The VR device, while innovative and interesting, 
+has several notable drawbacks. Users often experience nausea and dizziness 
+after prolonged usage, particularly beyond 30 minutes. Comfort is a 
+significant issue, as the device needs to be tightly fitted to the face for 
+optimal functionality, which poses problems for individuals who wear glasses. 
+Achieving the clearest image can be challenging, requiring time to adjust the lenses, 
+which are never completely clear. The home screen, which displays the user's actual surroundings, 
+is of poor quality, appearing in black and white and often glitchy. In contrast, the quality within
+ games, such as light saber experiences, is excellent, with smooth performance. However, certain applications, 
+ like the Organ HR application, have cumbersome navigation, requiring precise pointer movements to view cell types, 
+ which disappear when the pointer is moved away. The text on screens can be blurry and difficult to read, and the zoom 
+ functionality is hindered by its programming. Additionally, the instruction manual lacks clarity, making setup and use more challenging. 
+ Overall, while the VR offers some high-quality experiences, it is marred by comfort issues, visual clarity problems, and suboptimal user instructions.
+"""
+st.write(vrCaption)
+
 text = "### Dataset types"
 st.write(text)
 
