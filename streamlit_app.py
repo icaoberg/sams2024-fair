@@ -528,130 +528,128 @@ with col7:
 
 
 #unpublished data
-st.title("At A Glance: Unpublished Datasets")
-number_of_datasets = len(df2)
-answer = f"- The number of unpublished datasets are {number_of_datasets}."
-st.write(answer)
+def at_a_glance():
+    st.title("At A Glance: Unpublished Datasets")
+    number_of_datasets = len(df2)
+    answer = f"- The number of unpublished datasets are {number_of_datasets}."
+    st.write(answer)
 
-access_level_protected = df2["data_access_level"].value_counts()["protected"]
-answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
-st.write(answer)
+    access_level_protected = df2["data_access_level"].value_counts()["protected"]
+    answer = f"- The number of unpublished datasets that are protected is {access_level_protected}."
+    st.write(answer)
 
-dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
-answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
-st.write(answer)
+    dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
+    answer = f"- The number of unpublished datasets with a derived status is {dataset_status_derived}."
+    st.write(answer)
 
-dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
-answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
-st.write(answer)
+    dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
+    answer = f"- The number of unpublished datasets with a primary status is {dataset_status_primary}."
+    st.write(answer)
 
-dataset_types = df2["dataset_type"].unique()
-number_of_dataset_types = len(dataset_types)
-answer = f"- The number of unpublished dataset types are {number_of_dataset_types}."
-st.write(answer)
+    dataset_types = df2["dataset_type"].unique()
+    number_of_dataset_types = len(dataset_types)
+    answer = f"- The number of unpublished dataset types are {number_of_dataset_types}."
+    st.write(answer)
 
-organs = df2["organ"].unique()
-number_of_organs = len(organs)
-answer = f"- The number of unpublished organ types are {number_of_organs}."
-st.write(answer)
+    organs = df2["organ"].unique()
+    number_of_organs = len(organs)
+    answer = f"- The number of unpublished organ types are {number_of_organs}."
+    st.write(answer)
 
-donors = df2["donor_hubmap_id"].unique()
-number_of_donors = len(donors)
-answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
-st.write(answer)
+    donors = df2["donor_hubmap_id"].unique()
+    number_of_donors = len(donors)
+    answer = f"- The number of donors for unpublished datasets are {number_of_donors}."
+    st.write(answer)
 
-groups = df2["group_name"].unique()
-number_of_groups = len(groups)
-answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
-st.write(answer)
+    groups = df2["group_name"].unique()
+    number_of_groups = len(groups)
+    answer = f"- The number of groups with unpublished datasets are {number_of_groups}."
+    st.write(answer)
 
+def unpublished_has_contributors():
+#st.subheader("Unpublished Dataset Plots")
+    data_counts = df2["has_contributors"].value_counts()
+    colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#5b6255", "#cadF9E"]
 
-st.subheader("Unpublished Dataset Plots")
-data_counts = df2["has_contributors"].value_counts()
-colors = ["#3d5a6c", "#a4c4d7"]
-colors = ["#5b6255", "#cadF9E"]
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
 
-fig, ax = plt.subplots(figsize=(3, 3))
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-)
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
 
-autotexts[0].set_color("white")
-autotexts[1].set_color("black")
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contributors",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contributors" in Unpublished Data')
+    st.pyplot(fig)
 
-ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contributors",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
-ax.axis("equal")
-ax.set_title('Distribution of "has contributors" in Unpublished Data')
-st.pyplot(fig)
+def unpublished_has_contacts():
 
+    data_counts = df2["has_contacts"].value_counts()
+    colors = ["#5b6255", "#cadF9E"]
+    colors = ["#3d5a6c", "#a4c4d7"]
 
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
 
-data_counts = df2["has_contacts"].value_counts()
-colors = ["#3d5a6c", "#a4c4d7"]
-colors = ["#5b6255", "#cadF9E"]
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
 
-fig, ax = plt.subplots(figsize=(3, 3))
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-)
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contributors",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
 
-autotexts[0].set_color("white")
-autotexts[1].set_color("black")
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contacts" in Unpublished Data')
+    st.pyplot(fig)
 
-ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contributors",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
+def unpublished_data_access_level():
+    data_counts = df2["data_access_level"].value_counts()
+    colors = ["#5b6255", "#cadF9E"]
 
-ax.axis("equal")
-ax.set_title('Distribution of "has contacts" in Unpublished Data')
-st.pyplot(fig)
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
 
-data_counts = df2["data_access_level"].value_counts()
-colors = ["#5b6255", "#cadF9E"]
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
 
-fig, ax = plt.subplots(figsize=(3, 3))
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-)
+    ax.legend(
+        wedges,
+        [s.capitalize() for s in data_counts.index],
+        title="Access Level",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
 
-autotexts[0].set_color("white")
-autotexts[1].set_color("black")
+    ax.axis("equal")
+    ax.set_title("Data Acess Level Distribution in Unpublished Data")
+    # Display the plot in Streamlit
+    st.pyplot(fig)
 
-ax.legend(
-    wedges,
-    [s.capitalize() for s in data_counts.index],
-    title="Access Level",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
-
-ax.axis("equal")
-ax.set_title("Data Acess Level Distribution in Unpublished Data")
-# Display the plot in Streamlit
-st.pyplot(fig)
-
-
-
-
-
-
+#Creation of side bar (again...)
 
 
 
 
 
 
-#end of unpublished data
+
 
 
 
