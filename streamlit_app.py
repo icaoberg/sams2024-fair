@@ -50,7 +50,8 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
-#Unpublished dataframe
+
+# Unpublished dataframe
 @st.cache_data
 def get_unpublished_data() -> pd.DataFrame:
     """
@@ -391,7 +392,8 @@ data_counts = df["has_contacts"].value_counts()
 
 def has_contacts_chart():
     plt.clf()
-    
+
+
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
@@ -523,6 +525,8 @@ def data_access_level_distribution_chart():
     plt.show()
     st.pyplot(fig)
     text = "To enlarge graph, click on desired"
+
+
 # Define your text
 
 
