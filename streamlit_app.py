@@ -50,8 +50,46 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
+#Unpublished dataframe
+@st.cache_data
+def get_unpublished_data() -> pd.DataFrame:
+    """
+    Fetch data from a predefined URL, extract the 'data' key,
+    and return it as a DataFrame.
+
+    Returns:
+    pd.DataFrame: The data extracted from the 'data' key loaded into a DataFrame.
+    """
+    url = "https://ingest.api.hubmapconsortium.org/datasets/data-status"  # The URL to get the data from
+    try:
+        response = requests.get(url)  # Send a request to the URL to get the data
+        response.raise_for_status()  # Check if the request was successful (no errors)
+        json_data = response.json()  # Convert the response to JSON format
+
+        # Ensure 'data' key exists in the JSON
+        if "data" in json_data:  # Check if the JSON contains the key 'data'
+            df = pd.DataFrame(
+                json_data["data"]
+            )  # Create a DataFrame using the data under 'data' key
+            df = df[df["status"] != "Published"]
+            df["dataset_status"] = df["dataset_type"].apply(determine_type)
+            print("Data successfully loaded.")  # Print a message indicating success
+        else:
+            raise KeyError(
+                "'data' key not found in the JSON response"
+            )  # Raise an error if 'data' key is missing
+
+        return df  # Return the DataFrame with the data
+    except (ValueError, KeyError) as e:  # Catch errors related to value or missing keys
+        print(f"Error loading data: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if there is an error
+    except requests.RequestException as e:  # Catch errors related to the request itself
+        print(f"Request failed: {e}")  # Print the error message
+        return pd.DataFrame()  # Return an empty DataFrame if the request fails
+
 
 df = get_data()
+df2 = get_unpublished_data()
 ## DO NOT MODIFY THIS BLOCK
 
 # Convert the dictionary into a DataFrame
@@ -59,11 +97,9 @@ df = get_data()
 
 ## DO NOT MODIFY THIS BLOCK
 
-logo_url = (
-    "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
-)
-st.image(logo_url) 
- # Display the logo with column width fitting
+logo_url = "https://hubmapconsortium.org/wp-content/uploads/2019/01/HuBMAP-Retina-Logo-Color-300x110.png"
+st.image(logo_url)
+# Display the logo with column width fitting
 
 title = "# FAIR Assessment of HuBMAP data"
 st.write(title)
@@ -95,17 +131,15 @@ Through the seamless integration of work from data providers, contributors, and 
 st.write(intro)
 
 
-introImg_url = (
-    "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
-)
-st.image(introImg_url, use_column_width=True) 
+introImg_url = "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-019-1629-x/MediaObjects/41586_2019_1629_Fig1_HTML.png?as=webp"
+st.image(introImg_url, use_column_width=True)
 
 introImgCaption = """
 The TMCs will collect tissue samples and generate spatially resolved, single-cell data. Groups involved in TTD and RTI initiatives will develop emerging and more developed technologies, respectively; in later years, these will be implemented at scale. Data from all groups will be rendered useable for the biomedical community by the HuBMAP integration, visualization and engagement (HIVE) teams. The groups will collaborate closely to iteratively refine the atlas as it is gradually realized. (HuBMAP Consortium)
 """
 st.write(introImgCaption)
 
-#Method = """
+# Method = """
 
 method = """
 
@@ -488,9 +522,147 @@ plt.show()
 
 with col7:
     st.pyplot(fig)
-
+    text = "To enlarge graph, click on desired"
 # Define your text
-text = "To enlarge graph, click on desired"
+
+
+# unpublished data
+title = """
+# Unplubished datasets
+## At a Glance
+"""
+
+st.write(title)
+
+
+def at_a_glance():
+    number_of_datasets = len(df2)
+    access_level_protected = df2["data_access_level"].value_counts()["protected"]
+    dataset_status_derived = df2["dataset_status"].value_counts()["Derived"]
+    dataset_status_primary = df2["dataset_status"].value_counts()["Primary"]
+
+    dataset_types = df2["dataset_type"].unique()
+    number_of_dataset_types = len(dataset_types)
+    organs = df2["organ"].unique()
+    number_of_organs = len(organs)
+
+    donors = df2["donor_hubmap_id"].unique()
+    number_of_donors = len(donors)
+
+    groups = df2["group_name"].unique()
+    number_of_groups = len(groups)
+
+    answer = f"""
+    * The number of unpublished datasets are **{number_of_datasets}**.
+     * The number of unpublished datasets that are protected is {access_level_protected}.
+    * The number of unpublished dataset types are {number_of_dataset_types}.
+    * The number of unpublished datasets with a derived status is {dataset_status_derived}.
+    * The number of unpublished datasets with a primary status is {dataset_status_primary}.
+    * The number of unpublished organ types are {number_of_organs}.
+    * The number of donors for unpublished datasets are {number_of_donors}.
+    * The number of groups with unpublished datasets are {number_of_groups}."""
+    st.write(answer)
+
+
+def unpublished_has_contributors():
+    # st.subheader("Unpublished Dataset Plots")
+    data_counts = df2["has_contributors"].value_counts()
+    colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#5b6255", "#cadF9E"]
+
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
+
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
+
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contributors",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contributors" in Unpublished Data')
+    st.pyplot(fig)
+
+
+def unpublished_has_contacts():
+    data_counts = df2["has_contacts"].value_counts()
+    colors = ["#5b6255", "#cadF9E"]
+    colors = ["#3d5a6c", "#a4c4d7"]
+
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
+
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
+
+    ax.legend(
+        wedges,
+        data_counts.index,
+        title="Contributors",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
+
+    ax.axis("equal")
+    ax.set_title('Distribution of "has contacts" in Unpublished Data')
+    st.pyplot(fig)
+
+
+def unpublished_data_access_level():
+    data_counts = df2["data_access_level"].value_counts()
+    colors = ["#5b6255", "#cadF9E"]
+
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    )
+
+    autotexts[0].set_color("white")
+    autotexts[1].set_color("black")
+
+    ax.legend(
+        wedges,
+        [s.capitalize() for s in data_counts.index],
+        title="Access Level",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1),
+    )
+
+    ax.axis("equal")
+    ax.set_title("Data Acess Level Distribution in Unpublished Data")
+    # Display the plot in Streamlit
+    st.pyplot(fig)
+
+
+# Creation of side bar (again...)
+def main():
+    # Sidebar with dropdown menu
+    option = st.sidebar.selectbox(
+        "Select an option:",
+        ["At a Glance", "Contributors Plot", "Contacts Plot", "Data Access Level Plot"],
+    )
+
+    # Display content based on selected option
+    if option == "At a Glance":
+        at_a_glance()
+    elif option == "Contributors Plot":
+        unpublished_has_contributors()
+    elif option == "Contacts Plot":
+        unpublished_has_contacts()
+    elif option == "Data Access Level Plot":
+        unpublished_data_access_level()
+
+
+if __name__ == "__main__":
+    main()
 
 # Use HTML to align text to the right
 st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
