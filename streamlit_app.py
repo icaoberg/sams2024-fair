@@ -150,7 +150,7 @@ method = """
 # Overview
 The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
 """
-st.title("Overview")
+
 st.sidebar.markdown("[Overview](#overview)", unsafe_allow_html=True)
 st.write(method)
 
@@ -390,8 +390,6 @@ with col3:
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
 
-
-
 plt.clf()
 
 
@@ -499,6 +497,7 @@ with col6:
 
 plt.clf()
 access_counts = df["data_access_level"].value_counts()
+plt.figure(figsize=(10, 6))
 
 # Generate a list of colors - one for each bar
 colors = ["skyblue", "coral", "lightgreen"]
@@ -523,8 +522,8 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Display the chart
-plt.show()
-st.pyplot(fig)
+with col7:
+   st.pyplot(fig) 
 text = "To enlarge graph, click on desired"
 
 
