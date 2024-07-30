@@ -168,46 +168,36 @@ ax.axis("off")  # Hide the axis
 
 st.pyplot(fig)
 # wordcloud
-
 number_of_datasets = len(df)
-answer = f"- The number of datasets are {number_of_datasets}."
-st.write(answer)
-
 access_level_protected = df["data_access_level"].value_counts()["protected"]
-answer = f"- The number of datasets that are protected is {access_level_protected}."
-st.write(answer)
-
 access_level_public = df["data_access_level"].value_counts()["public"]
-answer = f"- The number of datasets that are public is {access_level_public}."
-st.write(answer)
-
 dataset_status_derived = df["dataset_status"].value_counts()["Derived"]
-answer = f"- The number of datasets with a derived status is {dataset_status_derived}."
-st.write(answer)
-
 dataset_status_primary = df["dataset_status"].value_counts()["Primary"]
-answer = f"- The number of datasets with a primary status is {dataset_status_primary}."
-st.write(answer)
 
 dataset_types = df["dataset_type"].unique()
 number_of_dataset_types = len(dataset_types)
-answer = f"- The number of dataset types are {number_of_dataset_types}."
-st.write(answer)
-
 organs = df["organ"].unique()
 number_of_organs = len(organs)
-answer = f"- The number of organ types are {number_of_organs}."
-st.write(answer)
 
 donors = df["donor_hubmap_id"].unique()
 number_of_donors = len(donors)
-answer = f"- The number of donors are {number_of_donors}."
-st.write(answer)
 
 groups = df["group_name"].unique()
 number_of_groups = len(groups)
-answer = f"- The number of groups are {number_of_groups}."
+
+answer = f"""
+* The number of datasets are **{number_of_datasets}**.
+    * The number of  datasets that are protected is **{access_level_protected}**.
+    * The number of datasets that are public is **{access_level_public}**.
+* The number of dataset types are **{number_of_dataset_types}**.
+    * The number of datasets with a derived status is **{dataset_status_derived}**.
+    * The number of datasets with a primary status is **{dataset_status_primary}**.
+* The number of organ types are **{number_of_organs}**.
+* The number of donors for the datasets are **{number_of_donors}**.
+* The number of groups for the datasets are **{number_of_groups}**."""
+
 st.write(answer)
+
 # At a a glance sentences (closed)
 
 text = "## Observability"
@@ -528,7 +518,7 @@ with col7:
 
 # unpublished data
 title = """
-# Unplubished datasets
+# Unpublished Datasets
 ## At a Glance
 """
 
@@ -554,13 +544,13 @@ def at_a_glance():
 
     answer = f"""
     * The number of unpublished datasets are **{number_of_datasets}**.
-     * The number of unpublished datasets that are protected is {access_level_protected}.
-    * The number of unpublished dataset types are {number_of_dataset_types}.
-    * The number of unpublished datasets with a derived status is {dataset_status_derived}.
-    * The number of unpublished datasets with a primary status is {dataset_status_primary}.
-    * The number of unpublished organ types are {number_of_organs}.
-    * The number of donors for unpublished datasets are {number_of_donors}.
-    * The number of groups with unpublished datasets are {number_of_groups}."""
+        * The number of unpublished datasets that are protected is **{access_level_protected}**.
+    * The number of unpublished dataset types are **{number_of_dataset_types}**.
+        * The number of unpublished datasets with a derived status is **{dataset_status_derived}**.
+        * The number of unpublished datasets with a primary status is **{dataset_status_primary}**.
+    * The number of unpublished organ types are **{number_of_organs}**.
+    * The number of donors for unpublished datasets are **{number_of_donors}**.
+    * The number of groups with unpublished datasets are **{number_of_groups}**."""
     st.write(answer)
 
 
