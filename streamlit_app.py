@@ -50,7 +50,7 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
-
+#Unpublished dataframe
 @st.cache_data
 def get_unpublished_data() -> pd.DataFrame:
     """
@@ -653,11 +653,11 @@ def main():
     # Display content based on selected option
     if option == "At a Glance":
         at_a_glance()
-    elif option == "Has Contributors":
+    elif option == "Contributors Plot":
         unpublished_has_contributors()
-    elif option == "Has Contacts":
+    elif option == "Contacts Plot":
         unpublished_has_contacts()
-    elif option == "Data Access Level":
+    elif option == "Data Access Level Plot":
         unpublished_data_access_level()
 
 
