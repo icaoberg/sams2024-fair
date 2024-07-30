@@ -248,38 +248,38 @@ access_level_counts = df["has_data"].value_counts()
 
 
 # Start making a donut chart
-def dataset_with_data_chart():
-    plt.clf()
-    fig, ax = plt.subplots(
-        figsize=(5, 5)
-    )  # Create a blank space (figure) where the chart will be drawn
-    colors = ["#cadF9E"]
-    # Plot a pie chart that will later become a donut chart
-    wedges, texts, autotexts = ax.pie(
-        access_level_counts,  # This is the data we're using — the counts of each access level
-        autopct="%1.1f%%",  # This makes sure that each piece of the pie shows its percentage like "25.0%"
-        startangle=90,  # This starts the first piece of the pie at the top of the circle
-        wedgeprops=dict(
-            width=0.3
-        ),  # This makes the pie chart have a hole in the middle, turning it into a donut chart
-        colors=colors,
-    )
 
-    # Draw a white circle in the middle to make it look like a donut instead of a pie
-    centre_circle = plt.Circle(
-        (0, 0),  # This places the circle in the middle of the chart
-        0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
-        fc="white",  # 'fc' stands for fill color, which we're setting to white here
-    )
-    fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+plt.clf()
+fig, ax = plt.subplots(
+    figsize=(5, 5)
+)  # Create a blank space (figure) where the chart will be drawn
+colors = ["#cadF9E"]
+# Plot a pie chart that will later become a donut chart
+wedges, texts, autotexts = ax.pie(
+    access_level_counts,  # This is the data we're using — the counts of each access level
+    autopct="%1.1f%%",  # This makes sure that each piece of the pie shows its percentage like "25.0%"
+    startangle=90,  # This starts the first piece of the pie at the top of the circle
+    wedgeprops=dict(
+        width=0.3
+    ),  # This makes the pie chart have a hole in the middle, turning it into a donut chart
+    colors=colors,
+)
 
-    ax.legend(
-        wedges,
-        access_level_counts.index,
-        title="Contributors",
-        loc="center right",
-        bbox_to_anchor=(1.2, 0.5),
-    )
+# Draw a white circle in the middle to make it look like a donut instead of a pie
+centre_circle = plt.Circle(
+    (0, 0),  # This places the circle in the middle of the chart
+    0.70,  # This sets the size of the white circle, making sure it's small enough to see the data around it but big enough to make a 'hole'
+    fc="white",  # 'fc' stands for fill color, which we're setting to white here
+)
+fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
+
+ax.legend(
+    wedges,
+    access_level_counts.index,
+    title="Contributors",
+    loc="center right",
+    bbox_to_anchor=(1.2, 0.5),
+)
 
 
 # Make sure the chart is a perfect circle
@@ -352,30 +352,30 @@ access_level_counts = df["group_name"].value_counts()
 
 
 # Increase figure size for better readability
-def has_contributers_chart():
-    plt.clf()
-    plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
-    # Counting the number of datasets with contributors
-    data_counts = df["has_contributors"].value_counts()
-    colors = ["#3d5a6c", "#a4c4d7"]
-    colors = ["#5b6255", "#cadF9E"]
+plt.clf()
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
-    fig, ax = plt.subplots(figsize=(3, 3))
-    wedges, texts, autotexts = ax.pie(
-        data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-    )
+# Counting the number of datasets with contributors
+data_counts = df["has_contributors"].value_counts()
+colors = ["#3d5a6c", "#a4c4d7"]
+colors = ["#5b6255", "#cadF9E"]
 
-    autotexts[0].set_color("white")
-    autotexts[1].set_color("black")
+fig, ax = plt.subplots(figsize=(3, 3))
+wedges, texts, autotexts = ax.pie(
+    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+)
 
-    ax.legend(
-        wedges,
-        data_counts.index,
-        title="Contributors",
-        loc="center left",
-        bbox_to_anchor=(1, 0, 0.5, 1),
-    )
+autotexts[0].set_color("white")
+autotexts[1].set_color("black")
+
+ax.legend(
+    wedges,
+    data_counts.index,
+    title="Contributors",
+    loc="center left",
+    bbox_to_anchor=(1, 0, 0.5, 1),
+)
 
 
 ax.axis("equal")
@@ -390,8 +390,8 @@ with col3:
 data_counts = df["has_contacts"].value_counts()
 
 
-def has_contacts_chart():
-    plt.clf()
+
+plt.clf()
 
 
 colors = ["#5b6255", "#cadF9E"]
@@ -400,18 +400,18 @@ colors = ["#3d5a6c", "#a4c4d7"]
 
 fig, ax = plt.subplots(figsize=(6, 6))
 wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
 ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contacts",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
+wedges,
+data_counts.index,
+title="Contacts",
+loc="center left",
+bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
 ax.axis("equal")
@@ -456,37 +456,37 @@ access_level_counts = df["group_name"].value_counts()
 
 
 # Increase figure size for better readability
-def research_group_name_chart():
-    plt.clf()
-    plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
-    # Start making a bar chart to visualize the data
-    # This will create a bar chart where each bar represents a different data access level
-    access_level_counts.plot(
-        kind="bar", color="skyblue", width=0.8
-    )  # 'width' adjusts the width of the bars
+plt.clf()
+plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
-    # Add a title to the top of the chart
-    plt.title("Research group name", fontsize=16)  # Increase font size for the title
+# Start making a bar chart to visualize the data
+# This will create a bar chart where each bar represents a different data access level
+access_level_counts.plot(
+    kind="bar", color="skyblue", width=0.8
+)  # 'width' adjusts the width of the bars
 
-    # Label the x-axis (horizontal axis)
-    plt.xlabel(
-        "University", fontsize=14, labelpad=15
-    )  # Increase font size for the x-axis label and add padding
+# Add a title to the top of the chart
+plt.title("Research group name", fontsize=16)  # Increase font size for the title
 
-    # Label the y-axis (vertical axis)
-    plt.ylabel("Count", fontsize=14)  # Increase font size for the y-axis label
+# Label the x-axis (horizontal axis)
+plt.xlabel(
+    "University", fontsize=14, labelpad=15
+)  # Increase font size for the x-axis label and add padding
 
-    # Rotate the labels on the x-axis to 45 degrees for better readability
-    plt.xticks(
-        rotation=45, fontsize=12, ha="right"
-    )  # Increase font size and rotate x-axis labels, align them to the right
+# Label the y-axis (vertical axis)
+plt.ylabel("Count", fontsize=14)  # Increase font size for the y-axis label
 
-    # Add grid lines to the plot
-    plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed style
+# Rotate the labels on the x-axis to 45 degrees for better readability
+plt.xticks(
+    rotation=45, fontsize=12, ha="right"
+)  # Increase font size and rotate x-axis labels, align them to the right
 
-    # Adjust the layout to make sure everything fits without clipping
-    plt.tight_layout()
+# Add grid lines to the plot
+plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed style
+
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
 
 
 # Display the chart
@@ -495,36 +495,36 @@ with col6:
 
 
 # Count the occurrences of each data access level in the dataframe
-def data_access_level_distribution_chart():
-    plt.clf()
-    access_counts = df["data_access_level"].value_counts()
 
-    # Generate a list of colors - one for each bar
-    colors = ["skyblue", "coral", "lightgreen"]
+plt.clf()
+access_counts = df["data_access_level"].value_counts()
 
-    # Start making a bar chart to visualize the data
-    access_counts.plot(kind="bar", color=colors)
+# Generate a list of colors - one for each bar
+colors = ["skyblue", "coral", "lightgreen"]
 
-    # Add a title to the top of the chart
+# Start making a bar chart to visualize the data
+access_counts.plot(kind="bar", color=colors)
 
-    plt.title("Data Access Level Distribution")
+# Add a title to the top of the chart
 
-    # Label the x-axis (horizontal axis)
-    plt.xlabel("Data Access Level")
+plt.title("Data Access Level Distribution")
 
-    # Label the y-axis (vertical axis)
-    plt.ylabel("Count")
+# Label the x-axis (horizontal axis)
+plt.xlabel("Data Access Level")
 
-    # Rotate the labels on the x-axis to 45 degrees
-    plt.xticks(rotation=45)
+# Label the y-axis (vertical axis)
+plt.ylabel("Count")
 
-    # Adjust the layout to make sure everything fits without clipping
-    plt.tight_layout()
+# Rotate the labels on the x-axis to 45 degrees
+plt.xticks(rotation=45)
 
-    # Display the chart
-    plt.show()
-    st.pyplot(fig)
-    text = "To enlarge graph, click on desired"
+# Adjust the layout to make sure everything fits without clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
+st.pyplot(fig)
+text = "To enlarge graph, click on desired"
 
 
 # Define your text
@@ -668,32 +668,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-plot_options = [
-    "Datasets with Data",
-    "Datasets with Donor Metadata",
-    'Distribution of "has contributors"',
-    'Distribution of "has contacts"',
-    "Data Access Level",
-    "Research Group Name Distribution",
-    "Data Access Level Distribution",
-]
-
-selected_plot = st.sidebar.selectbox("Select A Plot", plot_options)
-if selected_plot == "Datasets with Data":
-    dataset_with_data_chart()
-elif selected_plot == "Datasets with Donor Metadata":
-    has_metadata_chart()
-elif selected_plot == 'Distribution of "has contributors"':
-    has_contributers_chart()
-elif selected_plot == 'Distribution of "has contacts"':
-    has_contacts_chart()
-elif selected_plot == "Data Access Level":
-    data_access_level_chart()
-elif selected_plot == "Research Group Name Distribution":
-    research_group_name_chart()
-elif selected_plot == "Data Access Level Distribution":
-    data_access_level_distribution_chart()
 
 # Introduction paragraph for VR
 vrIntro = """
