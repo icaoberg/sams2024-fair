@@ -572,15 +572,15 @@ def unpublished_has_contributors():
     # st.subheader("Unpublished Dataset Plots")
     data_counts = df2["has_contributors"].value_counts()
     colors = ["#3d5a6c", "#a4c4d7"]
-    colors = ["#5b6255", "#cadF9E"]
+    colors = ["#cadF9E","#5b6255"]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
         data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
     )
 
-    autotexts[0].set_color("white")
-    autotexts[1].set_color("black")
+    autotexts[0].set_color("black")
+    autotexts[1].set_color("white")
 
     ax.legend(
         wedges,
@@ -597,15 +597,15 @@ def unpublished_has_contributors():
 def unpublished_has_contacts():
     data_counts = df2["has_contacts"].value_counts()
     colors = ["#5b6255", "#cadF9E"]
-    colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#a4c4d7","#3d5a6c" ]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
         data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
     )
 
-    autotexts[0].set_color("white")
-    autotexts[1].set_color("black")
+    autotexts[0].set_color("black")
+    autotexts[1].set_color("white")
 
     ax.legend(
         wedges,
