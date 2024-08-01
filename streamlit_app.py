@@ -531,12 +531,11 @@ text = "To enlarge graph, click on desired"
 
 
 # unpublished data
-title = """
-# Unpublished Datasets
-## At a Glance
-"""
+st.header("Unpublished Data")
 st.sidebar.markdown("[Unpublished Data](#unpublished-data)", unsafe_allow_html=True)
-st.write(title)
+
+st.subheader("At A Glance")
+
 
 
 def at_a_glance():
