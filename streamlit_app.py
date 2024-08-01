@@ -114,7 +114,7 @@ st.write(today)
 abstract = """
 The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
 """
-#Anchor point
+# Anchor point
 st.title("Abstract")
 st.sidebar.markdown("[Abstract](#abstract)", unsafe_allow_html=True)
 st.write(abstract)
@@ -399,18 +399,18 @@ colors = ["#3d5a6c", "#a4c4d7"]
 
 fig, ax = plt.subplots(figsize=(6, 6))
 wedges, texts, autotexts = ax.pie(
-data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
+    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
 
 autotexts[0].set_color("white")
 autotexts[1].set_color("black")
 
 ax.legend(
-wedges,
-data_counts.index,
-title="Contacts",
-loc="center left",
-bbox_to_anchor=(1, 0, 0.5, 1),
+    wedges,
+    data_counts.index,
+    title="Contacts",
+    loc="center left",
+    bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
 ax.axis("equal")
@@ -523,11 +523,11 @@ plt.tight_layout()
 
 # Display the chart
 with col7:
-   st.pyplot(fig) 
+    st.pyplot(fig)
 text = "To enlarge graph, click on desired"
 
 
-#f Define your text
+# f Define your text
 
 
 # unpublished data
@@ -535,7 +535,6 @@ st.header("Unpublished Data")
 st.sidebar.markdown("[Unpublished Data](#unpublished-data)", unsafe_allow_html=True)
 
 st.subheader("At A Glance")
-
 
 
 def at_a_glance():
@@ -571,7 +570,7 @@ def unpublished_has_contributors():
     # st.subheader("Unpublished Dataset Plots")
     data_counts = df2["has_contributors"].value_counts()
     colors = ["#3d5a6c", "#a4c4d7"]
-    colors = ["#cadF9E","#5b6255"]
+    colors = ["#cadF9E", "#5b6255"]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
@@ -596,7 +595,7 @@ def unpublished_has_contributors():
 def unpublished_has_contacts():
     data_counts = df2["has_contacts"].value_counts()
     colors = ["#5b6255", "#cadF9E"]
-    colors = ["#a4c4d7","#3d5a6c" ]
+    colors = ["#a4c4d7", "#3d5a6c"]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
