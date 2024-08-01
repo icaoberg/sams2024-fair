@@ -50,7 +50,8 @@ def get_data() -> pd.DataFrame:
         print(f"Request failed: {e}")  # Print the error message
         return pd.DataFrame()  # Return an empty DataFrame if the request fails
 
-#Unpublished dataframe
+
+# Unpublished dataframe
 @st.cache_data
 def get_unpublished_data() -> pd.DataFrame:
     """
@@ -111,13 +112,14 @@ today = pd.Timestamp.today().strftime("%m-%d-%Y")
 st.write(today)
 
 abstract = """
-# Abstract
 The Human BioMolecular Atlas Program (HuBMAP) aims to create a comprehensive 3D-map representation of the human body and improve data access while developing methods for tissue interrogation applicable to other studies. In its first phase, HuBMAP achieved significant milestones, including the development of critical resources, standardized protocols, innovative imaging and sequencing techniques, and a reliable data integration platform. These efforts have led to the creation of high-resolution molecular and cellular maps that are essential resources for biomedical research. Researchers are expanding the map from 2D to 3D environments, incorporating niche factors such as age and ethnicity. The core value of HuBMAP is to provide freely accessible data via its online portal. Future directions include investigating changes in individual cells and neighborhoods during healthy aging and diseases that will help develop better drugs, predict disease outcomes, and understand disease progression in clinical settings. The program adheres to the FAIR guiding principles for scientific data management and stewardship, ensuring findability, accessibility, interoperability, and reusability of data. We researched these properties of HuBMAP, along with whether it has rich metadata, identifiable titles, standardized communication protocols, and open access to metadata even if the data itself is no longer available.
 """
+# Anchor point
+st.title("Abstract")
+st.sidebar.markdown("[Abstract](#abstract)", unsafe_allow_html=True)
 st.write(abstract)
 
 intro = """
-# Introduction
 The Human BioMolecular Atlas Program (HuBMAP) is an initiative that aims to create a comprehensive multi-scale spatial atlas of the healthy human body. HuBMAP aims to help biomedical researchers visualize how the cells in the human body influence our health and can also help others understand the way in which the human body functions. HuBMAP can only finalize its atlas with the help of data providers, data curators and other contributors. 
 
 Data providers are crucial to HuBMAP, these providers are responsible for producing biological data from various tissues of donors. These tissues are utilized by different types of cutting-edge technologies such as, single cell transcriptomics, bulk tissue arrays, etc. These providers generate high-quality datasets that help form a structure for HuBMAP.
@@ -128,6 +130,8 @@ With all the data provided and curated, contributors then develop innovative too
 
 Through the seamless integration of work from data providers, contributors, and HIVE, HuBMAP strives to create a high-tech transformational atlas that fosters inventions of new discoveries in the field of biomedical research.
 """
+st.title("Introduction")
+st.sidebar.markdown("[Introduction](#introduction)", unsafe_allow_html=True)
 st.write(intro)
 
 
@@ -146,10 +150,12 @@ method = """
 # Overview
 The Human Biomolecular Atlas Program(HuBMAP) funded by the National Institute of Health(NIH), provides spatial molecular data which serves as a way to completely map out the human body to promote intuitive and revolutionary research. However, in order for the research to be comprehensive and understandable by professionals and the public alike, it needs to be Findable, Accessible, Interoperable, and Reusable. The FAIR guidelines provide a path for the HuBMAP data to lessen unavoidable bias, and corrupt data. The purpose of the project by the Carnegie Mellon Summer Academy for Math and Science team, serves as a means to analyze some of the HuBMAP data, and report back on the level to which the data adheres to the first two FAIR principles(Findable and Accessible). 
 """
+
+st.sidebar.markdown("[Overview](#overview)", unsafe_allow_html=True)
 st.write(method)
 
-text = "## Published data"
-st.write(text)
+st.header("Published Data")
+st.sidebar.markdown("[Published Data](#published-data)", unsafe_allow_html=True)
 
 text = "### At a Glance"
 st.write(text)
@@ -231,9 +237,8 @@ df_display.rename(
 st.write(df_display)
 
 # Title for Graphs
-
-text = "# Graphs"
-st.write(text)
+st.header("Graphs")
+st.sidebar.markdown("[Graphs](#graphs)", unsafe_allow_html=True)
 
 # Creating columns for graphs
 
@@ -242,11 +247,14 @@ col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 # Count how many times each unique value appears in the 'data_access_level' column
 access_level_counts = df["has_data"].value_counts()
 
+
 # Start making a donut chart
-fig, ax = plt.subplots()  # Create a blank space (figure) where the chart will be drawn
 
+plt.clf()
+fig, ax = plt.subplots(
+    figsize=(5, 5)
+)  # Create a blank space (figure) where the chart will be drawn
 colors = ["#cadF9E"]
-
 # Plot a pie chart that will later become a donut chart
 wedges, texts, autotexts = ax.pie(
     access_level_counts,  # This is the data we're using — the counts of each access level
@@ -266,7 +274,14 @@ centre_circle = plt.Circle(
 )
 fig.gca().add_artist(centre_circle)  # This adds the white circle to our chart
 
-ax.legend(wedges, access_level_counts.index, title="Contributors", loc="center")
+ax.legend(
+    wedges,
+    access_level_counts.index,
+    title="Contributors",
+    loc="center right",
+    bbox_to_anchor=(1.2, 0.5),
+)
+
 
 # Make sure the chart is a perfect circle
 ax.axis(
@@ -281,7 +296,6 @@ plt.title("Percentages of Dataset with Data")
 plt.tight_layout()
 with col1:
     st.pyplot(fig)
-
 
 text = "### Datasets"
 st.write(text)
@@ -337,7 +351,10 @@ with col2:
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
+
 # Increase figure size for better readability
+
+plt.clf()
 plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Counting the number of datasets with contributors
@@ -361,6 +378,7 @@ ax.legend(
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
 
+
 ax.axis("equal")
 ax.set_title('Distribution of "has contributors"')
 
@@ -371,16 +389,15 @@ with col3:
 
 # Counting the number of datasets with contacts
 data_counts = df["has_contacts"].value_counts()
+
+plt.clf()
+
+
 colors = ["#5b6255", "#cadF9E"]
 colors = ["#3d5a6c", "#a4c4d7"]
 
+
 fig, ax = plt.subplots(figsize=(6, 6))
-
-wedges, texts, autotexts = ax.pie(
-    data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
-)
-
-# fig, ax = plt.subplots(figsize=(3,3))
 wedges, texts, autotexts = ax.pie(
     data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
 )
@@ -395,16 +412,6 @@ ax.legend(
     loc="center left",
     bbox_to_anchor=(1, 0, 0.5, 1),
 )
-
-ax.legend(
-    wedges,
-    data_counts.index,
-    title="Contributors",
-    loc="center left",
-    bbox_to_anchor=(1, 0, 0.5, 1),
-)
-ax.axis("equal")
-ax.set_title('Distribution of "has_contributors"')
 
 ax.axis("equal")
 ax.set_title('Distribution of "has contacts"')
@@ -443,11 +450,13 @@ plt.tight_layout()
 with col5:
     st.pyplot(fig)
 
-
 # Count the occurrences of each data access level in the dataframe
 access_level_counts = df["group_name"].value_counts()
 
+
 # Increase figure size for better readability
+
+plt.clf()
 plt.figure(figsize=(10, 6))  # Adjust width and height as necessary
 
 # Start making a bar chart to visualize the data
@@ -478,13 +487,17 @@ plt.grid(axis="y", linestyle="--")  # Add horizontal grid lines with dashed styl
 # Adjust the layout to make sure everything fits without clipping
 plt.tight_layout()
 
+
 # Display the chart
 with col6:
     st.pyplot(fig)
 
 
 # Count the occurrences of each data access level in the dataframe
+
+plt.clf()
 access_counts = df["data_access_level"].value_counts()
+plt.figure(figsize=(10, 6))
 
 # Generate a list of colors - one for each bar
 colors = ["skyblue", "coral", "lightgreen"]
@@ -493,6 +506,7 @@ colors = ["skyblue", "coral", "lightgreen"]
 access_counts.plot(kind="bar", color=colors)
 
 # Add a title to the top of the chart
+
 plt.title("Data Access Level Distribution")
 
 # Label the x-axis (horizontal axis)
@@ -508,21 +522,19 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Display the chart
-plt.show()
-
 with col7:
     st.pyplot(fig)
-    text = "To enlarge graph, click on desired"
-# Define your text
+text = "To enlarge graph, click on desired"
+
+
+# f Define your text
 
 
 # unpublished data
-title = """
-# Unpublished Datasets
-## At a Glance
-"""
+st.header("Unpublished Data")
+st.sidebar.markdown("[Unpublished Data](#unpublished-data)", unsafe_allow_html=True)
 
-st.write(title)
+st.subheader("At A Glance")
 
 
 def at_a_glance():
@@ -558,15 +570,15 @@ def unpublished_has_contributors():
     # st.subheader("Unpublished Dataset Plots")
     data_counts = df2["has_contributors"].value_counts()
     colors = ["#3d5a6c", "#a4c4d7"]
-    colors = ["#5b6255", "#cadF9E"]
+    colors = ["#cadF9E", "#5b6255"]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
         data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
     )
 
-    autotexts[0].set_color("white")
-    autotexts[1].set_color("black")
+    autotexts[0].set_color("black")
+    autotexts[1].set_color("white")
 
     ax.legend(
         wedges,
@@ -583,15 +595,15 @@ def unpublished_has_contributors():
 def unpublished_has_contacts():
     data_counts = df2["has_contacts"].value_counts()
     colors = ["#5b6255", "#cadF9E"]
-    colors = ["#3d5a6c", "#a4c4d7"]
+    colors = ["#a4c4d7", "#3d5a6c"]
 
     fig, ax = plt.subplots(figsize=(3, 3))
     wedges, texts, autotexts = ax.pie(
         data_counts, autopct="%1.1f%%", startangle=90, colors=colors, shadow=True
     )
 
-    autotexts[0].set_color("white")
-    autotexts[1].set_color("black")
+    autotexts[0].set_color("black")
+    autotexts[1].set_color("white")
 
     ax.legend(
         wedges,
@@ -654,21 +666,20 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Use HTML to align text to the right
-st.markdown(f'<p style="text-align:right">{text}</p>', unsafe_allow_html=True)
 
 # Introduction paragraph for VR
 vrIntro = """
-# VR Introduction
 Recent advancements in virtual reality (VR) development have sparked interest in applying VR to biomedical research and practice. VR allows for dynamic exploration and enables viewers to enter visualizations from various viewpoints (Camp et al., 1998). It also facilitates the creation of detailed visualizations of intricate molecular structures and biomolecular systems (Chavent et al., 2011; Gill and West, 2014; Trellet et al., 2018; Wiebrands et al., 2018).
 When viewed in VR, the spatiality of organs and tissue blocks mapped to the Human Reference Atlas (HRA) can be explored in their true size, providing a perspective that surpasses traditional 2D user interfaces. Added 2D and 3D visualizations can then offer data-rich context. The HRA Organ Gallery, a VR application, allows users to explore 3D organ models of the HRA in their true scale, location, and spatial relation to each other. Currently, the HRA Organ Gallery features 55 3D reference organs, 1,203 mapped tissue blocks from 292 demographically diverse donors and 15 providers, linking to over 6,000 datasets. It also includes prototype visualizations of cell type distributions and 3D protein structures.
 """
+st.title("HuBMAP In VR", anchor="hubmap-in-vr")
+st.sidebar.markdown("[HuBMAP In VR](#hubmap-in-vr)", unsafe_allow_html=True)
 st.write(vrIntro)
 
 # How to use VR
 
 vrNavigate = """
-# Navigating VR
+## Navigating VR
 """
 st.write(vrNavigate)
 
@@ -714,7 +725,8 @@ references = """
 * Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
 * Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
 """
-
+st.title("References")
+st.sidebar.markdown("[References](#references)", unsafe_allow_html=True)
 st.write(references)
 
 acknowledgements = """
@@ -723,10 +735,14 @@ We thank Andreas Bueckle for their assistance in data acquisition and management
 
 Research reported in this publication was supported by the National Institute of Health's (NIH) Common Fund under award numbers X, Y, and Z. Additionally, it’s important to include a disclaimer: The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
 """
+st.title("Acknowledgements")
+st.sidebar.markdown("[Acknowledgements](#acknowledgements)", unsafe_allow_html=True)
 st.write(acknowledgements)
 
 conclusion = """
-# Conclusion
+Place Holder
 """
+st.title("Conclusion")
+st.sidebar.markdown("[Conclusion](#conclusion)", unsafe_allow_html=True)
 
 st.write(conclusion)
