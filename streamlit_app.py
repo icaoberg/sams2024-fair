@@ -738,7 +738,9 @@ st.sidebar.markdown("[Acknowledgements](#acknowledgements)", unsafe_allow_html=T
 st.write(acknowledgements)
 
 conclusion = """
-Place Holder
+Regarding our first objective, an assessment of the FAIRness of HuBMAP Data, we found that data visualization techniques allowed us to present a live time analysis of HuBMAP data. HuBMAP data includes many features that help ensure the FAIR guideline;. most datasets include rich metadata, identifiable titles, standardized communication protocols. Thus, we conclude that HubMAP data adheres to the first 2 FAIR guidelines of findable and accessible.
+
+When considering our second objective, assessing the FAIRness of the HuBMAP VR application, we came to a different conclusion. HRA Organ VR still needs some work to meet the principles of FAIR, as not all the data is easily accessible and findable. However, the application is still in development and is expected to improve on many of its current shortcomings. Thus, this result is somewhat expected as the current version is not the final product.
 """
 st.title("Conclusion")
 st.sidebar.markdown("[Conclusion](#conclusion)", unsafe_allow_html=True)
