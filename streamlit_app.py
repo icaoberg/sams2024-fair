@@ -608,7 +608,7 @@ def at_a_glance():
 columns = [
     "organ",
     "dataset_type",
-    "group_name",
+    "status",
     "created_timestamp",
     "data_access_level",
 ]
@@ -622,7 +622,7 @@ df_display.rename(
         "organ": "Organ",
         "dataset_type": "Dataset Type",
         "created_timestamp": "Date Added",
-        "group_name": "Group Name",
+        "status": "Status",
         "data_access_level": "Data Access Level",
     },
     inplace=True,
