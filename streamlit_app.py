@@ -300,30 +300,6 @@ with col1:
 text = "### Datasets"
 st.write(text)
 
-columns = [
-    "organ",
-    "dataset_type",
-    "group_name",
-    "created_timestamp",
-    "data_access_level",
-]
-df_display = df[columns]
-df_display["created_timestamp"] = df_display["created_timestamp"].apply(
-    lambda time: pd.to_datetime(time, unit="ms").strftime("%m-%d-%Y")
-)
-df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
-df_display.rename(
-    columns={
-        "organ": "Organ",
-        "dataset_type": "Dataset Type",
-        "created_timestamp": "Date Added",
-        "group_name": "Group Name",
-        "data_access_level": "Data Access Level",
-    },
-    inplace=True,
-)
-st.write(df_display)
-
 text = "### Data access level"
 st.write(text)
 
@@ -527,9 +503,6 @@ with col7:
 text = "To enlarge graph, click on desired"
 
 
-# f Define your text
-
-
 # unpublished data
 st.header("Unpublished Data")
 st.sidebar.markdown("[Unpublished Data](#unpublished-data)", unsafe_allow_html=True)
@@ -564,6 +537,31 @@ def at_a_glance():
     * The number of donors for unpublished datasets are **{number_of_donors}**.
     * The number of groups with unpublished datasets are **{number_of_groups}**."""
     st.write(answer)
+
+
+columns = [
+    "organ",
+    "dataset_type",
+    "group_name",
+    "created_timestamp",
+    "data_access_level",
+]
+df_display = df2[columns]
+df_display["created_timestamp"] = df_display["created_timestamp"].apply(
+    lambda time: pd.to_datetime(time, unit="ms").strftime("%m-%d-%Y")
+)
+df_display["data_access_level"] = df_display["data_access_level"].str.capitalize()
+df_display.rename(
+    columns={
+        "organ": "Organ",
+        "dataset_type": "Dataset Type",
+        "created_timestamp": "Date Added",
+        "group_name": "Group Name",
+        "data_access_level": "Data Access Level",
+    },
+    inplace=True,
+)
+st.write(df_display)
 
 
 def unpublished_has_contributors():
@@ -710,24 +708,6 @@ st.write(vrCaption)
 text = "### Dataset types"
 st.write(text)
 
-references = """
-* Browne K, Cross LE, Herr, II BW, Record EG, Quardokus EM, Bueckle A, Börner K. 2020. HuBMAP CCF 3D Reference Object Library.
-* Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
-* Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
-* Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. https://doi.org/10.1002/jcc.21861  
-* García, L. J., Batut, B., Burke, M. L., Kuzak, M., Psomopoulos, F. E., Arcila, R., Attwood, T. K., Beard, N., Carvalho-Silva, D., Dimopoulos, A. C., Del Angel, V. D., Dumontier, M., Gurwitz, K. T., Krause, R., McQuilton, P., Pera, L. L., Morgan, S. L., Rauste, P., Via, A., . . . Palagi, P. M. (2020). Ten simple rules for making training materials FAIR. PLOS Computational Biology/PLoS Computational Biology, 16(5), e1007854. https://doi.org/10.1371/journal.pcbi.1007854
-* Gill, B. J., and West, J. L. (2014). Modeling the tumor extracellular matrix: Tissue engineering tools repurposed towards new frontiers in cancer biology. J. Biomechanics, Funct. Tissue Eng. 47 (9), 1969–1978. https://pubmed.ncbi.nlm.nih.gov/24300038/ 
-* HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
-* Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
-* Snyder, M.P., Lin, S., Posgai, A. et al. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x.
-* Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. https://doi.org/10.1515/jib-2018-0004 
-* Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
-* Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
-"""
-st.title("References")
-st.sidebar.markdown("[References](#references)", unsafe_allow_html=True)
-st.write(references)
-
 acknowledgements = """
 We thank Andreas Bueckle for their assistance in data acquisition and management.  
 
@@ -746,3 +726,21 @@ st.title("Conclusion")
 st.sidebar.markdown("[Conclusion](#conclusion)", unsafe_allow_html=True)
 
 st.write(conclusion)
+
+references = """
+* Browne K, Cross LE, Herr, II BW, Record EG, Quardokus EM, Bueckle A, Börner K. 2020. HuBMAP CCF 3D Reference Object Library.
+* Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
+* Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
+* Chavent, M., Antoine, V., Tek, A., Levy, B., Robert, S., Bruno, R., et al. (2011). GPU-accelerated atom and dynamic bond visualization using hyperballs: A unified algorithm for balls, sticks, and hyperboloids. J. Comput. Chem. 32 (13), 2924–2935. https://doi.org/10.1002/jcc.21861  
+* García, L. J., Batut, B., Burke, M. L., Kuzak, M., Psomopoulos, F. E., Arcila, R., Attwood, T. K., Beard, N., Carvalho-Silva, D., Dimopoulos, A. C., Del Angel, V. D., Dumontier, M., Gurwitz, K. T., Krause, R., McQuilton, P., Pera, L. L., Morgan, S. L., Rauste, P., Via, A., . . . Palagi, P. M. (2020). Ten simple rules for making training materials FAIR. PLOS Computational Biology/PLoS Computational Biology, 16(5), e1007854. https://doi.org/10.1371/journal.pcbi.1007854
+* Gill, B. J., and West, J. L. (2014). Modeling the tumor extracellular matrix: Tissue engineering tools repurposed towards new frontiers in cancer biology. J. Biomechanics, Funct. Tissue Eng. 47 (9), 1969–1978. https://pubmed.ncbi.nlm.nih.gov/24300038/ 
+* HuBMAP Consortium. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x
+* Jain, S., Pei, L., Spraggins, J.M. et al. Advances and prospects for the Human BioMolecular Atlas Program (HuBMAP). Nat Cell Biol 25, 1089–1100 (2023). https://doi.org/10.1038/s41556-023-01194-w
+* Snyder, M.P., Lin, S., Posgai, A. et al. The human body at cellular resolution: the NIH Human Biomolecular Atlas Program. Nature 574, 187–192 (2019). https://doi.org/10.1038/s41586-019-1629-x.
+* Trellet, M. L., Férey, N., Flotyński, J., Baaden, M., and Bourdot, P. (2018). Semantics for an integrative and immersive pipeline combining visualization and analysis of molecular data. J. Integr. Bioinforma. 15 (2), 20180004. https://doi.org/10.1515/jib-2018-0004 
+* Wiebrands, M., Malajczuk, C. J., Woods, A. J., Rohl, A. L., and Mancera, R. L. (2018). Molecular dynamics visualization (MDV): Stereoscopic 3D display of biomolecular structure and interactions using the Unity game engine. J. Integr. Bioinforma. 15 (2), 20180010. https://doi.org/10.1515/jib-2018-0010 
+* Wilkinson, M. D., Sansone, S. A., Schultes, E., Doorn, P., Bonino da Silva Santos, L. O., & Dumontier, M. (2018). A design framework and exemplar metrics for FAIRness. Scientific data, 5, 180118. https://doi.org/10.1038/sdata.2018.118
+"""
+st.title("References")
+st.sidebar.markdown("[References](#references)", unsafe_allow_html=True)
+st.write(references)
