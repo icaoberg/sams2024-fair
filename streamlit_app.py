@@ -780,7 +780,6 @@ text = "### Dataset types"
 st.write(text)
 
 references = """
-# References
 * Browne K, Cross LE, Herr, II BW, Record EG, Quardokus EM, Bueckle A, Börner K. 2020. HuBMAP CCF 3D Reference Object Library.
 * Bueckle, A., Qing, C., Luley, S., Kumar, Y., Pandey, N., & Borner, K. (2023, April 10). The HRA Organ Gallery affords immersive superpowers for building and exploring the Human Reference Atlas with virtual reality. Frontiers, 3. https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2023.1162723/full
 * Camp, J. J., Cameron, B. M., Blezek, D., and Robb, R. A. (1998). Virtual reality in medicine and biology.” Future Generation Computer Systems. Telemedical Inf. Soc. 14 (1), 91–108. https://www.sciencedirect.com/science/article/abs/pii/S0167739X98000235 
@@ -799,7 +798,6 @@ st.sidebar.markdown("[References](#references)", unsafe_allow_html=True)
 st.write(references)
 
 acknowledgements = """
-# Acknowledgements
 We thank Andreas Bueckle for their assistance in data acquisition and management.  
 
 Research reported in this publication was supported by the National Institute of Health's (NIH) Common Fund under award numbers X, Y, and Z. Additionally, it’s important to include a disclaimer: The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIH.
@@ -809,7 +807,9 @@ st.sidebar.markdown("[Acknowledgements](#acknowledgements)", unsafe_allow_html=T
 st.write(acknowledgements)
 
 conclusion = """
-Place Holder
+Regarding our first objective, an assessment of the FAIRness of HuBMAP Data, we found that data visualization techniques allowed us to present a live time analysis of HuBMAP data. HuBMAP data includes many features that help ensure the FAIR guideline;. most datasets include rich metadata, identifiable titles, standardized communication protocols. Thus, we conclude that HubMAP data adheres to the first 2 FAIR guidelines of findable and accessible.
+
+When considering our second objective, assessing the FAIRness of the HuBMAP VR application, we came to a different conclusion. HRA Organ VR still needs some work to meet the principles of FAIR, as not all the data is easily accessible and findable. However, the application is still in development and is expected to improve on many of its current shortcomings. Thus, this result is somewhat expected as the current version is not the final product.
 """
 st.title("Conclusion")
 st.sidebar.markdown("[Conclusion](#conclusion)", unsafe_allow_html=True)
