@@ -121,8 +121,6 @@ st.write(abstract)
 
 about_us = """
 # About Us
-some text here
-
 """
 st.write(about_us)
 import plotly.graph_objects as go
@@ -185,7 +183,6 @@ layout = go.Layout(
 )
 
 fig = go.Figure(data=[data], layout=layout)
-st.title("SAMS 24 Map")
 st.plotly_chart(fig)
 
 intro = """
